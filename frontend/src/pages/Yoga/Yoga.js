@@ -91,7 +91,7 @@ function Yoga() {
         pose_center_new = tf.expandDims(pose_center_new, 1)
 
         pose_center_new = tf.broadcastTo(pose_center_new, [1, 17, 2])
-            // return: shape(17,2)
+        // return: shape(17,2)
         let d = tf.gather(tf.sub(landmarks, pose_center_new), 0, 0)
         let max_dist = tf.max(tf.norm(d, 'euclidean', 0))
 
@@ -118,7 +118,7 @@ function Yoga() {
         return embedding
     }
 
-    const runMovenet = async() => {
+    const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
         const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
@@ -129,7 +129,7 @@ function Yoga() {
         }, 100)
     }
 
-    const detectPose = async(detector, poseClassifier, countAudio) => {
+    const detectPose = async (detector, poseClassifier, countAudio) => {
         if (
             typeof webcamRef.current !== "undefined" &&
             webcamRef.current !== null &&
@@ -151,7 +151,7 @@ function Yoga() {
                                 connections.forEach((connection) => {
                                     let conName = connection.toUpperCase()
                                     drawSegment(ctx, [keypoint.x, keypoint.y], [keypoints[POINTS[conName]].x,
-                                        keypoints[POINTS[conName]].y
+                                    keypoints[POINTS[conName]].y
                                     ], skeletonColor)
                                 })
                             } catch (err) {
@@ -211,117 +211,75 @@ function Yoga() {
 
 
     if (isStartPose) {
-        return ( <
-            div className = "yoga-container" >
-            <
-            div className = "performance-container" >
-            <
-            div className = "pose-performance" >
-            <
-            h4 > Tiempo: { poseTime }
-            s < /h4> <
-            /div> <
-            div className = "pose-performance2" >
-            <
-            h4 > Tiempo Record: { bestPerform }
-            s < /h4> <
-            /div> <
-            /div> <
-            div >
+        return (
+            <div className="yoga-container" >
+                <div className="performance-container" >
+                    <div className="pose-performance" >
+                        < h4 >
+                            Tiempo: {poseTime}
+                        </h4>
+                    </div>
+                    <div className="pose-performance2" >
+                        <h4> Tiempo Record: {bestPerform}
+                        </h4> </div> </div>
+                <div>
 
-            <
-            Webcam width = '640px'
-            height = '480px'
-            id = "webcam"
-            ref = { webcamRef }
-            style = {
-                {
-                    position: 'absolute',
-                    left: 120,
-                    top: 100,
-                    padding: '0px',
-                }
-            }
-            /> <
-            canvas ref = { canvasRef }
-            id = "my-canvas"
-            width = '640px'
-            height = '480px'
-            style = {
-                {
-                    position: 'absolute',
-                    left: 120,
-                    top: 100,
-                    zIndex: 1
-                }
-            } >
-            <
-            /canvas> <
-            div className = "social9" >
-            <
-            img src = { once }
-            /> <
-            /div> <
-            div className = "social4" >
-            <
-            img src = { doce }
-            /> <
-            /div> <
-            div className = "social7" >
-            <
-            img src = { trece }
-            /> <
-            /div> <
-            div className = "social3" >
-            <
-            img src = { trece }
-            /> <
-            /div> <
-            div className = "social5" >
-            <
-            img src = { doce }
-            /> <
-            /div> <
-            div >
-            <
-            img src = { poseImages[currentPose] }
-            className = "pose-img" /
-            >
-            <
-            /div>
+                    <  Webcam width='640px'
+                        height='480px'
+                        id="webcam"
+                        ref={webcamRef}
+                        style={
+                            {
+                                position: 'absolute',
+                                left: 120,
+                                top: 180,
+                                padding: '0px',
+                            }
+                        }
+                    /> <canvas ref={canvasRef}
+                        id="my-canvas"
+                        width='640px'
+                        height='480px'
+                        style={
+                            {
+                                position: 'absolute',
+                                left: 120,
+                                top: 180,
+                                zIndex: 1
+                            }
+                        } >
+                    </canvas> <div className="social9" >
+                        <img src={once} />
+                    </div>
+                    <div className="social4" >
+                        <img src={doce} />
+                    </div>
+                    <div className="social7" >
+                        <img src={trece} /> </div>
+                    <div className="social3" >
+                        < img src={trece} /> </div> <div className="social5" >
+                        < img src={doce} /> </div> <div >
+                        < img src={poseImages[currentPose]}
+                            className="pose-img" />   </div>
 
-            <
-            /div> <
-            button onClick = { stopPose }
-            className = "secondary-btn2" >
-            Parar < /button> <
-            div className = "social2" >
-            <
-            img src = { nueve }
-            /> <
-            /div> <
-            div className = "social" >
-            <
-            img src = { diez }
-            /> <
-            /div> <
-            /div>
+                </div> < button onClick={stopPose} className="secondary-btn2" >        Parar </button>
+                <div className="social2" >
+                    <img src={nueve} /> </div>
+                <div className="social" >
+                    <img src={diez} /> </div> </div>
         )
     }
 
-    return ( <
-        div className = "yoga-container" >
-        <
-        DropDown poseList = { poseList }
-        currentPose = { currentPose }
-        setCurrentPose = { setCurrentPose }
-        /> <
-        Instructions currentPose = { currentPose }
-        /> <
-        button onClick = { startYoga }
-        className = "secondary-btn" >
-        Empezar < /button> <
-        /div>
+    return (
+        <div className="yoga-container" >
+            < DropDown poseList={poseList}
+                currentPose={currentPose}
+                setCurrentPose={setCurrentPose}
+            /> < Instructions currentPose={currentPose}
+            /> <  button onClick={startYoga}
+                className="btny2 boton-abajo" >
+                ¡Listo! </button>
+        </div>
     )
 }
 

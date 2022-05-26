@@ -15,12 +15,12 @@
     justify-content: center;
 }
 #pose-dropdown-btn:focus {
-    background-color: white;
-    color: black;
+    background-color: #6D8EBB;
+    color: white;
     box-shadow: none;
 }
 #pose-dropdown-btn:focus-within {
-    border-color: white;
+    border-color: #6D8EBB;
 }
 .dropdown-option {
     background: url('../../utils/pose_images/chair.png');
@@ -43,6 +43,7 @@
     border-radius: 4px;
     justify-content: center;
     align-items: center;
+    background-color: #6D8EBB;
 }
 
 .dropdown-item-1 {
