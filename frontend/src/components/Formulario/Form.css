@@ -1,6 +1,6 @@
 
 .description2 {
-    padding-top:30px;
+    padding-top:6px;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 25px;
     color: #636363;
@@ -11,6 +11,16 @@
     font-weight: 500;
 }
 
+.description3 {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 25px;
+    color: #636363;
+    text-align: center;
+    margin: 0px;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
 
 @font-face {
     font-family: 'Bryndan_Write';

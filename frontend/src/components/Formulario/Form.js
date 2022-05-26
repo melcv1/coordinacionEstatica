@@ -1,22 +1,72 @@
 import React from 'react'
 import "./Form.css";
-
 import { Link } from "react-router-dom";
-export default function Form() {
+import { useNavigate } from "react-router-dom";
+
+export default function Form({nino, setNino}) {
+  const navigate = useNavigate();
+  
+  const handleChange = e => {
+    setNino({
+        ...nino,
+        [e.target.name]: e.target.value
+    })
+  }
+  let{nombre, edad_actual} = nino
+
+  const handleSubmit = () => {
+    console.log("si vino a submit");
+    edad_actual = parseInt(edad_actual, 10)
+    //validación de los datos
+    if (nombre === '' || edad_actual === ''  ) {
+        alert('Todos los campos son obligatorios')
+        return
+        
+    }
+
+    //consulta
+    const requestInit = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(nino)
+    }
+    console.log("niño: "+nino);
+    fetch('http://localhost:9000/api', requestInit)
+    .then(res => res.text())
+    .then(res => console.log(res))
+    navigate("/start")
+
+    //reiniciando state de libro
+    setNino({
+      nombre: '',
+        edad_actual: 0
+    })
+    
+
+}
+
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="mb-3">
 
             <h2 className="description2">¿Cómo te llamas?</h2>
 
-            <input type="text" id="nombre" className="form-control nombre">
+            <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
+
+            </input>
+
+            <h2 className="description3">¿Cuántos años tienes?</h2>
+
+            <input type="text" value={edad_actual} name="edad_actual" onChange={handleChange} className="form-control nombre">
 
             </input>
             
             <div className="btn-section">
-              <Link to="/start">
-                <button className="btn start-btn">Comencemos</button>
-              </Link>              
+          
+              
+                <button type="submit" className="btn start-btn">Comencemos</button>
+                
             </div>            
 
             </div>

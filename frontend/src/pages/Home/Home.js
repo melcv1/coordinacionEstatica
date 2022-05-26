@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment, useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 
 import "./Home.css";
@@ -18,6 +18,13 @@ import ocho from "../../utils/images/8.png";
 import Form from "../../components/Formulario/Form";
 
 export default function Home() {
+
+  const [nino, setNino] = useState({
+    nombre: '',
+    edad_actual: 0
+  })
+
+
   return (
     <div className="home-container">
       <div className="container">
@@ -28,8 +35,8 @@ export default function Home() {
           <div className="col-lg-6 fondo">
             <h2 className="description2">Coordinación estática</h2>
             <h1 className="description">¡Bienvenido!</h1>
-            <Form/>
-           
+            
+            <Form nino={nino} setNino={setNino}/>
             
           </div>
         </div>
