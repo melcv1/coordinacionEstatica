@@ -1,0 +1,57 @@
+.about-container {
+    width: 100vw;
+    height: 100vh;background: #F9FFFF;
+}
+
+@font-face {
+    font-family: 'Bryndan_Write';
+    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
+}
+
+.titulo{
+    background-color: #FFE4E8;
+    margin-top:90px;
+    border-radius: 15px;
+    box-shadow:  1em 0.4em #eb8198;
+    margin-left: 153px;
+    width: 70%;
+}
+.about-heading {
+    font-size: 54px;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Bryndan_Write';
+    color: #5b5b5b;
+}
+.about-main {
+    background-color: #FFF8E5;
+    margin:auto;
+    border-radius: 15px;
+    box-shadow:  1em 0.4em #F6C496;
+    margin-left: 44px;
+    width: 96%;
+}
+.about-content {
+    color: #5b5b5b;
+    font-size: 17px;
+    padding: 19px 0px 4px 50px;
+}
+.centrado{
+    display:flex;
+    justify-content: center;
+}
+.developer-info h4 {
+    color: #5b5b5b;
+    font-family: 'Bryndan_Write';
+    margin-left: 47px;
+    text-decoration: underline;
+}
+.about-content a,
+.developer-info a {
+ color: #5b5b5b;  
+}
+.derecha{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

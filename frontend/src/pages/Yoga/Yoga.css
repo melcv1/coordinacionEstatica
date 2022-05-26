@@ -1,0 +1,96 @@
+.yoga-container {
+    background: #F9FFFF;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.secondary-btn:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.starting-contdown {
+    margin: auto;
+    border: 10px solid rgba(125, 125, 125, 0.5);
+    width: max-content;
+    padding: 10px 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0);
+    position: relative;
+    top: 45%;
+}
+
+.starting-contdown h1 {
+    color: white;
+}
+
+.pose-img {
+    position: absolute;
+    right: 120px;
+    top: 80px;
+    width: 500px;
+    aspect-ratio: 1;
+}
+
+.performance-container {
+    display: flex;
+    padding: 20px;
+    position: absolute;
+    left: 150px;
+}
+
+@font-face {
+    font-family: 'Bryndan_Write';
+    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
+}
+
+.pose-performance {
+    margin: 10px 10px;
+    background-color: #EB8198;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.secondary-btn2 {
+    position: absolute;
+    right: 37%;
+    top: 0;
+    margin: 10px 10px;
+    background-color: #EB8198;
+    border-radius: 50px;
+    padding: 21px;
+    color: white;
+    border: none !important;
+    width: 119px;
+    font-family: 'Bryndan_Write';
+    font-size: 2rem;
+}
+
+.pose-performance h4 {
+    color: white;
+    font-family: 'Bryndan_Write';
+    font-size: 3.5rem;
+}
+
+.pose-performance2 {
+    margin: 10px -17px;
+    background-color: #FDE5A4;
+    border-radius: 50px;
+    padding: 10px;
+    position: absolute;
+    left: 40%;
+    top: 62%;
+}
+
+.pose-performance2 h4 {
+    color: #494D4D;
+    font-family: 'Bryndan_Write';
+    font-size: 1.5rem;
+}
+
+#webcam {
+    transform: rotateY(180deg);
+}
+
+#my-canvas {
+    transform: rotateY(180deg);
+}
