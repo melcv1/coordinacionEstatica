@@ -23,8 +23,8 @@ import trece from "../../utils/images/13.png";
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
-    'Shoulderstand', 'Traingle'
+    /*'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+    'Shoulderstand', 'Traingle'*/ 'Pose_3', 'Pose_4', 'Pose_5', 'Pose_6'
 ]
 
 let interval
@@ -43,7 +43,7 @@ function Yoga() {
     const [currentTime, setCurrentTime] = useState(0)
     const [poseTime, setPoseTime] = useState(0)
     const [bestPerform, setBestPerform] = useState(0)
-    const [currentPose, setCurrentPose] = useState('Tree')
+    const [currentPose, setCurrentPose] = useState('Pose_3')
     const [isStartPose, setIsStartPose] = useState(false)
 
 
@@ -65,14 +65,18 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-        Chair: 0,
+       /* Chair: 0,
         Cobra: 1,
         Dog: 2,
         No_Pose: 3,
         Shoulderstand: 4,
         Traingle: 5,
         Tree: 6,
-        Warrior: 7,
+        Warrior: 7,*/
+        Pose_3: 0, 
+        Pose_4: 1, 
+        Pose_5: 2,
+        Pose_6: 3
     }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {

@@ -75,7 +75,7 @@ class Preprocessor(object):
                         
                         # skip images that is not RGB
                         if image.shape[2] != 3:
-                            self.message.append('Skipped' + image_path + ' Image is not in RGB')
+                            self._message.append('Skipped' + image_path + ' Image is not in RGB')
                             continue
                         
                         person = detect(image)
