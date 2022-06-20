@@ -20,21 +20,31 @@ import once from "../../utils/images/11.png";
 
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
+import { log } from '@tensorflow/tfjs';
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    /*'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
-    'Shoulderstand', 'Traingle'*/ 'Pose_3', 'Pose_4', 'Pose_5', 'Pose_6'
+    'a'
 ]
+
 
 let interval
 
 // flag variable is used to help capture the time when AI just detect 
 // the pose as correct(probability more than threshold)
 let flag = false
-
+var id_nino='';
 
 function Yoga() {
+  /*  const [ninoEdad, setNinoEdad] = useState(true);
+  useEffect(() => {
+    fetch("http://localhost:9000/api/edad")
+      .then((response) => response.json())
+      .then((ninoEdad) =>setNinoEdad(ninoEdad));
+     }, []);*/
+
+
+    // console.log("todo bien22"+ ninoEdad);
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -42,8 +52,37 @@ function Yoga() {
     const [startingTime, setStartingTime] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [poseTime, setPoseTime] = useState(0)
+   
+    const [ninoId, setNinoId] = useState(0);
+   /* const [valores, setValores] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:9000/api/id")
+          .then((response) => response.json())
+          .then((response) =>setValores(response));
+         }, []); 
+
+        console.log("-------------aa--:"+valores);*/
+        
+    var variable='';
+    /*if(ninoEdad==6){
+        variable='Pose_6';
+        
+        console.log("entro en pose 6");
+    }else if(ninoEdad==5){
+        variable='Pose_5';
+        
+        console.log("entro en pose 5");
+    }else if(ninoEdad==4){
+        variable='Pose_4';
+        console.log("entro en pose 4");
+    }else{
+        variable='Pose_3';
+        console.log("no entro en ninguno");
+    } */
+    
+    const [currentPose, setCurrentPose] = useState("a")
     const [bestPerform, setBestPerform] = useState(0)
-    const [currentPose, setCurrentPose] = useState('Pose_3')
+   
     const [isStartPose, setIsStartPose] = useState(false)
 
 
@@ -65,19 +104,8 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-       /* Chair: 0,
-        Cobra: 1,
-        Dog: 2,
-        No_Pose: 3,
-        Shoulderstand: 4,
-        Traingle: 5,
-        Tree: 6,
-        Warrior: 7,*/
-        Pose_3: 0, 
-        Pose_4: 1, 
-        Pose_5: 2,
-        Pose_6: 3
-    }
+        a: 1
+      }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {
         let left = tf.gather(landmarks, left_bodypart, 1)
@@ -207,7 +235,46 @@ function Yoga() {
         runMovenet()
     }
 
+   
+
     function stopPose() {
+
+        console.log("esta es la pose"+currentPose);
+        var poseAct=0;
+        if(currentPose==="Pose_3"){
+           var poseAct=1;
+        }else if(currentPose==="Pose_4"){
+            var poseAct=2;
+        }else if(currentPose==="Pose_5"){
+            var poseAct=3;
+        }else if(currentPose==="Pose_6"){
+            var poseAct=4;
+        }else{
+            var poseAct=1;
+        }
+
+       
+
+    /* var resultado=({
+        ID_PRUEBA: 0,
+        ID_ESTUDIANTE:0,
+        TIEMPO_RECORD: bestPerform,
+        INTENTOS: 0
+          })
+            console.log("si vino a stop pose");
+        
+            //consulta
+            const requestInit = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(resultado)
+            }
+            console.log("niño: "+resultado);
+            fetch('http://localhost:9000/api/valor', requestInit)
+            .then(res => res.text())
+            .then(res => console.log(res))     
+
+            */
         setIsStartPose(false)
         clearInterval(interval)
     }

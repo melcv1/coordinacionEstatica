@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {Fragment, useState, useEffect} from 'react';
 
 import { poseInstructions } from '../../utils/data'
 
@@ -15,9 +15,12 @@ import seis from "../../utils/images/6.png";
 
 import siete from "../../utils/images/7.png";
 import ocho from "../../utils/images/8.png";
+import { log } from '@tensorflow/tfjs-core/dist/log';
 export default function Instructions({ currentPose }) {
 
     const [instructions, setInsntructions] = useState(poseInstructions)
+
+    
 
     return (
         <div className="instructions-container">
@@ -55,6 +58,8 @@ export default function Instructions({ currentPose }) {
                 className="pose-demo-img"
                 src={poseImages[currentPose]}
             />
+            
         </div>
+       
     )
 }
