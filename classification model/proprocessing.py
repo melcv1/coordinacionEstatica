@@ -147,8 +147,8 @@ class Preprocessor(object):
 
 
 # preprocess training data
-images_in_folder = os.path.join('ninos', 'train')
-csvs_out_path = 'train_data3.csv'
+images_in_folder = os.path.join('nuevo', 'train')
+csvs_out_path = 'train_data.csv'
 train_preprocessor = Preprocessor(
     images_in_folder,
     csvs_out_path
@@ -156,8 +156,8 @@ train_preprocessor = Preprocessor(
 train_preprocessor.process()   
 
 # preprocessing testing data
-images_in_folder = os.path.join('ninos', 'test')
-csvs_out_path = 'test_data3.csv'
+images_in_folder = os.path.join('nuevo', 'test')
+csvs_out_path = 'test_data.csv'
 test_preprocessor = Preprocessor(
     images_in_folder,
     csvs_out_path

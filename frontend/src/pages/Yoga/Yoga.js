@@ -24,7 +24,7 @@ import { log } from '@tensorflow/tfjs';
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    'a'
+    'pose1', 'pose2', 'pose3', 'pose4'
 ]
 
 
@@ -80,7 +80,7 @@ function Yoga() {
         console.log("no entro en ninguno");
     } */
     
-    const [currentPose, setCurrentPose] = useState("a")
+    const [currentPose, setCurrentPose] = useState("pose1")
     const [bestPerform, setBestPerform] = useState(0)
    
     const [isStartPose, setIsStartPose] = useState(false)
@@ -104,7 +104,11 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-        a: 1
+        pose1: 0,
+        pose2: 1, 
+        pose3: 2,
+        pose4: 3
+
       }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {
@@ -153,12 +157,14 @@ function Yoga() {
     const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/de-cambio/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {
             detectPose(detector, poseClassifier, countAudio)
         }, 100)
+        poseClassifier.summary();
+        console.log(poseClassifier.summary());
     }
 
     const detectPose = async (detector, poseClassifier, countAudio) => {
@@ -206,6 +212,7 @@ function Yoga() {
                 classification.array().then((data) => {
                     const classNo = CLASS_NO[currentPose]
                     console.log(data[0][classNo])
+                    console.log("current:"+currentPose+" classno "+classNo);
                     if (data[0][classNo] > 0.97) {
 
                         if (!flag) {
