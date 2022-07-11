@@ -24,27 +24,39 @@ import { log } from '@tensorflow/tfjs';
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    'pose1', 'pose2', 'pose3', 'pose4'
+    'Habituación', 'Entrenamiento', 'Evaluación'
 ]
-
+let flag = false
+var id_nino = 0;
+var edad_nino=0;
 
 let interval
 
 // flag variable is used to help capture the time when AI just detect 
 // the pose as correct(probability more than threshold)
-let flag = false
-var id_nino='';
+
 
 function Yoga() {
-  /*  const [ninoEdad, setNinoEdad] = useState(true);
-  useEffect(() => {
-    fetch("http://localhost:9000/api/edad")
-      .then((response) => response.json())
-      .then((ninoEdad) =>setNinoEdad(ninoEdad));
-     }, []);*/
+    const [ninoEdad, setNinoEdad] = useState(0);
+    useEffect(() => {
+        fetch("http://localhost:9000/api/edad")
+            .then((response) => response.json())
+            .then((ninoEdad) => setNinoEdad(ninoEdad));
+    }, []);
+    edad_nino= ninoEdad;
+  
+    const [valores, setValores] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:9000/api/id")
+            .then((response) => response.json())
+            .then((response) => {
+                id_nino= response[0].id_est;
+                console.log("Todo ok!");
+                setValores(response);
 
+            });
+    }, []);
 
-    // console.log("todo bien22"+ ninoEdad);
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -52,38 +64,13 @@ function Yoga() {
     const [startingTime, setStartingTime] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [poseTime, setPoseTime] = useState(0)
-   
-    const [ninoId, setNinoId] = useState(0);
-   /* const [valores, setValores] = useState([])
-    useEffect(() => {
-        fetch("http://localhost:9000/api/id")
-          .then((response) => response.json())
-          .then((response) =>setValores(response));
-         }, []); 
 
-        console.log("-------------aa--:"+valores);*/
-        
-    var variable='';
-    /*if(ninoEdad==6){
-        variable='Pose_6';
-        
-        console.log("entro en pose 6");
-    }else if(ninoEdad==5){
-        variable='Pose_5';
-        
-        console.log("entro en pose 5");
-    }else if(ninoEdad==4){
-        variable='Pose_4';
-        console.log("entro en pose 4");
-    }else{
-        variable='Pose_3';
-        console.log("no entro en ninguno");
-    } */
-    
-    const [currentPose, setCurrentPose] = useState("pose1")
+    var variable = '';
+    const [currentPose, setCurrentPose] = useState("Habituación")
     const [bestPerform, setBestPerform] = useState(0)
-   
+
     const [isStartPose, setIsStartPose] = useState(false)
+
 
 
     useEffect(() => {
@@ -104,12 +91,11 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-        pose1: 0,
-        pose2: 1, 
-        pose3: 2,
-        pose4: 3
+        Habituación: 0,
+        Entrenamiento: 1,
+        Evaluación: 2
 
-      }
+    }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {
         let left = tf.gather(landmarks, left_bodypart, 1)
@@ -157,7 +143,7 @@ function Yoga() {
     const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/de-cambio/model.json')
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {
@@ -212,10 +198,10 @@ function Yoga() {
                 classification.array().then((data) => {
                     const classNo = CLASS_NO[currentPose]
                     console.log(data[0][classNo])
-                    console.log("current:"+currentPose+" classno "+classNo);
+                    console.log("current:" + currentPose + " classno " + classNo);
                     if (data[0][classNo] > 0.97) {
-
                         if (!flag) {
+                            
                             countAudio.play()
                             setStartingTime(new Date(Date()).getTime())
                             flag = true
@@ -242,46 +228,47 @@ function Yoga() {
         runMovenet()
     }
 
-   
+
 
     function stopPose() {
 
-        console.log("esta es la pose"+currentPose);
-        var poseAct=0;
-        if(currentPose==="Pose_3"){
-           var poseAct=1;
-        }else if(currentPose==="Pose_4"){
-            var poseAct=2;
-        }else if(currentPose==="Pose_5"){
-            var poseAct=3;
-        }else if(currentPose==="Pose_6"){
-            var poseAct=4;
-        }else{
-            var poseAct=1;
+        console.log("esta es la pose" + currentPose);
+        var poseAct = 0;
+        if (currentPose === "Habituación") {
+            var poseAct = 3;
+        } else if (currentPose === "Entrenamiento") {
+            var poseAct = 4;
+        } else if (currentPose === "Evaluación") {
+            var poseAct = 5;
         }
+        else {
+            var poseAct = 3;
+        }
+        var paso=0;
 
-       
-
-    /* var resultado=({
-        ID_PRUEBA: 0,
-        ID_ESTUDIANTE:0,
-        TIEMPO_RECORD: bestPerform,
-        INTENTOS: 0
-          })
-            console.log("si vino a stop pose");
-        
-            //consulta
-            const requestInit = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(resultado)
-            }
-            console.log("niño: "+resultado);
-            fetch('http://localhost:9000/api/valor', requestInit)
-            .then(res => res.text())
-            .then(res => console.log(res))     
-
-            */
+        if(bestPerform >= 10){
+            paso=1;
+        }
+        var resultado=({
+            ID_PRUEBA: poseAct,
+            ID_ESTUDIANTE: id_nino,
+            TIEMPO_RECORD: bestPerform,
+            VALIDACION: paso
+              })
+                console.log("si vino a stop pose");
+            
+                //consulta
+                const requestInit = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(resultado)
+                }
+                console.log("niño: "+resultado);
+                fetch('http://localhost:9000/api/valor', requestInit)
+                .then(res => res.text())
+                .then(res => console.log(res))     
+    
+                
         setIsStartPose(false)
         clearInterval(interval)
     }
@@ -326,16 +313,16 @@ function Yoga() {
                                 zIndex: 1
                             }
                         } >
-                    </canvas> <div className="social9" >
+                    </canvas> <div className="social9 " >
                         <img src={once} />
                     </div>
-                    <div className="social4" >
+                    <div className="social4 rotate" >
                         <img src={doce} />
                     </div>
-                    <div className="social7" >
+                    <div className="social7 rotate" >
                         <img src={trece} /> </div>
-                    <div className="social3" >
-                        < img src={trece} /> </div> <div className="social5" >
+                    <div className="social3 rotate" >
+                        < img src={trece} /> </div> <div className="social5 rotate" >
                         < img src={doce} /> </div> <div >
                         < img src={poseImages[currentPose]}
                             className="pose-img" />   </div>
@@ -350,6 +337,7 @@ function Yoga() {
 
     return (
         <div className="yoga-container" >
+            
             < DropDown poseList={poseList}
                 currentPose={currentPose}
                 setCurrentPose={setCurrentPose}

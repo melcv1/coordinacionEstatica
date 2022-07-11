@@ -15,14 +15,27 @@
     color: rgb(35, 35, 35);
     font-weight: 400;
     margin-top: 20px;
-
-
 }
 
 .instructions-container {
     display: flex;
     justify-content: space-evenly;
     align-content: center;
+}
+.audioImg{
+    width:100%;
+   
+   
+}
+.audioBtn{
+   position:absolute;
+    left:5px;
+    top:5px;
+    background-color:transparent !important;
+    border-color: transparent;
+    width: 130px;
+   
+   
 }
 
 .pose-demo-img {

@@ -26,51 +26,60 @@ export default function Home() {
 
 
   return (
+    
     <div className="home-container">
       <div className="container">
         <div className="row home-top">
           <div className="col-lg-6 ">
-            <img src={inicio} />
+            <img src={inicio} className="nuevos1"/>
           </div>
           <div className="col-lg-6 fondo">
             <h2 className="description2">Coordinación estática</h2>
             <h1 className="description">¡Bienvenido!</h1>
             
             <Form nino={nino} setNino={setNino}/>
+
+           
             
           </div>
+         
         </div>
-        <div className="row">                        
+        <div className="row">               
+        <Link to="/resultados">
+                <button className="btn2 start-btn btn-res">Resultados</button>
+                </Link>          
               <Link to="/about">
                 <button className="btn2 start-btn">Información</button>
-              </Link>         
+              </Link>    
+              
+                   
 
         </div>
        
       </div>
-      <div className="social">
+      <div className="social ">
            <img src={siete} />
       </div>
 
-      <div className="social2">
+      <div className="social2 ">
            <img src={ocho} />
       </div>
-      <div className="social3">
+      <div className="social3 rotate">
            <img src={uno} />
       </div>
-      <div className="social4">
+      <div className="social4 rotate" >
            <img src={dos} />
       </div>
-      <div className="social5">
+      <div className="social5 rotate">
            <img src={tres} />
       </div>
-      <div className="social6">
+      <div className="social6 rotate">
            <img src={cuatro} />
       </div>
-      <div className="social7">
+      <div className="social7 rotate">
            <img src={cinco} />
       </div>
-      <div className="social8">
+      <div className="social8 rotate">
            <img src={seis} />
       </div>
     </div>

@@ -31,6 +31,31 @@ routes.get('/:id', (req, res)=>{
         })
     })
 })
+
+routes.get('/pruebas/:id', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+
+        conn.query('SELECT * FROM estudiante_prueba WHERE id_estudiante = ?', [req.params.id],  (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.json(rows)
+        })
+    })
+})
+
+
+routes.get('/ninos', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+
+        conn.query('SELECT * FROM estudiante',  (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.json(rows)
+        })
+    })
+})
 routes.post('/', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -52,6 +77,27 @@ routes.post('/valor', (req, res)=>{
           
 
             res.send("todo ok!")
+        })
+    })
+})
+routes.post('/process', function(req, res){
+   let data='';
+   if(req.xhr){
+    data+='Hello, ';
+
+   }
+   if(req.body.fieldB){
+    data+='world';
+   }
+   data+='!';
+})
+routes.put('/actualizar/:id', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('UPDATE estudiante set ? WHERE id_estudiante = ?', [req.body, req.params.id], (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.send('NINO  ACTUALIZADO!')
         })
     })
 })

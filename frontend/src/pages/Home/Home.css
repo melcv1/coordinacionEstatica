@@ -72,7 +72,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Yanone+Kaffeesatz&display=swap');
 .home-top {
-    padding-top: 11rem;
+    padding-top: 8rem;
 }
 
 .btn-section {
@@ -83,7 +83,7 @@
 .social {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
 }
 
 .social2 {
@@ -125,7 +125,7 @@
 .social8 {
     position: absolute;
     right: 22rem;
-    top: 8rem;
+    top: 3rem;
 }
 
 .social9 {
@@ -185,3 +185,5 @@ body::-webkit-scrollbar {
     border-color: white;
     color: black;
 }
+
+

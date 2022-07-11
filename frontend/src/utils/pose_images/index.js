@@ -11,10 +11,9 @@ import pose_5 from './pose5.jpg'
 import pose_6 from './pose6.jpg'
 
 export const poseImages = {
-    pose1: pose_3,
-    pose2: pose_4,
-    pose3: pose_5,
-    pose4: pose_6
+    Habituación: pose_3,
+    Entrenamiento: pose_4,
+    Evaluación: pose_5
    /* Dog: dog,
     Warrior: warrior,
     Chair: chair,

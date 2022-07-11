@@ -1,25 +1,17 @@
 export const poseInstructions = {
-    pose1: [
+    Habituación: [
         'Brazos caídos, pies juntos. Poner una rodilla en tierra sin mover los brazos ni el otro pie. Mantener el tronco vertical (sin sentarse sobre el talón). 20 segundos de descanso y cambio de pierna',
         '1 vez por cada pierna',
         'Fallas: Desplazar brazos, pies o rodillas. Tiempo menor a 10 segundos. Sentarse sobre el talón”)',
         'Durar al menos 10 segundos'
         ],
-    pose2: [
+    Entrenamiento: [
         'Con los ojos abiertos, pies juntos, manos a la espalda; doblar el tronco a 90° y mantener esta posición',
         'Duración al menos de 10 segundos.',
         'Fallas: Desplazarse. Flexionar las piernas.Tiempo menor a 10 segundos'
     ],
-    pose3: [
+    Evaluación: [
         'Con los ojos abiertos, mantenerse sobre la pierna derecha; rodilla izquierda flexionada al frente a 90°, muslo paralelo al derecho y ligeramente separado, brazos caídos. Después de 30 segundosde reposo. Mismo ejercicios con la otra pierna.',
-        '1 vez por cada pierna',
-        'Duración al menos 10 segundos por pierna',
-        'Fallas: Bajar más de tres veces la pierna flexionada. Tocar el suelo con el pie, saltar,elevarse sobre la punta del pie. Balanceos'
-        
-    
-    ],
-    pose4: [
-        'Con los ojos abiertos, mantenerse sobre la pierna derecha; rodilla izquierda flexionada atrás a 90°, muslo paralelo al derecho y ligeramente separado, brazos caídos. Después de 30 segundosde reposo. Mismo ejercicios con la otra pierna.',
         '1 vez por cada pierna',
         'Duración al menos 10 segundos por pierna',
         'Fallas: Bajar más de tres veces la pierna flexionada. Tocar el suelo con el pie, saltar,elevarse sobre la punta del pie. Balanceos'

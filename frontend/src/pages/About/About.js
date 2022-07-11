@@ -60,7 +60,7 @@ export default function About() {
                    
                     <div className="row">
                         <div  className="col-4 centrado">
-                        <img src={logo1} width="26%" />
+                        <img src={logo1} height="100px" />
                         </div>
                     <div className="col-4 ">
                 
@@ -68,7 +68,7 @@ export default function About() {
                     <p className="about-content centrado">Laura Melissa Cedeño Viteri</p>
                         </div>
                         <div className="col-4 centrado">
-                        <img src={logo2} />
+                        <img src={logo2}  height="100px"/>
                         </div>
                     </div>
                    

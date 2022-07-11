@@ -1,0 +1,271 @@
+.about-container {
+    width: 100vw;
+    height: 100vh;background: #FFF9FA;
+}
+
+@font-face {
+    font-family: 'Bryndan_Write';
+    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
+}
+
+.titulo{
+    background-color: #FFE4E8;
+    margin-top:90px;
+    border-radius: 15px;
+    box-shadow:  1em 0.4em #eb8198;
+    margin-left: 153px;
+    width: 70%;
+}
+.btn-res{
+}
+.par{
+  font-family: 'Bryndan_Write';
+}
+.par2{
+  font-size: 20px;
+}
+.par3{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 40px;
+}
+
+.about-heading {
+    font-size: 54px;
+    text-align: center;
+    padding-top: 10px;
+    font-family: 'Bryndan_Write';
+    color: #5b5b5b;
+}
+.about-main {
+    background-color: white;
+    margin:auto;
+    border-radius: 15px;
+    box-shadow:  1em 0.4em #eb8198;
+    margin-left: 44px;
+    width: 96%;
+    height: 60%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.about-content {
+    color: #5b5b5b;
+    font-size: 17px;
+    padding: 19px 0px 4px 50px;
+}
+.row{
+    height: 100%;
+}
+.centrado{
+    display:flex;
+    justify-content: center;
+}
+.developer-info h4 {
+    color: #5b5b5b;
+    font-family: 'Bryndan_Write';
+    margin-left: 47px;
+    text-decoration: underline;
+}
+.about-content a,
+.developer-info a {
+ color: #5b5b5b;  
+}
+.derecha{
+    position:relative;
+    bottom: 0;
+    left: 0;
+    align-self: flex-end;
+    text-align: center;
+}
+.colo{
+    height:100%;
+}
+
+.resultadostop{
+    position:absolute;
+    top:0;
+    left:0;
+}
+.izquierda{
+    position:relative;
+    bottom: 0;
+    left: 0;
+    align-self: flex-end;
+    text-align: center;
+}
+.b1{
+    position:absolute;
+    top: 14%;
+    left: 25%;
+
+}
+.b2{
+    position:absolute;
+    bottom: 57%;
+    right: -79%;
+
+}
+.li_estudiante{
+    pointer-events: all;
+    list-style-type: none;
+    display: flex;
+    /*border-radius: 20px;*/
+    border-bottom: 5px solid #fde6a3;
+    justify-content: space-between;
+    padding: 0 20px 0px 20px;
+    align-items: center;
+    font-size: 1.75rem;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    pointer-events:all;
+    cursor: pointer;
+    height: 60px;
+    background-color: white;
+    z-index: 20;
+
+}
+.li_estudiante:hover{
+    background-color:#fffbed;
+}
+
+.li_age_lbl{
+    font-size: 1rem;
+}
+.li_age{
+  font-size: 1.75rem;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+.li_habi{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+
+}
+
+.izquierda, .derecha{
+    animation-name: oscillatorUpDown;   
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+.nuevos1{
+  animation-name: oscillatorLeftRight;   
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+.rotate {
+    -webkit-animation: rotate 5s normal linear infinite;
+    animation: rotate 5s normal linear infinite;
+  }
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+  }
+  .estudiante_info{
+    justify-content:space-between;
+    width:100%;
+
+  }
+  .collapsable{
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+    animation-name: topFadeOut;
+    animation-duration: 0.5s;
+    z-index: 10;
+
+  }
+  .div_edades{
+    text-align:center;
+    justify-content:space-evenly;
+    width:100%;
+  }
+  .div_infocategorias{
+    border: 5px solid #fde6a3;
+    border-radius: 10px;
+    width: 60%;
+    margin-bottom: 20px;
+  }
+  .collapsed{
+    display: flex;
+  }
+  .nocollapsed{
+    display: none !important;
+   
+  }
+  .fotos{
+    height: 2vh;
+  }
+  @keyframes topFadeOut {
+    0% {
+      position: relative;
+      top: -100%;
+      opacity: 1;
+      transform: translate(0%,-100%);
+    }
+  
+    100% {
+      position: relative;
+      top: 0%;
+      transform: translate(0%,0%);
+      opacity: 1;
+    }
+  }
+  @keyframes rotate {
+    0% {
+      -webkit-transform: rotate3d(0, 0, 1, 0deg);
+      transform: rotate3d(0, 0, 1, 0deg);
+    }
+    25% {
+      -webkit-transform: rotate3d(0, 0, 1, 90deg);
+      transform: rotate3d(0, 0, 1, 90deg);
+    }
+    50% {
+      -webkit-transform: rotate3d(0, 0, 1, 180deg);
+      transform: rotate3d(0, 0, 1, 180deg);
+    }
+    75% {
+      -webkit-transform: rotate3d(0, 0, 1, 270deg);
+      transform: rotate3d(0, 0, 1, 270deg);
+    }
+    100% {
+      -webkit-transform: rotate3d(0, 0, 1, 360deg);
+      transform: rotate3d(0, 0, 1, 360deg);
+    }
+  }
+
+@keyframes oscillatorUpDown {
+0%   {top:0px;}
+50%  {top:50px;}
+100% {top:0px;}
+}
+
+@keyframes oscillatorLeftRight{
+  0%   {left:-10px;}
+  50%   {left:50px;}
+  100% {left:-10px;}
+  }
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #fde6a3; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f5eed8; 
+  }
