@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import backend from '@tensorflow/tfjs-backend-webgl'
 import Webcam from 'react-webcam'
 import { count } from '../../utils/music';
-
+import { Link } from "react-router-dom";
 import Instructions from '../../components/Instrctions/Instructions';
 
 import './Yoga.css'
@@ -22,9 +22,14 @@ import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { log } from '@tensorflow/tfjs';
 
+import videos from './Habituación.mp4'
+import videos1 from './Entrenamiento1.mp4'
+import videos2 from './Entrenamiento2.mp4'
+
+import videos3 from './Evaluación.mp4'
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    'Habituación', 'Entrenamiento', 'Evaluación'
+   'Habituación', 'Entrenamiento1', 'Entrenamiento2', 'Evaluación'
 ]
 let flag = false
 var id_nino = 0;
@@ -91,8 +96,8 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-        Habituación: 0,
-        Entrenamiento: 1,
+        Entrenamiento1: 0,
+        Entrenamiento2: 1,
         Evaluación: 2
 
     }
@@ -234,9 +239,9 @@ function Yoga() {
 
         console.log("esta es la pose" + currentPose);
         var poseAct = 0;
-        if (currentPose === "Habituación") {
+        if (currentPose === "Entrenamiento1") {
             var poseAct = 3;
-        } else if (currentPose === "Entrenamiento") {
+        } else if (currentPose === "Entrenamiento2") {
             var poseAct = 4;
         } else if (currentPose === "Evaluación") {
             var poseAct = 5;
@@ -313,9 +318,7 @@ function Yoga() {
                                 zIndex: 1
                             }
                         } >
-                    </canvas> <div className="social9 " >
-                        <img src={once} />
-                    </div>
+                    </canvas> 
                     <div className="social4 rotate" >
                         <img src={doce} />
                     </div>
@@ -324,8 +327,35 @@ function Yoga() {
                     <div className="social3 rotate" >
                         < img src={trece} /> </div> <div className="social5 rotate" >
                         < img src={doce} /> </div> <div >
-                        < img src={poseImages[currentPose]}
-                            className="pose-img" />   </div>
+
+
+                        
+
+{currentPose == 'Habituación' &&
+                 <video width="650" height="400" controls className="video-rsp">
+                    <source src={videos} type="video/mp4" />
+                </video> 
+            }
+            {currentPose == 'Entrenamiento1' &&
+                 <video width="650" height="400" controls className="video-rsp">
+                    <source src={videos1} type="video/mp4" />
+                </video> 
+            }
+            {currentPose == 'Entrenamiento2' &&
+                 <video width="650" height="400" controls className="video-rsp">
+                    <source src={videos2} type="video/mp4" />
+                </video> 
+            }
+                      {currentPose == 'Evaluación' &&
+                 <video width="650" height="400" controls className="video-rsp">
+                    <source src={videos3} type="video/mp4" />
+                </video> 
+            }       
+                            
+                            
+                             </div>
+
+                            
 
                 </div> < button onClick={stopPose} className="secondary-btn2" >        Parar </button>
                 <div className="social2" >
@@ -336,7 +366,44 @@ function Yoga() {
     }
 
     return (
+        
         <div className="yoga-container" >
+             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse jsflx" id="navbarTogglerDemo01">
+          
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+            <Link to="/inicio">
+                <a class="nav-link">Inicio</a>
+            </Link>
+            </li>
+            <li class="nav-item">
+            <Link to="/home">
+            <a class="nav-link" >Tareas</a>
+            </Link>
+              
+            </li>
+            <li class="nav-item">
+            <Link to="/resultados">
+                <a class="nav-link">Resultados</a>
+            </Link>  
+             
+            </li>
+            <li class="nav-item">
+            <Link to="/about">
+            <a class="nav-link" >Créditos</a>
+              </Link>    
+              
+             
+            </li>
+            
+          </ul>
+     
+        </div>
+      </nav>
             
             < DropDown poseList={poseList}
                 currentPose={currentPose}
@@ -344,7 +411,7 @@ function Yoga() {
             /> < Instructions currentPose={currentPose}
             /> <  button onClick={startYoga}
                 className="btny2 boton-abajo" >
-                ¡Listo! </button>
+                Iniciar </button>
         </div>
     )
 }

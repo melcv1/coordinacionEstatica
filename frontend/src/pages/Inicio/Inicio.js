@@ -66,18 +66,10 @@ export default function Home() {
       </nav>
       <div className="container">
         <div className="row home-top">
-          <div className="col-lg-6 ">
+          <div className="col-lg-12 nuevos22" >
             <img src={inicio} className="nuevos1" />
           </div>
-          <div className="col-lg-6 fondo2">
-            
-            <h1 className="description1">¡Bienvenido!</h1>
-            <h2 className="description22">Coordinación estática</h2>
-            <p>La coordinación y el equilibrio son capacidades que definirán la acción, hasta el punto de que una deficiencia o anomalía en el desarrollo de cualquiera de ellas, limitará o incluso impedirá una ejecución eficaz</p>
-
-
-          </div>
-
+         
         </div>
       </div>
       <div className="social ">

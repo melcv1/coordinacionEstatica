@@ -114,7 +114,7 @@ const Estudiantes = ({ setListUpdated }) => {
                                    
                                     
                                 }else{
-                                    document.getElementById(id+"p"+aux).innerHTML='<img src="/static/media/rojo.ba3c7903.png" class="fotos">';
+                                    document.getElementById(id+"p"+aux).innerHTML='<img src="/static/media/veve.147bfda7.png" class="fotos">';
                                 }
                                 aux++;
                             });

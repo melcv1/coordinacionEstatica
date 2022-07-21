@@ -5,14 +5,18 @@ import tree from './tree.jpg'
 import warrior from './warrior.jpg'
 import traingle from './traingle.jpg'
 import shoulderstand from './shoulderstand.jpg'
+import pose_2 from './pose.jpg'
 import pose_3 from './pose3.jpg'
 import pose_4 from './pose4.jpg'
 import pose_5 from './pose5.jpg'
-import pose_6 from './pose6.jpg'
+
+
+
 
 export const poseImages = {
-    Habituación: pose_3,
-    Entrenamiento: pose_4,
+    Habituación: pose_2,
+    Entrenamiento1: pose_3,
+    Entrenamiento2: pose_4,
     Evaluación: pose_5
    /* Dog: dog,
     Warrior: warrior,

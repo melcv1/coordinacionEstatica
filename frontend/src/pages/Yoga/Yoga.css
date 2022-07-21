@@ -30,6 +30,14 @@
     width: 500px;
     aspect-ratio: 1;
 }
+.video-rsp{
+    position: absolute;
+    right: 71px;
+top: 197px;
+width: 663px;
+    aspect-ratio: 1;
+
+}
 
 .performance-container {
     display: flex;
@@ -96,7 +104,7 @@
 }
 .boton-abajo{
     position: absolute;
-    bottom: 81px;
+    bottom: 14px;
     left: 36%;
     width: 26%;
 }

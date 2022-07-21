@@ -16,6 +16,7 @@ import a1 from "../../utils/images/b1.png";
 
 import a2 from "../../utils/images/b2.png";
 import Estudiantes from "./Estudiantes";
+import { Link } from "react-router-dom";
 
 
 
@@ -26,6 +27,42 @@ export default function Resultados() {
     
     return (
         <div className="about-container">  
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse jsflx" id="navbarTogglerDemo01">
+          
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+            <Link to="/inicio">
+                <a class="nav-link">Inicio</a>
+            </Link>
+            </li>
+            <li class="nav-item">
+            <Link to="/home">
+            <a class="nav-link" >Tareas</a>
+            </Link>
+              
+            </li>
+            <li class="nav-item">
+            <Link to="/resultados">
+                <a class="nav-link">Resultados</a>
+            </Link>  
+             
+            </li>
+            <li class="nav-item">
+            <Link to="/about">
+            <a class="nav-link" >Créditos</a>
+              </Link>    
+              
+             
+            </li>
+            
+          </ul>
+     
+        </div>
+      </nav>
             <div className="row">
 
             <div className="b1">

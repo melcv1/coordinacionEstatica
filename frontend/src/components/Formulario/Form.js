@@ -50,18 +50,18 @@ export default function Form({nino, setNino}) {
         <form onSubmit={handleSubmit}>
             <div className="mb-3 algn-cnt">
 
-            <h2 className="description2">¿Cómo te llamas?</h2>
+            <h2 className="description2">Nombres y Apellidos del estudiante</h2>
 
             <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
 
             </input>
 
-            <h2 className="description3">¿Cuántos años tienes?</h2>
+            <h2 className="description3">Edad actual del estudiante</h2>
 
             <input type="text" value={edad_actual} name="edad_actual" onChange={handleChange} className="form-control nombre">
 
             </input>
-            <button type="submit" className="btn start-btn">Comencemos</button>
+            <button type="submit" className="btn start-btn">Iniciar</button>
                  
 
             </div>
