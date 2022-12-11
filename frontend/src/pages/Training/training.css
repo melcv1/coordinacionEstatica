@@ -158,3 +158,8 @@
     align-items: center;
     justify-content:center
 }
+.social3 {
+    position: absolute;
+    left: 5rem;
+    top: 10rem;
+}

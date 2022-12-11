@@ -20,12 +20,14 @@ import diez from "../../utils/images/10.png";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import video from '../../utils/images/Pose1.mp4';
+import { UnityPlayer } from '../../components/Unity/UnityPlayer';
+import Timer from '../../components/Timer/Timer';
 
 function Training() {
     const navigate = useNavigate();
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
-
+    const [testTime, setTestTime] = useState(0);
 
 
     /*
@@ -47,32 +49,7 @@ function Training() {
             //xrCompatible: true,
         },
     });*/
-
-    const videoEl = useRef(null);
-
-    const attemptPlay = () => {
-        videoEl &&
-            videoEl.current &&
-            videoEl.current.play().catch(error => {
-                console.error("Error attempting to play", error);
-            })
-        videoEl.current.muted = false;
-
-    };
-    async function unmute() {
-        await setTimeout(() => {
-            videoEl.current.muted = false;
-        }, 2000)
-    }
-
-    useEffect(() => {
-        attemptPlay();
-        console.log(pose);
-
-        // unmute()
-
-    }, []);
-
+   
     function handleChange(pose) {
         setPose(pose);
         // await unityContext.unload();
@@ -88,6 +65,18 @@ function Training() {
         // await unityContext.unload();
         navigate(path)
     }
+
+    let interval = null;
+    
+    function startTestTimer() {
+        interval = setInterval(() => {
+            setTestTime((time) => time + 10);
+        }, 10);
+    }
+useEffect(() => {
+    
+}, [])
+
 
     return (
         <>
@@ -126,21 +115,15 @@ function Training() {
                 </DropDown>
                 
                 */}
+                <Timer testTime={testTime} startTestTimer={startTestTimer} />
                 <div className='poseTitle_container'>
                     <div className='poseTitle' >{pose}</div>
                 </div>
-                <div className="UnityComponent">
-                    <video
-                        style={{ maxWidth: "100%", width: "800px", margin: "0 auto" }}
-                        playsInline
-                        muted
-                        autoPlay
-                        alt="All the devices"
-                        src={U_LOADERS_TRAINING[pose]}
-                        ref={videoEl}
-                    />
-                </div>
-                <div className="social4 " >
+                <UnityPlayer
+                    source={U_LOADERS_TRAINING[pose]}
+                    CallbackFn={startTestTimer}
+                />
+                <div className="social4 rotate" >
                     <img src={doce} />
                 </div>
                 <div className="social7 " >

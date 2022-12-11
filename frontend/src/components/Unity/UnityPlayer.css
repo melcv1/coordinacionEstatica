@@ -1,0 +1,10 @@
+.UnityPlayer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.UnityPlayerControls{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
