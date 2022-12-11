@@ -42,7 +42,7 @@ export default function Home() {
             </li>
             <li className="nav-item">
             <Link to="/home">
-            <a className="nav-link" >Tareas</a>
+            <a className="nav-link" >Registro</a>
             </Link>
               
             </li>
@@ -67,7 +67,29 @@ export default function Home() {
       <div className="container">
         <div className="row home-top">
           <div className="col-lg-12 nuevos22" >
-            <img src={inicio} className="nuevos1" />
+
+            <div className="cnt-in">
+              <h1>
+                Evaluación de la Coordinación Estática
+
+              </h1>
+              <p className="about-content">La estabilidad estática, hace referencia a la capacidad del sujeto de mantenerse sobre una base estable mientras lo realiza con mínimos movimientos compensatorios.
+                 Este tipo de acciones tienen como objetivo poner foco sobre el control postural estático.
+                Es la facultad del individuo para mantener el cuerpo en posición sin desplazarse.    
+                
+                </p>
+                <div className="developer-info">
+                    <h4>Importancia</h4>
+                    <p className="about-content">La coordinación y el equilibrio son capacidades que definirán la acción,
+                 hasta el punto de que una deficiencia o anomalía en el desarrollo de cualquiera de ellas,
+                  limitará o incluso impedirá una ejecución eficaz. Por ello, es necesario el trabajo de estas
+                   capacidades en los primeros años de la Educación Primaria, ya que la mejora funcional del dominio 
+                   corporal supondrá la adquisición de múltiples conductas motrices de carácter utilitario, 
+                   lúdico o expresivo, que serán fundamentales para el desarrollo integral de los niños. 
+                    </p>
+                </div>
+           </div>
+           
           </div>
          
         </div>
@@ -79,22 +101,18 @@ export default function Home() {
       <div className="social2 ">
         <img src={ocho} />
       </div>
-      <div className="social3 rotate">
+      <div className="social3 ">
         <img src={uno} />
       </div>
-      <div className="social4 rotate" >
-        <img src={dos} />
-      </div>
-      <div className="social5 rotate">
+     
+      <div className="social5 ">
         <img src={tres} />
       </div>
-      <div className="social6 rotate">
-        <img src={cuatro} />
-      </div>
-      <div className="social7 rotate">
+     
+      <div className="social7 ">
         <img src={cinco} />
       </div>
-      <div className="social8 rotate">
+      <div className="social8 ">
         <img src={seis} />
       </div>
     </div>

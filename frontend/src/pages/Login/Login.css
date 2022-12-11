@@ -11,6 +11,7 @@
     background: #F9FFFF;
 }
 
+
 .header-btn:hover {
     border-color: white;
 }
@@ -25,6 +26,10 @@
 }
 .margens{
     margin-left:40%;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #EB8198;
+    color:white;
 }
 .derecha2{
     position: relative;
@@ -53,13 +58,10 @@
     background-size: 750px;
 }
 
-@font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
-}
+
 
 .description {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 66px;
     color: #494D4D;
     text-align: center;
@@ -70,7 +72,7 @@
 
 .description2 {
     padding-top: 30px;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 25px;
     color: #636363;
     text-align: center;
@@ -79,8 +81,10 @@
     letter-spacing: 0.5px;
     font-weight: 500;
 }
+.login{
+    padding-top:9rem;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Yanone+Kaffeesatz&display=swap');
 .home-top {
     padding-top: 8rem;
 }
@@ -157,11 +161,11 @@
     border-width: 4px;
     cursor: pointer;
     width: 498px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 input {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 .btn2:hover {

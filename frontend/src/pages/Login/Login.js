@@ -50,7 +50,7 @@ export default function Login() {
     
     <div className="home-container">
       <div className="container-login">
-        <div className="row home-top">
+        <div className="row login">
           <div className="col-lg-12 fondo">
           <form onSubmit={handleSubmit}>
             
@@ -59,7 +59,7 @@ export default function Login() {
             <input type="text" value={usuario} name="usuario" onChange={handleChange} className="form-control nombre"></input>
             <h2 className="description2">Contraseña</h2>
             <input type="password" value={contrasena} name="contrasena" onChange={handleChange} className="form-control nombre"></input>
-            <button type="submit" className="btn start-btn margens">Comencemos</button>
+            <button type="submit" className="btn start-btn margens">Ingresar</button>
           </form>
           </div>
          
@@ -72,29 +72,24 @@ export default function Login() {
       <div className="social2 ">
            <img src={ocho} />
       </div>
-      <div className="social3 rotate">
+      <div className="social3 ">
            <img src={uno} />
       </div>
-      <div className="social4 rotate" >
+      <div className="social4 " >
            <img src={dos} />
       </div>
-      <div className="social5 rotate">
+      <div className="social5 ">
            <img src={tres} />
       </div>
-      <div className="social6 rotate">
-           <img src={cuatro} />
-      </div>
-      <div className="social7 rotate">
+     
+      <div className="social7 ">
            <img src={cinco} />
       </div>
-      <div className="social8 rotate">
+      <div className="social8 ">
            <img src={seis} />
       </div>
 
-      <div className="derecha2">
-                <img src={nueve} />
-
-                </div>
+     
     </div>
   );
 }

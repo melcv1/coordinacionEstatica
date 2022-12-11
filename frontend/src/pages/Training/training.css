@@ -44,10 +44,6 @@
     display: flex;
 }
 
-@font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(../Training/Bryndan_Write.ttf) format('opentype');
-}
 
 .pose-performance {
     margin: 10px 10px;
@@ -64,13 +60,16 @@
     color: white;
     border: none !important;
     width: 250px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 2rem;
+}
+.nav-link{
+    font-weight: bold;
 }
 
 .pose-performance h4 {
     color: white;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 3.5rem;
 }
 
@@ -86,7 +85,7 @@
 
 .pose-performance2 h4 {
     color: #494D4D;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 1.5rem;
 }
 
@@ -128,7 +127,7 @@
     border: none !important;
     margin: 30px 0;
     color: white;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 1.5rem;
 }
 
@@ -152,7 +151,7 @@
     border: none !important;
     margin: 30px 0;
     color: white;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 1.5rem;
     width:300px;
     display: flex;

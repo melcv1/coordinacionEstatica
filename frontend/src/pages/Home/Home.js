@@ -16,6 +16,9 @@ import siete from "../../utils/images/7.png";
 import ocho from "../../utils/images/8.png";
 
 import Form from "../../components/Formulario/Form";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPerson} from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
 
@@ -42,7 +45,7 @@ export default function Home() {
             </li>
             <li className="nav-item">
             <Link to="/home">
-            <a className="nav-link" >Tareas</a>
+            <a className="nav-link" >Registro</a>
             </Link>
               
             </li>
@@ -70,13 +73,19 @@ export default function Home() {
           
           </div>
           <div className="col-lg-12 fondo">
-            <h2 className="description2">Coordinación estática</h2>
-            <h1 className="description">Registro</h1>
-            
-            <Form nino={nino} setNino={setNino}/>
+          <Link to="/registro1">
+          
+                    <a className="texto-link">Agregar Nuevo Participante  <span className="icono-der"><FontAwesomeIcon icon={faPerson} />  </span></a>
+                </Link>    
+                      
+          </div>
 
-           
-            
+          <div className="col-lg-12 fondo3">
+          <Link to="/busqueda">
+          
+                    <a className="texto-link">Buscar Participante  <span className="icono-der"><FontAwesomeIcon icon={faMagnifyingGlass} />  </span></a>
+                </Link>    
+                      
           </div>
          
         </div>
@@ -95,22 +104,18 @@ export default function Home() {
       <div className="social2 ">
            <img src={ocho} />
       </div>
-      <div className="social3 rotate">
+      <div className="social3 ">
            <img src={uno} />
       </div>
-      <div className="social4 rotate" >
-           <img src={dos} />
-      </div>
-      <div className="social5 rotate">
+     
+      <div className="social5 ">
            <img src={tres} />
       </div>
-      <div className="social6 rotate">
-           <img src={cuatro} />
-      </div>
-      <div className="social7 rotate">
+     
+      <div className="social7 ">
            <img src={cinco} />
       </div>
-      <div className="social8 rotate">
+      <div className="social8 ">
            <img src={seis} />
       </div>
     </div>

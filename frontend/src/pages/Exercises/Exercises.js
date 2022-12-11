@@ -136,13 +136,13 @@ function Exercises() {
                         </canvas>
                     </div>
                 </div>
-                <div className="social4 rotate" >
+                <div className="social4 " >
                     <img src={doce} />
                 </div>
-                <div className="social7 rotate" >
+                <div className="social7 " >
                     <img src={trece} /> </div>
-                <div className="social3 rotate" >
-                    < img src={trece} /> </div> <div className="social5 rotate" >
+                <div className="social3 " >
+                    < img src={trece} /> </div> <div className="social5 " >
                     < img src={doce} /> </div>
                 <div className="social2" >
                     <img src={nueve} />
