@@ -11,6 +11,7 @@ import Tutorials from './pages/Tutorials/Tutorials'
 
 import './App.css'
 import Exercises from './pages/Exercises/Exercises'
+import ExercisesTutorial from './pages/ExerciseTutorial/ExercisesTutorial'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/resultados' element={<Resultados />} />
         <Route path='/tutorials' element={<Tutorials />} />
+        <Route path='/ejtuturial' element={<ExercisesTutorial />} />
       </Routes>
     </Router>
   )

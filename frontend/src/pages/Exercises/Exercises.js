@@ -16,12 +16,17 @@ import trece from "../../utils/images/13.png";
 import { useFetchEdad } from '../../hooks/useFetchEdad';
 import { useFetchId } from '../../hooks/useFetchId';
 import { useDetector } from '../../hooks/useDetector';
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Timer from '../../components/Timer/Timer';
 
 function Exercises() {
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
+    const newTab = useRef(null);
     const { ninoEdad } = useFetchEdad();
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
+    const [testTime, setTestTime] = useState(0);
 
     const idnino = useFetchId();
     /*
@@ -48,29 +53,22 @@ function Exercises() {
         //await unityContext.unload();
         window.location.reload(false);
     }
-
-    const attemptPlay = () => {
-        videoEl &&
-            videoEl.current &&
-            videoEl.current.play().catch(error => {
-                console.error("Error attempting to play", error);
-            });
-        videoEl.current.muted = false;
-    };
+    let interval = null;
+    function startTestTimer() {
+        interval = setInterval(() => {
+            setTestTime((time) => time + 10);
+        }, 10);
+    }
 
 
-    useEffect(() => {
-        attemptPlay();
-
-
-    }, []);
     function postResults(poseAct, paso) {
-        console.log("AQUIIIIIIIIIIIIII-------" + idnino)
+        clearInterval(interval);
         var resultado = ({
             ID_PRUEBA: poseAct,
             ID_ESTUDIANTE: idnino,
             TIEMPO_RECORD: bestPerform,
-            VALIDACION: paso
+            VALIDACION: paso,
+            TIEMPO_FIN: testTime,
         })
         console.log("postResults");
 
@@ -93,6 +91,9 @@ function Exercises() {
 
             <div className="yoga-container" >
                 <div className="performance-container" >
+
+                    <Timer testTime={testTime} startTestTimer={startTestTimer} />
+
                     <div className="time-container">
                         <div className="pose-performance" >
                             < h4 >
@@ -106,9 +107,9 @@ function Exercises() {
                     </div>
                     < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Continuar </button>
                 </div>
+
                 <div className='exercise-container'>
                     <div className='webcam-container' >
-
                         <  Webcam width='600px'
                             height='400px'
                             id="webcam"
@@ -134,20 +135,6 @@ function Exercises() {
                             } >
                         </canvas>
                     </div>
-                    <div className='unity-excercise-container'>
-                        {
-                            //<UnityComponent unityContext={unityContext} classUnity='unity-excercise' />
-                            <video
-                                style={{ maxWidth: "100%", width: "600px", margin: "0 auto" }}
-                                playsInline
-                                muted
-                                autoPlay
-                                alt="All the devices"
-                                src={U_LOADERS_EJ[pose]}
-                                ref={videoEl}
-                            />
-                        }
-                    </div>
                 </div>
                 <div className="social4 rotate" >
                     <img src={doce} />
@@ -165,6 +152,9 @@ function Exercises() {
                 </div>
 
             </div>
+            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab}>
+                <span>start</span>
+            </Link>
 
         </>
     )
