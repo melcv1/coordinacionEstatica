@@ -62,7 +62,7 @@ routes.post('/', (req, res)=>{
         conn.query('INSERT INTO estudiante set ?', [req.body], (err, rows)=>{
             if(err) return res.send(err)
 
-            edad=req.body.edad_actual;
+           
 
             res.send("ok");
         })

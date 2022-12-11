@@ -39,6 +39,27 @@
     margin-right: auto;
     margin-left: auto;
 }
+.navbar-light{
+    font-weight: bold!important;
+
+}
+.nav-item{
+    border-right: 1px solid #888ea9;
+    padding: 0px 29px;
+    border-left: 1px solid #888ea9;
+    font-weight: bold;
+}
+.cnt-in{
+    background-color: white;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 1em 0.4em #eb8198;
+    margin-left: 44px;
+    width: 96%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
 .home-main {
     margin: auto;
@@ -51,13 +72,9 @@
     background-size: 750px;
 }
 
-@font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
-}
 
 .description1 {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 66px;
     color: #494D4D;
     text-align: center;
@@ -66,7 +83,7 @@
 }
 .nav-item{
     
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 24px;
     color:#888ea9;
 
@@ -74,7 +91,7 @@
 
 .description22 {
     padding-top: 30px;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 25px;
     color: #636363;
     text-align: center;
@@ -163,11 +180,11 @@ a {
     border-width: 4px;
     cursor: pointer;
     width: 498px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 input {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 .btn2:hover {

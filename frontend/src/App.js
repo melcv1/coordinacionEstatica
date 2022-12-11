@@ -11,6 +11,8 @@ import Tutorials from './pages/Tutorials/Tutorials'
 
 import './App.css'
 import Exercises from './pages/Exercises/Exercises'
+import { Registro1 } from './pages/Registro1/Registro1'
+import { Busqueda } from './pages/Busqueda/Busqueda'
 
 export default function App() {
   return (
@@ -25,6 +27,9 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/resultados' element={<Resultados />} />
         <Route path='/tutorials' element={<Tutorials />} />
+        <Route path='/registro1' element={<Registro1 />} />
+        <Route path='/busqueda' element={<Busqueda />} />
+      
       </Routes>
     </Router>
   )

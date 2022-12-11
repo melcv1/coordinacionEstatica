@@ -157,14 +157,17 @@ const Estudiantes = ({ setListUpdated }) => {
                         </div>
                     </div>
                     <div id={estudiante.ID_ESTUDIANTE} className="collapsable flex-column nocollapsed">
-                        <div className="flex-column">
+                        {/*
+                            <div className="flex-column">
                             <p className="li_habi">Entrenamiento 1   <span id={estudiante.ID_ESTUDIANTE + "p1"}>   </span>  </p>
                             <p className="li_habi">Entrenamiento 2 <span id={estudiante.ID_ESTUDIANTE + "p2"}>  </span>  </p>
                             <p className="li_habi">Evaluación    <span id={estudiante.ID_ESTUDIANTE + "p3"}> </span>  </p>
                         </div>
+            */ }
+            <br></br>
                         <div className="flex-row div_edades">
                             <div className="flex-column ">
-                                <p className="par par2"> EDAD MOTORA</p>
+                                <p className="par par2">POSIBLE EDAD MOTORA</p>
                                 <div className="li_age">
                                     <span className="par3">{estudiante.EDAD_MOTORA} </span>
                                     <span className="li_age_lbl">años</span>
@@ -183,12 +186,9 @@ const Estudiantes = ({ setListUpdated }) => {
                             <p className="par3">{estudiante.COCIENTE_MOTOR} % </p>
                         </div>
                         <div className="flex-column div_infocategorias">
-                            <p className="par par2">Nivel de Motricidad </p>
-                            <p className="li_habi">120% o más = Nivel de motricidad superior</p>
-                            <p className="li_habi">110% o 119% = Nivel de motricidad normal superior</p>
-                            <p className="li_habi">90% a 109% = Nivel de motricidad normal</p>
-                            <p className="li_habi">80% a 89% = Nivel de motricidad normal inferior</p>
-                            <p className="li_habi">79% o menos = Nivel de motricidad inferior</p>
+                            
+                            <p className="li_habi">Se recomienda evaluación y análisis del profesional de pedagoía y psicología educativa</p>
+                            
                         </div>
                     </div>
 

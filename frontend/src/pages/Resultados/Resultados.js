@@ -41,7 +41,7 @@ export default function Resultados() {
             </li>
             <li className="nav-item">
             <Link to="/home">
-            <a className="nav-link" >Tareas</a>
+            <a className="nav-link" >Registro</a>
             </Link>
               
             </li>
@@ -69,15 +69,12 @@ export default function Resultados() {
                 <img className=" rotate" src={a1} />
 
                 </div>
-                 <div className="b2">
-                <img className="rotate" src={a2} />
+                
+            <div className="col-2 izquierda">
+                
 
                 </div>
-            <div className="col-3 izquierda">
-                <img src={nina} />
-
-                </div>
-                <div className="col-6 colo">
+                <div className="col-8 colo">
                     <div className="titulo">
                     <h1 className="about-heading">Resultados</h1>
 
@@ -88,8 +85,8 @@ export default function Resultados() {
             </div>
 
                 </div>
-                <div className="col-3 derecha">
-                <img src={nino} />
+                <div className="col-2 derecha">
+             
 
                 </div>
               

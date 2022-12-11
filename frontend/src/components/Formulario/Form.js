@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment, useState, useEffect} from 'react';
 import "./Form.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -14,17 +14,35 @@ export default function Form({nino, setNino}) {
         [e.target.name]: e.target.value
     })
   }
-  let{nombre, edad_actual} = nino
+  const [isSaved, setisSaved] = useState(false);
+
+  let{nombre, apellido, edad_actual, fecha_nacimiento, observaciones} = nino
 
   const handleSubmit = () => {
     console.log("si vino a submit");
-    edad_actual = parseInt(edad_actual, 10)
+
+    console.log(fecha_nacimiento);
+    
     //validación de los datos
-    if (nombre === '' || edad_actual === ''  ) {
+    if (nombre === '' || apellido === '' || observaciones === ''  ) {
         alert('Todos los campos son obligatorios')
         return
         
     }
+   
+    var birthday_arr = fecha_nacimiento.split("-");
+    var birthday_date = new Date(birthday_arr[0], birthday_arr[1] - 1, birthday_arr[2]);
+    console.log(birthday_date);
+    var ageDifMs = Date.now() - birthday_date.getTime();
+    var ageDate = new Date(ageDifMs);
+    edad_actual= Math.abs(ageDate.getUTCFullYear() - 1970);
+     console.log(edad_actual);
+    var newState= nino;
+    nino.edad_actual= edad_actual;
+     setNino(
+        newState
+    )
+
 
     //consulta
     const requestInit = {
@@ -36,13 +54,16 @@ export default function Form({nino, setNino}) {
     fetch('http://localhost:9000/api', requestInit)
     .then(res => res.text())
     .then(res => console.log(res))
-    setPose("Habituacion");
-    navigate("/start");
+    .then(navigate("/start"))
+    
+   
 
     //reiniciando state de libro
     setNino({
       nombre: '',
-        edad_actual: 0
+      apellido: '',
+        edad_actual: '',
+        observaciones:'',
     })
     
 
@@ -52,19 +73,55 @@ export default function Form({nino, setNino}) {
     return (
         <form onSubmit={handleSubmit}>
             <div className="mb-3 algn-cnt">
-
-            <h2 className="description2">Ingrese nombres y apellidos del estudiante </h2>
-
-            <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
-
-            </input>
-
-            <h2 className="description3">Ingrese edad del estudiante</h2>
-
-            <input type="text" value={edad_actual} name="edad_actual" onChange={handleChange} className="form-control nombre">
+                <div className="d-flex align-items-center mt-4">
+                <h2 className="lbl-cnt">Nombres Completos</h2>
+                <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
 
             </input>
-            <button type="submit" className="btn start-btn">Iniciar</button>
+                </div>
+
+                
+                <div className="d-flex align-items-center mt-4">
+                <h2 className="lbl-cnt">Apellidos Completos</h2>
+                <input type="text" value={apellido} name="apellido" onChange={handleChange} className="form-control nombre">
+
+            </input>
+                </div>
+
+
+                <div className="d-flex align-items-center mt-4">
+                     <h2 className="lbl-cnt">Fecha de Nacimiento</h2>
+
+                    <input type="date" value={fecha_nacimiento} name="fecha_nacimiento" onChange={handleChange} className="form-control nombre">
+
+                    </input>
+
+               </div>
+
+               <div className="d-flex align-items-center mt-4">
+                <h2 className="lbl-cnt ob">Observaciones    </h2>
+                <input type="text" value={observaciones} name="observaciones" onChange={handleChange} className="form-control nombre">
+
+            </input>
+                </div>
+
+           
+
+            
+
+           <div className="form-sub">
+           <button type="submit" className="btn start-btn guardar">Guardar</button>
+          
+           <Link to="/home">
+           <button type="submit" className="btn start-btn cancelar">Cancelar</button>
+            </Link>
+
+           
+
+          
+           </div>
+           
+           
                  
 
             </div>
