@@ -104,7 +104,7 @@ function Training() {
 
                             </li>
                             <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/home')} class="nav-link">Tareas</button>
+                                <button onClick={() => goTo('/home')} class="nav-link">Registro</button>
                             </li>
                             <li class="nav-item btn-nav-item">
                                 <button onClick={() => goTo('/resultados')} class="nav-link">Resultados</button>
@@ -140,16 +140,16 @@ function Training() {
                         ref={videoEl}
                     />
                 </div>
-                <div className="social4 rotate" >
+                <div className="social4 " >
                     <img src={doce} />
                 </div>
-                <div className="social7 rotate" >
+                <div className="social7 " >
                     <img src={trece} />
                 </div>
-                <div className="social3 rotate" >
+                <div className="social3 " >
                     < img src={trece} />
                 </div>
-                <div className="social5 rotate" >
+                <div className="social5 " >
                     < img src={doce} />
                 </div>
                 <div className="social2" >

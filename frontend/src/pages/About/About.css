@@ -3,10 +3,7 @@
     height: 100vh;background: #F9FFFF;
 }
 
-@font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
-}
+
 
 .titulo{
     background-color: #FFE4E8;
@@ -20,7 +17,7 @@
     font-size: 54px;
     text-align: center;
     padding-top: 10px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     color: #5b5b5b;
 }
 .about-main {
@@ -42,7 +39,7 @@
 }
 .developer-info h4 {
     color: #5b5b5b;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     margin-left: 47px;
     text-decoration: underline;
 }

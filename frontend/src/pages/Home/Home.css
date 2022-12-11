@@ -44,12 +44,12 @@
 }
 
 @font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+    src: local('-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif'), url(./Bryndan_Write.ttf) format('opentype');
 }
 
 .description {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 66px;
     color: #494D4D;
     text-align: center;
@@ -60,7 +60,7 @@
 
 .description2 {
     padding-top: 30px;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 25px;
     color: #636363;
     text-align: center;
@@ -74,7 +74,18 @@
 .home-top {
     padding-top: 4rem!important;
 }
-
+.texto-link{
+    color:#5b5b5b;
+    display: flex;
+    justify-content:center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
+}
+.icono-der{
+    padding: 0px 10px;
+}
 .btn-section {
     position: absolute;
     left: 64vw;
@@ -147,11 +158,11 @@
     border-width: 4px;
     cursor: pointer;
     width: 498px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 input {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 .btn2:hover {
@@ -160,9 +171,23 @@ input {
 }
 
 .fondo {
+    margin-top:5%;
     background-color: #FFE4E8;
     border-radius: 15px;
     box-shadow: 1em 1em 0.4em #EB8198;
+}
+.fondo-reg {
+    
+    background-color: #FFE4E8;
+    border-radius: 15px;
+    box-shadow: 1em 1em 0.4em #EB8198;
+}
+.fondo3{
+    margin-top:6%;
+    background-color: #f1fdfd;
+    border-radius: 15px;
+    box-shadow: 1em 1em 0.4em #cfe7e7;
+
 }
 
 body::-webkit-scrollbar {
