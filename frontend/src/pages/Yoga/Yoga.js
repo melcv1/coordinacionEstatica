@@ -1,8 +1,7 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs';
-import React, { useRef, useState, useEffect } from 'react'
-import backend from '@tensorflow/tfjs-backend-webgl'
-import Webcam from 'react-webcam'
+import React, { useRef, useState, useEffect, Fragment } from 'react';
+import Webcam from 'react-webcam';
 import { count } from '../../utils/music';
 import { Link } from "react-router-dom";
 import Instructions from '../../components/Instrctions/Instructions';
@@ -10,23 +9,17 @@ import Instructions from '../../components/Instrctions/Instructions';
 import './Yoga.css'
 
 import DropDown from '../../components/DropDown/DropDown';
-import { poseImages } from '../../utils/pose_images';
 import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
 
 import nueve from "../../utils/images/9.png";
 import diez from "../../utils/images/10.png";
-import once from "../../utils/images/11.png";
 
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
-import { log } from '@tensorflow/tfjs';
 
-import videos from './Habituación.mp4'
-import videos1 from './Entrenamiento1.mp4'
-import videos2 from './Entrenamiento2.mp4'
+import UnityComponent from "../../components/Unity/UnityComponent";
 
-import videos3 from './Evaluación.mp4'
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
    'Habituación', 'Entrenamiento1', 'Entrenamiento2', 'Evaluación'
@@ -42,26 +35,6 @@ let interval
 
 
 function Yoga() {
-    const [ninoEdad, setNinoEdad] = useState(0);
-    useEffect(() => {
-        fetch("http://localhost:9000/api/edad")
-            .then((response) => response.json())
-            .then((ninoEdad) => setNinoEdad(ninoEdad));
-    }, []);
-    edad_nino= ninoEdad;
-  
-    const [valores, setValores] = useState([])
-    useEffect(() => {
-        fetch("http://localhost:9000/api/id")
-            .then((response) => response.json())
-            .then((response) => {
-                id_nino= response[0].id_est;
-                console.log("Todo ok!");
-                setValores(response);
-
-            });
-    }, []);
-
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -75,6 +48,28 @@ function Yoga() {
     const [bestPerform, setBestPerform] = useState(0)
 
     const [isStartPose, setIsStartPose] = useState(false)
+    const [isComponentUnloaded, setIsComponentUnloaded] = useState(true);
+    const [ninoEdad, setNinoEdad] = useState(0);
+    const [valores, setValores] = useState([])
+    
+    useEffect(() => {
+        fetch("http://localhost:9000/api/edad")
+            .then((response) => response.json())
+            .then((ninoEdad) => setNinoEdad(ninoEdad));
+    }, []);
+    edad_nino= ninoEdad;
+  
+    useEffect(() => {
+        fetch("http://localhost:9000/api/id")
+            .then((response) => response.json())
+            .then((response) => {
+                id_nino= response[0].id_est;
+                console.log("Todo ok!");
+                setValores(response);
+
+            });
+    }, []);
+
 
 
 
@@ -278,7 +273,9 @@ function Yoga() {
         clearInterval(interval)
     }
 
+    function handleSelectOnChange(){
 
+    }
 
     if (isStartPose) {
         return (
@@ -318,7 +315,7 @@ function Yoga() {
                                 zIndex: 1
                             }
                         } >
-                    </canvas> 
+                    </canvas>
                     <div className="social4 rotate" >
                         <img src={doce} />
                     </div>
@@ -326,38 +323,31 @@ function Yoga() {
                         <img src={trece} /> </div>
                     <div className="social3 rotate" >
                         < img src={trece} /> </div> <div className="social5 rotate" >
-                        < img src={doce} /> </div> <div >
+                        < img src={doce} /> </div>
 
+                    <div >
+                        {isComponentUnloaded === true ? 
+                            <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose1/Pose1/Build.loader.js" dataUrl="/Pose1/Pose1/Build.data" frameworkUrl="/Pose1/Pose1/Build.framework.js" codeUrl="/Pose1/Pose1/Build.wasm" />    
 
-                        
-
-{currentPose == 'Habituación' &&
-                 <video width="650" height="400" controls className="video-rsp">
-                    <source src={videos} type="video/mp4" />
-                </video> 
-            }
-            {currentPose == 'Entrenamiento1' &&
-                 <video width="650" height="400" controls className="video-rsp">
-                    <source src={videos1} type="video/mp4" />
-                </video> 
-            }
-            {currentPose == 'Entrenamiento2' &&
-                 <video width="650" height="400" controls className="video-rsp">
-                    <source src={videos2} type="video/mp4" />
-                </video> 
-            }
-                      {currentPose == 'Evaluación' &&
-                 <video width="650" height="400" controls className="video-rsp">
-                    <source src={videos3} type="video/mp4" />
-                </video> 
-            }       
+                                (currentPose == 'Habituación' &&    
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose1/Pose1/Build.loader.js" dataUrl="/Pose1/Pose1/Build.data" frameworkUrl="/Pose1/Pose1/Build.framework.js" codeUrl="/Pose1/Pose1/Build.wasm" />    
+                                )
+                                (currentPose == 'Entrenamiento1' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose2ej/Build/Pose2ej.loader.js" dataUrl="/Pose2ej/Build/Pose2ej.data" frameworkUrl="/Pose2ej/Build/Pose2ej.framework.js" codeUrl="/Pose2ej/Build/Pose2ej.wasm" />    
+                                )
+                                (currentPose == 'Entrenamiento2' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose4ej/Build/Pose4ej.loader.js" dataUrl="/Pose4ej/Build/Pose4ej.data" frameworkUrl="/Pose4ej/Build/Pose4ej.framework.js" codeUrl="/Pose4ej/Build/Pose4ej.wasm" />    
+                                )
+                                (currentPose == 'Evaluación' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose5ej/Build/Pose5ej.loader.js" dataUrl="/Pose5ej/Build/Pose5ej.data" frameworkUrl="/Pose5ej/Build/Pose5ej.framework.js" codeUrl="/Pose5ej/Build/Pose5ej.wasm" />    
+                                )                               
                             
-                            
-                             </div>
+                        :                            
+                            <p>no unloaded</p>
+                        }
+                    </div>
 
-                            
-
-                </div> < button onClick={stopPose} className="secondary-btn2" >        Parar </button>
+                </div> < button onClick={stopPose} className="secondary-btn2" >        Continuar </button>
                 <div className="social2" >
                     <img src={nueve} /> </div>
                 <div className="social" >
@@ -395,21 +385,21 @@ function Yoga() {
             <li class="nav-item">
             <Link to="/about">
             <a class="nav-link" >Créditos</a>
-              </Link>    
-              
+              </Link>           
              
             </li>
             
           </ul>
      
         </div>
-      </nav>
-            
+      </nav>            
             < DropDown poseList={poseList}
                 currentPose={currentPose}
                 setCurrentPose={setCurrentPose}
-            /> < Instructions currentPose={currentPose}
-            /> <  button onClick={startYoga}
+                onChange={handleSelectOnChange}
+            />
+            < Instructions currentPose={currentPose}/> 
+            <  button onClick={startYoga}
                 className="btny2 boton-abajo" >
                 Iniciar </button>
         </div>
@@ -417,3 +407,4 @@ function Yoga() {
 }
 
 export default Yoga
+

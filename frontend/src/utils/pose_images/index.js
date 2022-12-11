@@ -14,10 +14,10 @@ import pose_5 from './pose5.jpg'
 
 
 export const poseImages = {
-    Habituación: pose_2,
+    Habituacion: pose_2,
     Entrenamiento1: pose_3,
     Entrenamiento2: pose_4,
-    Evaluación: pose_5
+    Evaluacion: pose_5
    /* Dog: dog,
     Warrior: warrior,
     Chair: chair,

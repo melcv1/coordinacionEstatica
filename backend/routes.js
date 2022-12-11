@@ -64,7 +64,7 @@ routes.post('/', (req, res)=>{
 
             edad=req.body.edad_actual;
 
-            res.send(edad)
+            res.send("ok");
         })
     })
 })

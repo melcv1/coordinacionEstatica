@@ -2,10 +2,12 @@ import React from 'react'
 import "./Form.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../../localStorage/useLocalStorage";
 
 export default function Form({nino, setNino}) {
   const navigate = useNavigate();
-  
+  const [pose, setPose] = useLocalStorage("pose", "Habituacion");
+
   const handleChange = e => {
     setNino({
         ...nino,
@@ -34,7 +36,8 @@ export default function Form({nino, setNino}) {
     fetch('http://localhost:9000/api', requestInit)
     .then(res => res.text())
     .then(res => console.log(res))
-    navigate("/start")
+    setPose("Habituacion");
+    navigate("/start");
 
     //reiniciando state de libro
     setNino({
@@ -50,13 +53,13 @@ export default function Form({nino, setNino}) {
         <form onSubmit={handleSubmit}>
             <div className="mb-3 algn-cnt">
 
-            <h2 className="description2">Nombres y Apellidos </h2>
+            <h2 className="description2">Ingrese nombres y apellidos del estudiante </h2>
 
             <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
 
             </input>
 
-            <h2 className="description3">Edad</h2>
+            <h2 className="description3">Ingrese edad del estudiante</h2>
 
             <input type="text" value={edad_actual} name="edad_actual" onChange={handleChange} className="form-control nombre">
 

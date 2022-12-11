@@ -72,7 +72,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Yanone+Kaffeesatz&display=swap');
 .home-top {
-    padding-top: 8rem;
+    padding-top: 4rem!important;
 }
 
 .btn-section {
