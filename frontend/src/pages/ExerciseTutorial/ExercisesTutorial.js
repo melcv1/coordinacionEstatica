@@ -20,6 +20,7 @@ function ExercisesTutorial({source}) {
             <div className="yoga-container tuturialContainer" >
                 <UnityPlayer
                     source={U_LOADERS_TRAINING[pose]}
+                    CallbackFn={()=>{}}
                 />
                 <div className="social4 rotate" >
                     <img src={doce} />
