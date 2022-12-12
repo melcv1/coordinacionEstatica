@@ -347,7 +347,7 @@ function Yoga() {
                         }
                     </div>
 
-                </div> < button onClick={stopPose} className="secondary-btn2" >        Continuar </button>
+                </div> < button onClick={stopPose} className="secondary-btn2" >        Siguiente </button>
                 <div className="social2" >
                     <img src={nueve} /> </div>
                 <div className="social" >

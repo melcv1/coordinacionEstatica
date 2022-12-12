@@ -40,7 +40,7 @@
 
 .dropdown-custom-menu {
     overflow: scroll;
-    height: 40vh;
+   
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 0;

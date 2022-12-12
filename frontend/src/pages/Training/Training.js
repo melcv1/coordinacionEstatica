@@ -25,10 +25,12 @@ import Timer from '../../components/Timer/Timer';
 
 function Training() {
     const navigate = useNavigate();
+    const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
     const [testTime, setTestTime] = useState(0);
-
+    const [estId, setEstId] = useLocalStorage("estId", "0");
+    let interval = null;
 
     /*
     const unityContext = useUnityContext({
@@ -56,8 +58,41 @@ function Training() {
         window.location.reload(false);
     }
 
-    function goToExcercise() {
+    function update(){
+        clearInterval(interval);
+        var poseAct = 0;
+        if (pose === "Entrenamiento1") {
+            poseAct = 3;       
+        } else if (pose === "Entrenamiento2") {
+             poseAct = 4;         
+        } else if (pose === "Evaluacion") {
+             poseAct = 5;    
+        }
+        else if(pose === "Habituacion"){
+             poseAct = 2;    
+        }else{
+             poseAct = 0;
+        }
+
+        var resultado = ({
+            TIEMPO_INI: testTime,
+            ID_PRUEBA: poseAct
+        })
+
+        const requestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(resultado)
+        }
+        return fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
+            .then(res => res.text())
+
+    }
+
+   async function goToExcercise() {
         //  await unityContext.unload();
+    await update();
+
         navigate('/ej')
     }
 
@@ -66,16 +101,17 @@ function Training() {
         navigate(path)
     }
 
-    let interval = null;
+    
     
     function startTestTimer() {
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
         }, 10);
     }
-useEffect(() => {
-    
-}, [])
+
+    useEffect(() => {
+        newTab.current.click()
+    }, []);
 
 
     return (
@@ -106,7 +142,7 @@ useEffect(() => {
 
                     </div>
                 </nav>
-                {/*
+                
                 < DropDown
                     poseList={Object.keys(UNITY_LOADERS)}
                     currentPose={pose}
@@ -114,15 +150,21 @@ useEffect(() => {
                 >
                 </DropDown>
                 
-                */}
+                
                 <Timer testTime={testTime} startTestTimer={startTestTimer} />
+               { /*
                 <div className='poseTitle_container'>
                     <div className='poseTitle' >{pose}</div>
                 </div>
-                <UnityPlayer
+                */
+                }
+                {/*
+                    <UnityPlayer
                     source={U_LOADERS_TRAINING[pose]}
                     CallbackFn={startTestTimer}
                 />
+                */
+                }
                 <div className="social4 rotate" >
                     <img src={doce} />
                 </div>
@@ -147,6 +189,10 @@ useEffect(() => {
                         Iniciar
                     </button>
                 </div>
+
+                <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
+                <span>start</span>
+            </Link>
             </div>
         </>
     )

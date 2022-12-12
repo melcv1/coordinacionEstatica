@@ -59,15 +59,17 @@ routes.get('/ninos', (req, res)=>{
 routes.post('/', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
-        conn.query('INSERT INTO estudiante set ?', [req.body], (err, rows)=>{
+        conn.query('INSERT INTO estudiante set ?', [req.body], (err, results, rows)=>{
             if(err) return res.send(err)
-
-           
-
-            res.send("ok");
+            
+            res.json(results.insertId);
         })
+        
     })
 })
+
+
+
 routes.post('/valor', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -101,5 +103,20 @@ routes.put('/actualizar/:id', (req, res)=>{
         })
     })
 })
+
+
+routes.put('/actualizardatos/:id/:prueba', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('UPDATE estudiante_prueba set ? WHERE id_estudiante = ? and id_prueba = ?', [req.body, req.params.id, req.params.prueba], (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.send('NINO  ACTUALIZADO!')
+        })
+    })
+})
+
+
+
 
 module.exports = routes

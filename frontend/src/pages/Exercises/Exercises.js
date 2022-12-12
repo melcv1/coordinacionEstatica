@@ -27,8 +27,8 @@ function Exercises() {
     const { ninoEdad } = useFetchEdad();
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
     const [testTime, setTestTime] = useState(0);
-
-    const idnino = useFetchId();
+    const [estId, setEstId] = useLocalStorage("estId", "0");
+    //const idnino = useFetchId();
     /*
         const unityContext = useUnityContext({
             loaderUrl: UNITY_LOADERS_EXERCISES[pose].loaderUrl,
@@ -45,8 +45,6 @@ function Exercises() {
     );
 
     const videoEl = useRef(null);
-
-
 
     async function handleChange(pose) {
         setPose(pose);
@@ -65,24 +63,18 @@ function Exercises() {
         clearInterval(interval);
         var resultado = ({
             ID_PRUEBA: poseAct,
-            ID_ESTUDIANTE: idnino,
-            TIEMPO_RECORD: bestPerform,
+            ID_ESTUDIANTE: estId,
+            TIEMPO_EJ: bestPerform,
             VALIDACION: paso,
             TIEMPO_FIN: testTime,
         })
-        console.log("postResults");
-
-        //consulta
-        const requestInit = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(resultado)
-        }
-        console.log("niño: " + resultado);
-
-        fetch('http://localhost:9000/api/valor', requestInit)
-            .then(res => res.text())
-            .then(res => console.log(res))
+            const requestInit = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(resultado)
+            }
+             fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
+                .then(res => res.text())
 
     }
     useEffect(() => {
@@ -108,7 +100,7 @@ function Exercises() {
                             </div>
                         </div>
                     </div>
-                    < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Continuar </button>
+                    < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Siguiente </button>
                 </div>
 
                 <div className='exercise-container'>
