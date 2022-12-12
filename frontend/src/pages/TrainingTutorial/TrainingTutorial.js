@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {U_LOADERS_EJ } from '../../data/unityData';
+import {U_LOADERS_TRAINING } from '../../data/unityData';
 import './exercises.css'
 
 //hooks
@@ -11,7 +11,7 @@ import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 
-function ExercisesTutorial({source}) {
+function TrainingTutorial({source}) {
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");   
     
     return (
@@ -19,7 +19,7 @@ function ExercisesTutorial({source}) {
 
             <div className="yoga-container tuturialContainer" >
                 <UnityPlayer
-                    source={U_LOADERS_EJ[pose]}
+                    source={U_LOADERS_TRAINING[pose]}
                     CallbackFn={()=>{}}
                 />
                 <div className="social4 rotate" >
@@ -44,5 +44,5 @@ function ExercisesTutorial({source}) {
 
 }
 
-export default ExercisesTutorial;
+export default TrainingTutorial;
 

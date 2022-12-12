@@ -12,7 +12,7 @@ return (
     
         <div
         className='dropdown dropdown-container '
-        style={{visibility: 'hidden'}}
+        
          
       >
         <button 
@@ -28,10 +28,7 @@ return (
                 <li onClick={() => setCurrentPose(pose)}>
                     <div className="dropdown-item-container">
                         <p className="dropdown-item-1">{pose}</p>
-                        <img 
-                            src={poseImages[pose]}
-                            className="dropdown-img"
-                        />
+                        
                         
                     </div>
                 </li>
