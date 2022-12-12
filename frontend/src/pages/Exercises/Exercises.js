@@ -85,6 +85,10 @@ function Exercises() {
             .then(res => console.log(res))
 
     }
+    useEffect(() => {
+        startTestTimer();
+        newTab.current.click()
+    }, []);
 
     return (
         <>
