@@ -86,7 +86,6 @@ function Exercises() {
 
     }
     useEffect(() => {
-        startTestTimer();
         newTab.current.click()
     }, []);
 
@@ -156,7 +155,7 @@ function Exercises() {
                 </div>
 
             </div>
-            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab}>
+            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
                 <span>start</span>
             </Link>
 
