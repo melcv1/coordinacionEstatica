@@ -8,8 +8,13 @@ const ListaEstudiantes = () => {
 
 
     const columns = [
-        { field: 'nombre', headerName: 'Nombre', width: 150 },
-        { field: 'apellido', headerName: 'Apellido', width: 150 },
+        { field: 'nombre', headerName: 'Nombre', flex: 1 },
+        { field: 'apellido', headerName: 'Apellido', flex: 1  },
+        { field: 'fechaNacimiento', headerName: 'Fecha Nacimiento', flex: 1  },
+        { field: 'edad', headerName: 'Edad', flex: 1  },
+        { field: 'pruebas', headerName: 'Pruebas', flex: 1  },
+        { field: 'validacion', headerName: 'Validacion', flex: 1  },
+
     ];
 
     const handleRowClick = (e) =>{
