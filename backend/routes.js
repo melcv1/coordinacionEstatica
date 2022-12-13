@@ -32,7 +32,7 @@ routes.get('/:id', (req, res)=>{
     })
 })
 
-routes.get('/pruebasfinal', (req, res)=>{
+routes.get('/prueba/busqueda', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
 
