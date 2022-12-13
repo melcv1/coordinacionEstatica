@@ -1,6 +1,7 @@
 
 import React, {Fragment, useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
+import ListaEstudiantes from '../../components/ListaEstudiantes/ListaEstudiantes';
 import uno from "../../utils/images/1.png";
 import tres from "../../utils/images/3.png";
 import cinco from "../../utils/images/5.png";
@@ -54,14 +55,14 @@ export const Busqueda = () => {
               <div className="col ">
               
               </div>
-              <div className="col-lg-12 fondo-reg">
-                <h2 className="description2">Busqueda de Participante</h2>
-                           
+              <div className="col-lg-12 fondo-reg mb-5">
+                <h2 className="description2">Busqueda de Participante</h2>                     
                 
     
                
                 
               </div>
+              <ListaEstudiantes/>
              
             </div>
             <div className="row">               
