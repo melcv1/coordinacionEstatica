@@ -104,7 +104,7 @@ function Exercises() {
                             </div>
                         </div>
                     </div>
-                    < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Siguiente </button>
+                    < button onClick={() => stopPose(postResults,idEstudiante)} className="secondary-btn2" > Siguiente </button>
                     < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2" > Cancelar </button>
                 </div>
 

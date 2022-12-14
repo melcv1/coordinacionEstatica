@@ -181,7 +181,7 @@ export const useDetector = (
         runMovenet()
     }
 
-    async function stopPose(postResults) {
+    async function stopPose(postResults,id) {
 
         console.log("esta es la pose" + pose);
         let gotoPose= pose;
@@ -216,7 +216,7 @@ export const useDetector = (
         //await unload()
         
         await setPose(gotoPose);
-        navigate('/start')
+        navigate(`/start/${id}`);
     }
 
 
