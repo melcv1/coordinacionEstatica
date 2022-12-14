@@ -25,7 +25,7 @@ export default function App() {
         <Route path='/inicio' element={<Inicio />}/>
         <Route path='/home' element={<Home />}/>
         <Route path='/start/:id' element={<Training />} />
-        <Route path='/ej' element={<Exercises />} />
+        <Route path='/ej/:id' element={<Exercises />} />
         <Route path='/about' element={<About />} />
         <Route path='/resultados' element={<Resultados />} />
         <Route path='/tutorials' element={<Tutorials />} />

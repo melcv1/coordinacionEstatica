@@ -25,8 +25,8 @@ function Training() {
     const navigate = useNavigate();
     const params = useParams();
     const idEstudiante = params.id;
-    const { pruebas } = useFetchPruebas(idEstudiante);
-
+    const { pruebas, isLoading } = useFetchPruebas(idEstudiante);
+    console.log(pruebas);
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
@@ -94,7 +94,7 @@ function Training() {
     async function goToExcercise() {
         //  await unityContext.unload();
         await update();
-        navigate('/ej')
+        navigate(`/ej/${idEstudiante}`)
     }
 
     function goTo(path) {
@@ -143,12 +143,13 @@ function Training() {
 
                     </div>
                 </nav>
-
+                
                 < DropDown
                     poseList={Object.keys(UNITY_LOADERS)}
                     currentPose={pose}
                     setCurrentPose={handleChange}
                     pruebas={pruebas}
+                    isLoading={isLoading}
                 >
                 </DropDown>
 
@@ -188,6 +189,7 @@ function Training() {
                         className="btny2" >
                         Iniciar
                     </button>
+                    < button onClick={() => navigate(`/busqueda`)} className="btny2" > Cancelar </button>
                 </div>
 
                 <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>
