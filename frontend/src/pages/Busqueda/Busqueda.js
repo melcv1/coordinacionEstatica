@@ -56,7 +56,7 @@ export const Busqueda = () => {
               
               </div>
               <div className="col-lg-12 fondo-reg mb-5">
-                <h2 className="description2">Busqueda de Participante</h2>                     
+                <h2 className="description2">Búsqueda de Participante</h2>                     
                 
     
                

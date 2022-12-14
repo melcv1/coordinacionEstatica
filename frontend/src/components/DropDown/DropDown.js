@@ -4,9 +4,8 @@ import { poseImages } from '../../utils/pose_images'
 
 import './DropDown.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPerson } from '@fortawesome/free-solid-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 export default function DropDown({ poseList, currentPose, setCurrentPose, pruebas, isLoading }) {
 
@@ -33,7 +32,7 @@ export default function DropDown({ poseList, currentPose, setCurrentPose, prueba
                             {
                                 !isLoading &&
                                     <div className="dropdown-item-container">
-                                        <p className="dropdown-item-1">{pose}  {pruebas[index]['VALIDACION'] === 1 ? <FontAwesomeIcon icon={faPerson} /> : <FontAwesomeIcon icon={faMagnifyingGlass} />}</p>
+                                        <p className="dropdown-item-1">{pose}  {pruebas[index]['VALIDACION'] === 1 ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</p>
                                     </div>
                             }
                         </li>
