@@ -29,6 +29,16 @@ export default function Form({ nino, setNino }) {
 
         }
 
+        if(!/^[a-zA-Z]*$/g.test(nombre)){
+            alert('Solo ingresar letras en nombre');
+            return
+        }
+
+        if(!/^[a-zA-Z]*$/g.test(apellido)){
+            alert('Solo ingresar letras en apellido');
+            return
+        }
+
         var RegExPattern = /^\d{2,4}\-\d{1,2}\-\d{1,2}$/;
       if (!(fecha_nacimiento.match(RegExPattern))) {
         alert('Fecha de nacimiento incorrecta')  

@@ -22,14 +22,9 @@ function TrainingTutorial({source}) {
                     source={U_LOADERS_TRAINING[pose]}
                     CallbackFn={()=>{}}
                 />
-                <div className="social4 rotate" >
-                    <img src={doce} />
-                </div>
-                <div className="social7 rotate" >
-                    <img src={trece} /> </div>
-                <div className="social3 rotate" >
-                    < img src={trece} /> </div> <div className="social5 rotate" >
-                    < img src={doce} /> </div>
+               
+              
+              
                 <div className="social2" >
                     <img src={nueve} />
                 </div>
