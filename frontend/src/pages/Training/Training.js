@@ -1,6 +1,6 @@
 import React, { useState, useEffect, usePrevious, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 //components
 import DropDown from '../../components/DropDown/DropDown';
 import UnityComponent from "../../components/Unity/UnityComponent";
@@ -23,8 +23,13 @@ import video from '../../utils/images/Pose1.mp4';
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 import Timer from '../../components/Timer/Timer';
 
-function Training() {
+function Training({ route }) {
+
     const navigate = useNavigate();
+    
+    const params = useParams();
+    const idEstudiante = params.id;
+
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
@@ -92,7 +97,6 @@ function Training() {
    async function goToExcercise() {
         //  await unityContext.unload();
     await update();
-
         navigate('/ej')
     }
 

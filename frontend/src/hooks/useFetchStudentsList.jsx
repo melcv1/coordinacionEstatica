@@ -5,7 +5,7 @@ export const useFetchStudentsList = () => {
     const [StudentList, setStudentList] = useState([]);
 
     const getStudentList = async () => {
-        await fetch("http://localhost:9000/api/pruebasfinal")
+        await fetch("http://localhost:9000/api/prueba/busqueda")
             .then((response) => response.json())
             .then((response) => {
                 buildArrayForTable(response);
@@ -27,13 +27,34 @@ export const useFetchStudentsList = () => {
                 apellido: student.APELLIDO,
                 fechaNacimiento: format1,
                 edad: student.EDAD_ACTUAL,
-                pruebas: student.PRUEBAS,
-                validacion: student.VALIDACION,
+                pruebas: aux(student.PRUEBAS.split(','), student.VALIDACION.split(',')),
             };
             rows.push(row);
         })
-        console.log(list);
         setStudentList(rows);
+    }
+
+    const aux = (pruebas, vals) => {
+        let result = {};
+        let a = pruebas.map((item) => {
+            switch (parseInt(item)) {
+                case 2:
+                    return 'pose2';
+                case 3:
+                    return 'pose3';
+                case 4:
+                    return 'pose4';
+                case 5:
+                    return 'pose5';
+                default:
+                    break;
+            }
+        });
+        a.map((item, index) => {
+            let val = vals[index];
+            result[item] = (val === '1')? true:false;
+        })
+        return result;
     }
 
     useEffect(() => {
