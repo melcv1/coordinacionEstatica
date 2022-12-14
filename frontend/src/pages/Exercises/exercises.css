@@ -14,6 +14,7 @@
 }
 .webcam-container{
     position: relative;
+    margin-top:50px;
 }
 .record-container{
     position: absolute;

@@ -92,16 +92,7 @@ export const Registro1 = () => {
                <img src={uno} />
           </div>
          
-          <div className="social5 ">
-               <img src={tres} />
-          </div>
-         
-          <div className="social7 ">
-               <img src={cinco} />
-          </div>
-          <div className="social8 ">
-               <img src={seis} />
-          </div>
+          
         </div>
       );
 }

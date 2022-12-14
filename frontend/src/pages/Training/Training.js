@@ -154,7 +154,7 @@ function Training() {
                 </DropDown>
 
 
-                <Timer testTime={testTime} startTestTimer={startTestTimer} />
+                <Timer testTime={testTime}  startTestTimer={startTestTimer} />
                 { /*
                 
                 */
@@ -185,11 +185,17 @@ function Training() {
                     <img src={diez} />
                 </div>
                 <div className="btn-centered">
+
+                < button onClick={() => navigate(`/busqueda`)} className="btny2 cancel" > Cancelar </button>
+
+              
                     < button onClick={goToExcercise}
                         className="btny2" >
                         Iniciar
                     </button>
-                    < button onClick={() => navigate(`/busqueda`)} className="btny2" > Cancelar </button>
+
+                    
+                    
                 </div>
 
                 <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>

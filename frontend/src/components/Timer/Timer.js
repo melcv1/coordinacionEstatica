@@ -9,7 +9,7 @@ const Timer = ({testTime, startTestTimer}) => {
                                     <button className='timeButton'
                                         onClick={() => startTestTimer()}
                                     >
-                                        < h4 >
+                                        < h4 class="inicio-tst">
                                             Iniciar test
                                         </h4>
                                     </button>
