@@ -1,16 +1,14 @@
-import React, { useState, useEffect, usePrevious, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 //components
 import DropDown from '../../components/DropDown/DropDown';
-import UnityComponent from "../../components/Unity/UnityComponent";
 
 // constants
 import { UNITY_LOADERS, U_LOADERS_TRAINING } from '../../data/unityData';
 
 //hooks
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
-import { useUnityContext } from "react-unity-webgl";
 
 import './training.css';
 
@@ -19,19 +17,15 @@ import diez from "../../utils/images/10.png";
 
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
-import video from '../../utils/images/Pose1.mp4';
-import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 import Timer from '../../components/Timer/Timer';
 import { useFetchPruebas } from '../../hooks/useFetchPruebas';
 
-function Training({ route }) {
+function Training() {
 
     const navigate = useNavigate();
     const params = useParams();
     const idEstudiante = params.id;
     const { pruebas } = useFetchPruebas(idEstudiante);
-
-    console.log(pruebas);
 
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])

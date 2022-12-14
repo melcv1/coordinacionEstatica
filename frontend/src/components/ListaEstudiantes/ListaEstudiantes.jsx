@@ -26,11 +26,40 @@ const ListaEstudiantes = () => {
                         <div>pose3 : {cellValues.value.pose3 ? 'si' : 'no'}</div>
                         <div>pose4 : {cellValues.value.pose4 ? 'si' : 'no'}</div>
                         <div>pose5 : {cellValues.value.pose5 ? 'si' : 'no'}</div>
-
                     </Box>
                 )
             },
         },
+        {
+            field: 'tInicio', headerName: 'T Inicio', flex: 1, renderCell: (cellValues) => {
+                return (
+                    <Box>
+                        {
+                            cellValues.value.map((t)=><div>{t/1000}</div>)
+                        }
+                    </Box>
+                )
+            },
+        },
+        { field: 'tFin', headerName: 'T Final', flex: 1, renderCell: (cellValues) => {
+            return (
+                <Box>
+                    {
+                        cellValues.value.map((t)=><div>{t/1000}</div>)
+                    }
+                </Box>
+            )
+        }, },
+        { field: 'tEj', headerName: 'T Ej', flex: 1, renderCell: (cellValues) => {
+            return (
+                <Box>
+                    {
+                        cellValues.value.map((t)=><div>{t}</div>)
+                    }
+                </Box>
+            )
+        }, },
+        { field: 'observaciones', headerName: 'Observaciones', flex: 1 },
 
     ];
 
@@ -50,7 +79,7 @@ const ListaEstudiantes = () => {
                 rows={StudentList}
                 columns={columns}
                 rowHeight={100}
-                autoHeight 
+                autoHeight
                 onRowClick={(e) => handleRowClick(e)}
                 components={{ Toolbar: GridToolbar }}
                 componentsProps={{

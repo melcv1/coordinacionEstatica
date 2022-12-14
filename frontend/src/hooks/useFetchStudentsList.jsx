@@ -20,21 +20,26 @@ export const useFetchStudentsList = () => {
             let month = objectDate.getMonth();
             let year = objectDate.getFullYear();
             let format1 = month + "/" + day + "/" + year;
-
+            console.log(student);
             const row = {
                 id: student.ID_ESTUDIANTE,
                 nombre: student.NOMBRE,
                 apellido: student.APELLIDO,
                 fechaNacimiento: format1,
                 edad: student.EDAD_ACTUAL,
-                pruebas: aux(student.PRUEBAS.split(','), student.VALIDACION.split(',')),
+                pruebas: parsePruebas(student.PRUEBAS.split(','), student.VALIDACION.split(',')),
+                tInicio: student.TIEMPO_INICIO.split(','),
+                tFin: student.TIEMPO_FIN.split(','),
+                tEj: student.TIEMPO_EJ.split(','),
+                observaciones: student.OBSERVACIONES,
+
             };
             rows.push(row);
         })
         setStudentList(rows);
     }
 
-    const aux = (pruebas, vals) => {
+    const parsePruebas = (pruebas, vals) => {
         let result = {};
         let a = pruebas.map((item) => {
             switch (parseInt(item)) {
@@ -57,6 +62,7 @@ export const useFetchStudentsList = () => {
         return result;
     }
 
+    
     useEffect(() => {
         getStudentList();
     }, [])
