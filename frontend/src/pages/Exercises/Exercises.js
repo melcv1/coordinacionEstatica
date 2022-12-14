@@ -17,10 +17,14 @@ import { useFetchEdad } from '../../hooks/useFetchEdad';
 import { useFetchId } from '../../hooks/useFetchId';
 import { useDetector } from '../../hooks/useDetector';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Timer from '../../components/Timer/Timer';
 
 function Exercises() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const idEstudiante = params.id;
+
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
     const newTab = useRef(null);
@@ -101,6 +105,7 @@ function Exercises() {
                         </div>
                     </div>
                     < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Siguiente </button>
+                    < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2" > Cancelar </button>
                 </div>
 
                 <div className='exercise-container'>

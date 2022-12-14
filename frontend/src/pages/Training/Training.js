@@ -22,13 +22,16 @@ import trece from "../../utils/images/13.png";
 import video from '../../utils/images/Pose1.mp4';
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 import Timer from '../../components/Timer/Timer';
+import { useFetchPruebas } from '../../hooks/useFetchPruebas';
 
 function Training({ route }) {
 
     const navigate = useNavigate();
-    
     const params = useParams();
     const idEstudiante = params.id;
+    const { pruebas } = useFetchPruebas(idEstudiante);
+
+    console.log(pruebas);
 
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
@@ -56,27 +59,27 @@ function Training({ route }) {
             //xrCompatible: true,
         },
     });*/
-   
+
     function handleChange(pose) {
         setPose(pose);
         // await unityContext.unload();
         window.location.reload(false);
     }
 
-    function update(){
+    function update() {
         clearInterval(interval);
         var poseAct = 0;
         if (pose === "Entrenamiento1") {
-            poseAct = 3;       
+            poseAct = 3;
         } else if (pose === "Entrenamiento2") {
-             poseAct = 4;         
+            poseAct = 4;
         } else if (pose === "Evaluacion") {
-             poseAct = 5;    
+            poseAct = 5;
         }
-        else if(pose === "Habituacion"){
-             poseAct = 2;    
-        }else{
-             poseAct = 0;
+        else if (pose === "Habituacion") {
+            poseAct = 2;
+        } else {
+            poseAct = 0;
         }
 
         var resultado = ({
@@ -89,14 +92,14 @@ function Training({ route }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultado)
         }
-        return fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
+        return fetch('http://localhost:9000/api/actualizardatos/' + estId + "/" + poseAct, requestInit)
             .then(res => res.text())
 
     }
 
-   async function goToExcercise() {
+    async function goToExcercise() {
         //  await unityContext.unload();
-    await update();
+        await update();
         navigate('/ej')
     }
 
@@ -105,8 +108,8 @@ function Training({ route }) {
         navigate(path)
     }
 
-    
-    
+
+
     function startTestTimer() {
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
@@ -146,20 +149,19 @@ function Training({ route }) {
 
                     </div>
                 </nav>
-                
+
                 < DropDown
                     poseList={Object.keys(UNITY_LOADERS)}
                     currentPose={pose}
                     setCurrentPose={handleChange}
+                    pruebas={pruebas}
                 >
                 </DropDown>
-                
-                
+
+
                 <Timer testTime={testTime} startTestTimer={startTestTimer} />
-               { /*
-                <div className='poseTitle_container'>
-                    <div className='poseTitle' >{pose}</div>
-                </div>
+                { /*
+                
                 */
                 }
                 {/*
@@ -194,9 +196,9 @@ function Training({ route }) {
                     </button>
                 </div>
 
-                <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
-                <span>start</span>
-            </Link>
+                <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>
+                    <span>start</span>
+                </Link>
             </div>
         </>
     )

@@ -2,9 +2,13 @@ import React from 'react'
 
 import { poseImages } from '../../utils/pose_images'
 
-import './DropDown.css'
+import './DropDown.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPerson} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 
-export default function DropDown({ poseList, currentPose, setCurrentPose }) {
+
+export default function DropDown({ poseList, currentPose, setCurrentPose, pruebas }) {
 
 
 return (
@@ -24,12 +28,10 @@ return (
         >{currentPose}
         </button>
         <ul className="dropdown-menu dropdown-custom-menu" aria-labelledby="dropdownMenuButton1">
-            {poseList.map((pose) => (
+            {poseList.map((pose,index) => (
                 <li onClick={() => setCurrentPose(pose)}>
                     <div className="dropdown-item-container">
-                        <p className="dropdown-item-1">{pose}</p>
-                        
-                        
+                        <p className="dropdown-item-1">{pose}  {pruebas[index]['VALIDACION']===1? <FontAwesomeIcon icon={faPerson} /> :<FontAwesomeIcon icon={faMagnifyingGlass} /> }</p>
                     </div>
                 </li>
             ))}
