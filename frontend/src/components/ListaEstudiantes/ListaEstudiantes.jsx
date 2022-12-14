@@ -74,12 +74,11 @@ const ListaEstudiantes = () => {
     }
 
     return (
-        <div style={{ height: 300, width: '100%' }}>
+        <div style={{ height: '650px' , width: '100%' }}>
             <DataGrid
                 rows={StudentList}
                 columns={columns}
                 rowHeight={100}
-                autoHeight
                 onRowClick={(e) => handleRowClick(e)}
                 components={{ Toolbar: GridToolbar }}
                 componentsProps={{
