@@ -1,14 +1,8 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import uno from "../../utils/images/1.png";
-import tres from "../../utils/images/3.png";
-import cinco from "../../utils/images/5.png";
-import seis from "../../utils/images/6.png";
-
-
-import siete from "../../utils/images/7.png";
+import siete from "../../utils/images/aaa.jpg";
 import ocho from "../../utils/images/8.png";
-
 import Form from "../../components/Formulario/Form";
 
 export const Registro1 = () => {

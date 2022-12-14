@@ -8,6 +8,12 @@
     padding-right: 600px;
     margin-bottom: 30px;
 }
+.sg{
+    background-color: #24a07f!important;
+}
+.cn{
+    background-color: #a70b2c!important;
+}
 .exercise-container{
     display: flex;
     justify-content: space-evenly;
@@ -18,7 +24,8 @@
 }
 .record-container{
     position: absolute;
-    background-color: #FDE5A4;
+    background-color: #c2d9d9;
+    color: rgba(0,0,0,.7)!important;
     border-radius: 50px;
     padding: 10px;
     top: 80px;
@@ -27,6 +34,7 @@
 }
 .record-container h4{
     font-size: 16px;
+    color: rgba(0,0,0,.7)!important;
 }
 .timeButton{
     background-color: transparent;

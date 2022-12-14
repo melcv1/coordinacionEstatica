@@ -1,14 +1,14 @@
 .about-container {
     width: 100vw;
-    height: 100vh;background: #FFF9FA;
+    height: 100vh;
 }
 
 
 .titulo{
-    background-color: #FFE4E8;
+    background-color: #f0f5ff;
     margin-top:90px;
     border-radius: 15px;
-    box-shadow:  1em 0.4em #eb8198;
+    box-shadow:  1em 0.4em #26406d;
     margin-left: 153px;
     width: 70%;
 }
@@ -36,7 +36,7 @@
     background-color: white;
     margin:auto;
     border-radius: 15px;
-    box-shadow:  1em 0.4em #eb8198;
+    box-shadow:  1em 0.4em #26406d;
     margin-left: 44px;
     width: 96%;
     height: 60%;
@@ -78,7 +78,7 @@
 
 .resultadostop{
     position:absolute;
-    top:0;
+    bottom:0;
     left:0;
 }
 .izquierda{
@@ -105,7 +105,7 @@
     list-style-type: none;
     display: flex;
     /*border-radius: 20px;*/
-    border-bottom: 5px solid #fde6a3;
+    border-bottom: 5px solid #cfe7e7;
     justify-content: space-between;
     padding: 0 20px 0px 20px;
     align-items: center;
@@ -119,7 +119,7 @@
 
 }
 .li_estudiante:hover{
-    background-color:#fffbed;
+    background-color:#edf4ff;
 }
 
 .li_age_lbl{
@@ -179,7 +179,7 @@
     width:100%;
   }
   .div_infocategorias{
-    border: 5px solid #fde6a3;
+    border: 5px solid #cfe7e7;
     border-radius: 10px;
     width: 60%;
     margin-bottom: 20px;
@@ -257,7 +257,7 @@
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #fde6a3; 
+    background: #cfe7e7; 
     border-radius: 10px;
   }
   

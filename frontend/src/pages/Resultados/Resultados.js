@@ -2,19 +2,11 @@
 import React, { useRef, useState, useEffect } from 'react'
 
 import './Resultados.css'
-import logo1 from "../../utils/images/logo.png";
 
-import logo2 from "../../utils/images/logos.png";
-
-import siete from "../../utils/images/a2.png";
-import ocho from "../../utils/images/a1.png";
-import nino from "../../utils/images/a4.png";
-
-import nina from "../../utils/images/a3.png";
+import siete from "../../utils/images/aaa.jpg";
+import ocho from "../../utils/images/8.png";
 
 import a1 from "../../utils/images/b1.png";
-
-import a2 from "../../utils/images/b2.png";
 import Estudiantes from "./Estudiantes";
 import { Link } from "react-router-dom";
 
@@ -65,10 +57,7 @@ export default function Resultados() {
       </nav>
             <div className="row">
 
-            <div className="b1">
-                <img className=" rotate" src={a1} />
-
-                </div>
+           
                 
             <div className="col-2 izquierda">
                 

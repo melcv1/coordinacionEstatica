@@ -9,8 +9,8 @@ import { useLocalStorage } from "../../localStorage/useLocalStorage";
 import { useUnityContext } from "react-unity-webgl";
 import UnityComponent from '../../components/Unity/UnityComponent';
 
-import nueve from "../../utils/images/9.png";
-import diez from "../../utils/images/10.png";
+import nueve from "../../utils/images/8.png";
+import diez from "../../utils/images/aaa.jpg";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { useFetchEdad } from '../../hooks/useFetchEdad';
@@ -104,8 +104,8 @@ function Exercises() {
                             </div>
                         </div>
                     </div>
-                    < button onClick={() => stopPose(postResults,idEstudiante)} className="secondary-btn2" > Siguiente </button>
-                    < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2" > Cancelar </button>
+                    < button onClick={() => stopPose(postResults,idEstudiante)} className="secondary-btn2 sg" > Siguiente </button>
+                    < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2 cn" > Cancelar </button>
                 </div>
 
                 <div className='exercise-container'>

@@ -5,8 +5,8 @@ import './exercises.css'
 //hooks
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
 
-import nueve from "../../utils/images/9.png";
-import diez from "../../utils/images/10.png";
+import nueve from "../../utils/images/8.png";
+import diez from "../../utils/images/aaa.jpg";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';

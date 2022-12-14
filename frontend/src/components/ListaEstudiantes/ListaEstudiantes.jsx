@@ -4,6 +4,9 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useFetchStudentsList } from '../../hooks/useFetchStudentsList';
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faX } from '@fortawesome/free-solid-svg-icons';
 
 const ListaEstudiantes = () => {
 
@@ -22,10 +25,10 @@ const ListaEstudiantes = () => {
             field: 'pruebas', headerName: 'Pruebas', flex: 1, renderCell: (cellValues) => {
                 return (
                     <Box>
-                        <div>pose2 : {cellValues.value.pose2 ? 'si' : 'no'}</div>
-                        <div>pose3 : {cellValues.value.pose3 ? 'si' : 'no'}</div>
-                        <div>pose4 : {cellValues.value.pose4 ? 'si' : 'no'}</div>
-                        <div>pose5 : {cellValues.value.pose5 ? 'si' : 'no'}</div>
+                        <div>Habituación : {cellValues.value.pose2 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
+                        <div>Entrenamiento1 : {cellValues.value.pose3 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
+                        <div>Entrenamiento2 : {cellValues.value.pose4 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
+                        <div>Evaluación : {cellValues.value.pose5 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
                     </Box>
                 )
             },

@@ -5,7 +5,7 @@ import logo1 from "../../utils/images/logo.png";
 
 import logo2 from "../../utils/images/logos.png";
 
-import siete from "../../utils/images/7.png";
+import siete from "../../utils/images/aaa.jpg";
 import ocho from "../../utils/images/8.png";
 import nina from "../../utils/images/niña.png";
 
@@ -62,13 +62,9 @@ export default function About() {
            <img src={uno} />
       </div>
       
-      <div className="social5">
-           <img src={tres} />
-      </div>
      
-      <div className="social7">
-           <img src={cinco} />
-      </div>
+     
+   
       <div className="social8">
            <img src={seis} />
       </div>
