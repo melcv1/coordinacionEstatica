@@ -197,7 +197,7 @@ export default function Form({ nino, setNino }) {
                 </div>
                 {
                     isSaved ?
-                        <Link to="/start">
+                        <Link to={`/start/${estId}`}>
                             <button className="btn btn-start-btn siguiente">Siguiente</button>
                         </Link>
                         :
