@@ -25,8 +25,7 @@ function ExercisesTutorial({source}) {
                 
                 
                 <div className="social3 rotate" >
-                    < img src={trece} /> </div> <div className="social5 rotate" >
-                    < img src={doce} /> </div>
+                    < img src={trece} /> </div> 
                 <div className="social2" >
                     <img src={nueve} />
                 </div>

@@ -23,6 +23,7 @@
     margin-top:50px;
 }
 .record-container{
+    display:none;
     position: absolute;
     background-color: #c2d9d9;
     color: rgba(0,0,0,.7)!important;
@@ -33,7 +34,7 @@
     width: 160px;
 }
 .record-container h4{
-    font-size: 16px;
+    font-size: 1rem;
     color: rgba(0,0,0,.7)!important;
 }
 .timeButton{

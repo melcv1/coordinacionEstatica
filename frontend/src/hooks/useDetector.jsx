@@ -155,7 +155,7 @@ export const useDetector = (
                     if (data[0][classNo] > 0.97) {
                         if (!flag) {
 
-                            countAudio.play()
+                            
                             setStartingTime(new Date(Date()).getTime())
                             flag = true
                         }
@@ -164,7 +164,7 @@ export const useDetector = (
                     } else {
                         flag = false
                         skeletonColor = 'rgb(255,255,255)'
-                        countAudio.pause()
+                        
                         countAudio.currentTime = 0
                     }
                 })

@@ -32,6 +32,11 @@
     color: rgba(0,0,0,.7)!important;
     border:2px solid #26416e!important;
 }
+.margens:hover{
+    background-color: #cfe7e7;
+    border:2px solid #26416e!important;
+
+}
 .derecha2{
     position: relative;
     bottom: 0;

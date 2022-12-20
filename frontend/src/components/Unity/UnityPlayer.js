@@ -37,7 +37,7 @@ export const UnityPlayer = ({ source, CallbackFn }) => {
     return (
         <div className="UnityPlayer">
             <video
-                style={{ maxWidth: "100%", width: "1046px", margin: "0 auto" }}
+                style={{ maxWidth: "100%", width: "1199px", margin: "0 auto" }}
                 playsInline
                 alt="All the devices"
                 src={source}

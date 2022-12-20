@@ -26,7 +26,7 @@ function Training() {
     const params = useParams();
     const idEstudiante = params.id;
     const { pruebas, isLoading } = useFetchPruebas(idEstudiante);
-    console.log(pruebas);
+    
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
@@ -86,7 +86,7 @@ function Training() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultado)
         }
-        return fetch('http://localhost:9000/api/actualizardatos/' + estId + "/" + poseAct, requestInit)
+        return fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + poseAct, requestInit)
             .then(res => res.text())
 
     }
@@ -173,9 +173,7 @@ function Training() {
                 <div className="social3 " >
                     < img src={trece} />
                 </div>
-                <div className="social5 " >
-                    < img src={doce} />
-                </div>
+            
                 <div className="social2" >
                     <img src={nueve} />
                 </div>

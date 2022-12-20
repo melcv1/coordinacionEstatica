@@ -28,9 +28,9 @@ export const useFetchStudentsList = () => {
                 fechaNacimiento: format1,
                 edad: student.EDAD_ACTUAL,
                 pruebas: parsePruebas(student.PRUEBAS.split(','), student.VALIDACION.split(',')),
-                tInicio: student.TIEMPO_INICIO.split(','),
-                tFin: student.TIEMPO_FIN.split(','),
-                tEj: student.TIEMPO_EJ.split(','),
+                tInicio: parseTiempos(student.PRUEBAS.split(','), student.TIEMPO_INICIO.split(',')),
+                tFin: parseTiempos(student.PRUEBAS.split(','), student.TIEMPO_FIN.split(',')),
+                tEj: parseTiempos2(student.PRUEBAS.split(','), student.TIEMPO_EJ.split(',')),
                 observaciones: student.OBSERVACIONES,
 
             };
@@ -58,6 +58,51 @@ export const useFetchStudentsList = () => {
         a.map((item, index) => {
             let val = vals[index];
             result[item] = (val === '1')? true:false;
+        })
+        return result;
+    }
+    const parseTiempos = (pruebas, vals) => {
+        let result = {};
+        let a = pruebas.map((item) => {
+            switch (parseInt(item)) {
+                case 2:
+                    return 'pose2';
+                case 3:
+                    return 'pose3';
+                case 4:
+                    return 'pose4';
+                case 5:
+                    return 'pose5';
+                default:
+                    break;
+            }
+        });
+        a.map((item, index) => {
+            let val = vals[index];
+            result[item] = val/1000;
+        })
+        return result;
+    }
+
+    const parseTiempos2 = (pruebas, vals) => {
+        let result = {};
+        let a = pruebas.map((item) => {
+            switch (parseInt(item)) {
+                case 2:
+                    return 'pose2';
+                case 3:
+                    return 'pose3';
+                case 4:
+                    return 'pose4';
+                case 5:
+                    return 'pose5';
+                default:
+                    break;
+            }
+        });
+        a.map((item, index) => {
+            let val = vals[index];
+            result[item] = val;
         })
         return result;
     }

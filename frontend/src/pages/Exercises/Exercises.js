@@ -65,9 +65,11 @@ function Exercises() {
 
     function postResults(poseAct, paso) {
         clearInterval(interval);
+        console.log("TIEMPO_EJ"+bestPerform);
+        console.log("VALIDACION"+paso);
         var resultado = ({
             ID_PRUEBA: poseAct,
-            ID_ESTUDIANTE: estId,
+            ID_ESTUDIANTE: idEstudiante,
             TIEMPO_EJ: bestPerform,
             VALIDACION: paso,
             TIEMPO_FIN: testTime,
@@ -77,7 +79,7 @@ function Exercises() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(resultado)
             }
-             fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
+             fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante +"/"+poseAct, requestInit)
                 .then(res => res.text())
 
     }
@@ -99,7 +101,7 @@ function Exercises() {
                                 Tiempo: {poseTime}
                             </h4>
                             <div className="record-container" >
-                                <h4> Tiempo Record: {bestPerform}
+                                <h4> Tiempo Ejercicio: {bestPerform}
                                 </h4>
                             </div>
                         </div>
@@ -136,14 +138,11 @@ function Exercises() {
                         </canvas>
                     </div>
                 </div>
-                <div className="social4 " >
-                    <img src={doce} />
-                </div>
+              
                 <div className="social7 " >
                     <img src={trece} /> </div>
                 <div className="social3 " >
-                    < img src={trece} /> </div> <div className="social5 " >
-                    < img src={doce} /> </div>
+                    < img src={trece} /> </div> 
                 <div className="social2" >
                     <img src={nueve} />
                 </div>

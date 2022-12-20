@@ -29,16 +29,6 @@ export default function Form({ nino, setNino }) {
 
         }
 
-        if(!/^[a-zA-Z]*$/g.test(nombre)){
-            alert('Solo ingresar letras en nombre');
-            return
-        }
-
-        if(!/^[a-zA-Z]*$/g.test(apellido)){
-            alert('Solo ingresar letras en apellido');
-            return
-        }
-
         var RegExPattern = /^\d{2,4}\-\d{1,2}\-\d{1,2}$/;
       if (!(fecha_nacimiento.match(RegExPattern))) {
         alert('Fecha de nacimiento incorrecta')  
@@ -156,7 +146,7 @@ export default function Form({ nino, setNino }) {
         <div>
             <div className="mb-3 algn-cnt">
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt">Nombres Completos</h2>
+                    <h2 className="lbl-cnt">Nombres</h2>
                     <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
 
                     </input>
@@ -164,7 +154,7 @@ export default function Form({ nino, setNino }) {
 
 
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt">Apellidos Completos</h2>
+                    <h2 className="lbl-cnt">Apellidos</h2>
                     <input type="text" value={apellido} name="apellido" onChange={handleChange} className="form-control nombre">
 
                     </input>
@@ -199,13 +189,7 @@ export default function Form({ nino, setNino }) {
 
                     <button onClick={handleSubmit} className="btn btn-start-btn guardar">Guardar</button>
 
-
-
-
-
-
-                </div>
-                {
+                    {
                     isSaved ?
                         <Link to={`/start/${estId}`}>
                             <button className="btn btn-start-btn siguiente">Siguiente</button>
@@ -214,6 +198,14 @@ export default function Form({ nino, setNino }) {
                         <div></div>
                 }
 
+
+
+
+
+
+
+                </div>
+               
 
 
 

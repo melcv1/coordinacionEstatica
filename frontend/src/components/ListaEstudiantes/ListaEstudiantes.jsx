@@ -25,10 +25,10 @@ const ListaEstudiantes = () => {
             field: 'pruebas', headerName: 'Pruebas', flex: 1, renderCell: (cellValues) => {
                 return (
                     <Box>
-                        <div>Habituación : {cellValues.value.pose2 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
-                        <div>Entrenamiento1 : {cellValues.value.pose3 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
-                        <div>Entrenamiento2 : {cellValues.value.pose4 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
-                        <div>Evaluación : {cellValues.value.pose5 ? <FontAwesomeIcon icon={faCheck} />  : <FontAwesomeIcon icon={faX} /> }</div>
+                        <div>Habituación </div>
+                        <div>Entrenamiento1 : {cellValues.value.pose3 ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</div>
+                        <div>Entrenamiento2 : {cellValues.value.pose4 ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</div>
+                        <div>Evaluación : {cellValues.value.pose5 ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faX} />}</div>
                     </Box>
                 )
             },
@@ -37,31 +37,38 @@ const ListaEstudiantes = () => {
             field: 'tInicio', headerName: 'T Inicio', flex: 1, renderCell: (cellValues) => {
                 return (
                     <Box>
-                        {
-                            cellValues.value.map((t)=><div>{t/1000}</div>)
-                        }
+                        <div>{cellValues.value.pose2}</div>
+                        <div>{cellValues.value.pose3}</div>
+                        <div>{cellValues.value.pose4}</div>
+                        <div>{cellValues.value.pose5}</div>
                     </Box>
                 )
             },
         },
-        { field: 'tFin', headerName: 'T Final', flex: 1, renderCell: (cellValues) => {
-            return (
-                <Box>
-                    {
-                        cellValues.value.map((t)=><div>{t/1000}</div>)
-                    }
-                </Box>
-            )
-        }, },
-        { field: 'tEj', headerName: 'T Ej', flex: 1, renderCell: (cellValues) => {
-            return (
-                <Box>
-                    {
-                        cellValues.value.map((t)=><div>{t}</div>)
-                    }
-                </Box>
-            )
-        }, },
+        {
+            field: 'tFin', headerName: 'T Final', flex: 1, renderCell: (cellValues) => {
+                return (
+                    <Box>
+                        <div>{cellValues.value.pose2}</div>
+                        <div>{cellValues.value.pose3}</div>
+                        <div>{cellValues.value.pose4}</div>
+                        <div>{cellValues.value.pose5}</div>
+                    </Box>
+                )
+            },
+        },
+        {
+            field: 'tEj', headerName: 'T Ej', flex: 1, renderCell: (cellValues) => {
+                return (
+                    <Box>
+                        <div>{cellValues.value.pose2}</div>
+                        <div>{cellValues.value.pose3}</div>
+                        <div>{cellValues.value.pose4}</div>
+                        <div>{cellValues.value.pose5}</div>
+                    </Box>
+                )
+            },
+        },
         { field: 'observaciones', headerName: 'Observaciones', flex: 1 },
 
     ];
@@ -77,7 +84,7 @@ const ListaEstudiantes = () => {
     }
 
     return (
-        <div style={{ height: '650px' , width: '100%' }}>
+        <div style={{ height: '450px', width: '100%' }}>
             <DataGrid
                 rows={StudentList}
                 columns={columns}
