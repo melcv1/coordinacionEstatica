@@ -15,6 +15,8 @@ import ExercisesTutorial from './pages/ExerciseTutorial/ExercisesTutorial'
 import TrainingTutorial from './pages/TrainingTutorial/TrainingTutorial'
 import { Registro1 } from './pages/Registro1/Registro1'
 import { Busqueda } from './pages/Busqueda/Busqueda'
+import { KidsInterface } from './pages/KidsInterface/KidsInterface'
+import { EvaluatorInterface } from './pages/EvaluatorInterface/EvaluatorInterface'
 
 export default function App() {
   return (
@@ -24,7 +26,7 @@ export default function App() {
         <Route path='/' element={<Login />}/>
         <Route path='/inicio' element={<Inicio />}/>
         <Route path='/home' element={<Home />}/>
-        <Route path='/start/:id' element={<Training />} />
+        <Route path='/start/:id' element={<EvaluatorInterface />} />
         <Route path='/ej/:id' element={<Exercises />} />
         <Route path='/about' element={<About />} />
         <Route path='/resultados' element={<Resultados />} />
@@ -33,6 +35,7 @@ export default function App() {
         <Route path='/tratutorial' element={<TrainingTutorial />} />
         <Route path='/registro1' element={<Registro1 />} />
         <Route path='/busqueda' element={<Busqueda />} />
+        <Route path='/play' element={<KidsInterface />} />
       
       </Routes>
     </Router>

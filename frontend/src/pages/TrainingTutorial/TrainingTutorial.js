@@ -10,13 +10,14 @@ import diez from "../../utils/images/aaa.jpg";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';
+import { useOnChangeStorage } from '../../localStorage/useOnChangeStorage';
 
 function TrainingTutorial({source}) {
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");   
-    
+    const {storage} = useOnChangeStorage('pose');
     return (
         <>
-
+            <div>{storage}</div>
             <div className="yoga-container tuturialContainer" >
                 <UnityPlayer
                     source={U_LOADERS_TRAINING[pose]}

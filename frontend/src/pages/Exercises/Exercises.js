@@ -84,7 +84,7 @@ function Exercises() {
 
     }
     useEffect(() => {
-        newTab.current.click()
+        //newTab.current.click()
     }, []);
 
     return (
