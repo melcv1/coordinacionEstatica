@@ -44,12 +44,12 @@
 }
 
 @font-face {
-    font-family: 'Bryndan_Write';
-    src: local('Bryndan_Write'), url(./Bryndan_Write.ttf) format('opentype');
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+    src: local('-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif'), url(./Bryndan_Write.ttf) format('opentype');
 }
 
 .description {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 66px;
     color: #494D4D;
     text-align: center;
@@ -60,7 +60,7 @@
 
 .description2 {
     padding-top: 30px;
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
     font-size: 25px;
     color: #636363;
     text-align: center;
@@ -72,9 +72,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Yanone+Kaffeesatz&display=swap');
 .home-top {
-    padding-top: 11rem;
+    padding-top: 4rem!important;
 }
-
+.texto-link{
+    color:#5b5b5b;
+    display: flex;
+    justify-content:center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
+}
+.icono-der{
+    padding: 0px 10px;
+}
 .btn-section {
     position: absolute;
     left: 64vw;
@@ -83,13 +94,13 @@
 .social {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
 }
 
 .social2 {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
 }
 
 .social3 {
@@ -125,7 +136,7 @@
 .social8 {
     position: absolute;
     right: 22rem;
-    top: 8rem;
+    top: 3rem;
 }
 
 .social9 {
@@ -147,11 +158,11 @@
     border-width: 4px;
     cursor: pointer;
     width: 498px;
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 input {
-    font-family: 'Bryndan_Write';
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
 }
 
 .btn2:hover {
@@ -160,9 +171,23 @@ input {
 }
 
 .fondo {
-    background-color: #FFE4E8;
+    margin-top:5%;
+    background-color: #f0f5ff!important;
     border-radius: 15px;
-    box-shadow: 1em 1em 0.4em #EB8198;
+    box-shadow: 1em 1em 0.4em #26406d;
+}
+.fondo-reg {
+    
+    background-color: #f0f5ff;
+    border-radius: 15px;
+    box-shadow: 1em 1em 0.4em #26406d;
+}
+.fondo3{
+    margin-top:6%;
+    background-color: #f1fdfd;
+    border-radius: 15px;
+    box-shadow: 1em 1em 0.4em #cfe7e7;
+
 }
 
 body::-webkit-scrollbar {
@@ -185,3 +210,5 @@ body::-webkit-scrollbar {
     border-color: white;
     color: black;
 }
+
+

@@ -1,0 +1,225 @@
+.home-header {
+    background: linear-gradient(100deg, #FF8C00, #FFA500);
+    width: 100vw;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.jsflx{
+    justify-content: center;
+}
+
+.home-container {
+    background: #F9FFFF;
+}
+
+.header-btn:hover {
+    border-color: white;
+}
+.navbar-light{
+    background-color: #cfe7e7!important;
+    border-bottom: 2px solid #888ea9;
+
+}
+
+.home-heading {
+    padding: 0px;
+    margin: 0px;
+    font-size: 44px;
+    margin-left: 30px;
+    color: white;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.navbar-light{
+    font-weight: bold!important;
+
+}
+.nav-item{
+    border-right: 1px solid #888ea9;
+    padding: 0px 29px;
+    border-left: 1px solid #888ea9;
+    font-weight: bold;
+}
+.cnt-in{
+    background-color: white;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 1em 0.4em #26416e;
+    margin-left: 44px;
+    width: 96%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.home-main {
+    margin: auto;
+    margin-top: -50px;
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 750px;
+}
+
+
+.description1 {
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+    font-size: 66px;
+    color: #494D4D;
+    text-align: center;
+    margin-top: 50px;
+    letter-spacing: 0.5px;
+}
+.nav-item{
+    
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+    font-size: 24px;
+    color:#888ea9;
+
+}
+
+.description22 {
+    padding-top: 30px;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+    font-size: 25px;
+    color: #636363;
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Yanone+Kaffeesatz&display=swap');
+.home-top {
+    padding-top: 8rem;
+}
+
+.btn-section {
+    position: absolute;
+    left: 64vw;
+}
+a {
+    text-decoration: none;
+}
+
+.social {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+}
+
+.social2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.social3 {
+    position: absolute;
+    left: 5rem;
+    top: 5rem;
+}
+
+.social4 {
+    position: absolute;
+    left: 30rem;
+    top: 5rem;
+}
+
+.social5 {
+    position: absolute;
+    left: 40rem;
+    bottom: 6rem;
+}
+
+.social6 {
+    position: absolute;
+    right: 27rem;
+    bottom: 6rem;
+}
+
+.social7 {
+    position: absolute;
+    right: 2rem;
+    top: 20rem;
+}
+
+.social8 {
+    position: absolute;
+    right: 22rem;
+    top: 3rem;
+}
+
+.social9 {
+    position: absolute;
+    right: 40%;
+    bottom: 19%;
+}
+
+.btn2 {
+    padding: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 10px 20px 10px 20px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #494D4D;
+    font-size: 24px;
+    border-color: #6D8EBB;
+    border-radius: 50px;
+    border-width: 4px;
+    cursor: pointer;
+    width: 498px;
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+}
+
+input {
+    font-family: '-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif';
+}
+
+.btn2:hover {
+    background: #6D8EBB;
+    color: white;
+}
+.nuevos22{
+    text-align: center;
+}
+
+.fondo2 {
+    background-color: #f7eeff!important;
+    border-radius: 15px;
+    box-shadow: 1em 1em 0.4em #C9A3EF!important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#about-btn {
+    padding: 5px 10px;
+}
+
+#about-btn:hover {
+    border-color: white;
+    background-color: white;
+    color: black;
+}
+
+#about-btn:focus {
+    box-shadow: none;
+    background: white;
+    border-color: white;
+    color: black;
+}
+
+

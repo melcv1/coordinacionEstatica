@@ -1,50 +1,40 @@
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import * as tf from '@tensorflow/tfjs';
-import React, { useRef, useState, useEffect } from 'react'
-import backend from '@tensorflow/tfjs-backend-webgl'
-import Webcam from 'react-webcam'
+import React, { useRef, useState, useEffect, Fragment } from 'react';
+import Webcam from 'react-webcam';
 import { count } from '../../utils/music';
-
+import { Link } from "react-router-dom";
 import Instructions from '../../components/Instrctions/Instructions';
 
 import './Yoga.css'
 
 import DropDown from '../../components/DropDown/DropDown';
-import { poseImages } from '../../utils/pose_images';
 import { POINTS, keypointConnections } from '../../utils/data';
 import { drawPoint, drawSegment } from '../../utils/helper'
 
 import nueve from "../../utils/images/9.png";
 import diez from "../../utils/images/10.png";
-import once from "../../utils/images/11.png";
 
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
-import { log } from '@tensorflow/tfjs';
+
+import UnityComponent from "../../components/Unity/UnityComponent";
 
 let skeletonColor = 'rgb(255,255,255)'
 let poseList = [
-    'a'
+   'Habituación', 'Entrenamiento1', 'Entrenamiento2', 'Evaluación'
 ]
-
+let flag = false
+var id_nino = 0;
+var edad_nino=0;
 
 let interval
 
 // flag variable is used to help capture the time when AI just detect 
 // the pose as correct(probability more than threshold)
-let flag = false
-var id_nino='';
+
 
 function Yoga() {
-  /*  const [ninoEdad, setNinoEdad] = useState(true);
-  useEffect(() => {
-    fetch("http://localhost:9000/api/edad")
-      .then((response) => response.json())
-      .then((ninoEdad) =>setNinoEdad(ninoEdad));
-     }, []);*/
-
-
-    // console.log("todo bien22"+ ninoEdad);
     const webcamRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -52,38 +42,35 @@ function Yoga() {
     const [startingTime, setStartingTime] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [poseTime, setPoseTime] = useState(0)
-   
-    const [ninoId, setNinoId] = useState(0);
-   /* const [valores, setValores] = useState([])
+
+    var variable = '';
+    const [currentPose, setCurrentPose] = useState("Habituación")
+    const [bestPerform, setBestPerform] = useState(0)
+
+    const [isStartPose, setIsStartPose] = useState(false)
+    const [isComponentUnloaded, setIsComponentUnloaded] = useState(true);
+    const [ninoEdad, setNinoEdad] = useState(0);
+    const [valores, setValores] = useState([])
+    
+    useEffect(() => {
+        fetch("http://localhost:9000/api/edad")
+            .then((response) => response.json())
+            .then((ninoEdad) => setNinoEdad(ninoEdad));
+    }, []);
+    edad_nino= ninoEdad;
+  
     useEffect(() => {
         fetch("http://localhost:9000/api/id")
-          .then((response) => response.json())
-          .then((response) =>setValores(response));
-         }, []); 
+            .then((response) => response.json())
+            .then((response) => {
+                id_nino= response[0].id_est;
+                console.log("Todo ok!");
+                setValores(response);
 
-        console.log("-------------aa--:"+valores);*/
-        
-    var variable='';
-    /*if(ninoEdad==6){
-        variable='Pose_6';
-        
-        console.log("entro en pose 6");
-    }else if(ninoEdad==5){
-        variable='Pose_5';
-        
-        console.log("entro en pose 5");
-    }else if(ninoEdad==4){
-        variable='Pose_4';
-        console.log("entro en pose 4");
-    }else{
-        variable='Pose_3';
-        console.log("no entro en ninguno");
-    } */
-    
-    const [currentPose, setCurrentPose] = useState("a")
-    const [bestPerform, setBestPerform] = useState(0)
-   
-    const [isStartPose, setIsStartPose] = useState(false)
+            });
+    }, []);
+
+
 
 
     useEffect(() => {
@@ -104,8 +91,11 @@ function Yoga() {
     }, [currentPose])
 
     const CLASS_NO = {
-        a: 1
-      }
+        Entrenamiento1: 0,
+        Entrenamiento2: 1,
+        Evaluación: 2
+
+    }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {
         let left = tf.gather(landmarks, left_bodypart, 1)
@@ -153,12 +143,14 @@ function Yoga() {
     const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        const poseClassifier = await tf.loadLayersModel('https://models.s3.jp-tok.cloud-object-storage.appdomain.cloud/model.json')
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {
             detectPose(detector, poseClassifier, countAudio)
         }, 100)
+        poseClassifier.summary();
+        console.log(poseClassifier.summary());
     }
 
     const detectPose = async (detector, poseClassifier, countAudio) => {
@@ -206,9 +198,10 @@ function Yoga() {
                 classification.array().then((data) => {
                     const classNo = CLASS_NO[currentPose]
                     console.log(data[0][classNo])
+                    console.log("current:" + currentPose + " classno " + classNo);
                     if (data[0][classNo] > 0.97) {
-
                         if (!flag) {
+                            
                             countAudio.play()
                             setStartingTime(new Date(Date()).getTime())
                             flag = true
@@ -235,51 +228,54 @@ function Yoga() {
         runMovenet()
     }
 
-   
+
 
     function stopPose() {
 
-        console.log("esta es la pose"+currentPose);
-        var poseAct=0;
-        if(currentPose==="Pose_3"){
-           var poseAct=1;
-        }else if(currentPose==="Pose_4"){
-            var poseAct=2;
-        }else if(currentPose==="Pose_5"){
-            var poseAct=3;
-        }else if(currentPose==="Pose_6"){
-            var poseAct=4;
-        }else{
-            var poseAct=1;
+        console.log("esta es la pose" + currentPose);
+        var poseAct = 0;
+        if (currentPose === "Entrenamiento1") {
+            var poseAct = 3;
+        } else if (currentPose === "Entrenamiento2") {
+            var poseAct = 4;
+        } else if (currentPose === "Evaluación") {
+            var poseAct = 5;
         }
+        else {
+            var poseAct = 3;
+        }
+        var paso=0;
 
-       
-
-    /* var resultado=({
-        ID_PRUEBA: 0,
-        ID_ESTUDIANTE:0,
-        TIEMPO_RECORD: bestPerform,
-        INTENTOS: 0
-          })
-            console.log("si vino a stop pose");
-        
-            //consulta
-            const requestInit = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(resultado)
-            }
-            console.log("niño: "+resultado);
-            fetch('http://localhost:9000/api/valor', requestInit)
-            .then(res => res.text())
-            .then(res => console.log(res))     
-
-            */
+        if(bestPerform >= 10){
+            paso=1;
+        }
+        var resultado=({
+            ID_PRUEBA: poseAct,
+            ID_ESTUDIANTE: id_nino,
+            TIEMPO_RECORD: bestPerform,
+            VALIDACION: paso
+              })
+                console.log("si vino a stop pose");
+            
+                //consulta
+                const requestInit = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(resultado)
+                }
+                console.log("niño: "+resultado);
+                fetch('http://localhost:9000/api/valor', requestInit)
+                .then(res => res.text())
+                .then(res => console.log(res))     
+    
+                
         setIsStartPose(false)
         clearInterval(interval)
     }
 
+    function handleSelectOnChange(){
 
+    }
 
     if (isStartPose) {
         return (
@@ -319,21 +315,39 @@ function Yoga() {
                                 zIndex: 1
                             }
                         } >
-                    </canvas> <div className="social9" >
-                        <img src={once} />
-                    </div>
-                    <div className="social4" >
+                    </canvas>
+                    <div className="social4 " >
                         <img src={doce} />
                     </div>
-                    <div className="social7" >
+                    <div className="social7 " >
                         <img src={trece} /> </div>
-                    <div className="social3" >
-                        < img src={trece} /> </div> <div className="social5" >
-                        < img src={doce} /> </div> <div >
-                        < img src={poseImages[currentPose]}
-                            className="pose-img" />   </div>
+                    <div className="social3 " >
+                        < img src={trece} /> </div> <div className="social5 " >
+                        < img src={doce} /> </div>
 
-                </div> < button onClick={stopPose} className="secondary-btn2" >        Parar </button>
+                    <div >
+                        {isComponentUnloaded === true ? 
+                            <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose1/Pose1/Build.loader.js" dataUrl="/Pose1/Pose1/Build.data" frameworkUrl="/Pose1/Pose1/Build.framework.js" codeUrl="/Pose1/Pose1/Build.wasm" />    
+
+                                (currentPose == 'Habituación' &&    
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose1/Pose1/Build.loader.js" dataUrl="/Pose1/Pose1/Build.data" frameworkUrl="/Pose1/Pose1/Build.framework.js" codeUrl="/Pose1/Pose1/Build.wasm" />    
+                                )
+                                (currentPose == 'Entrenamiento1' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose2ej/Build/Pose2ej.loader.js" dataUrl="/Pose2ej/Build/Pose2ej.data" frameworkUrl="/Pose2ej/Build/Pose2ej.framework.js" codeUrl="/Pose2ej/Build/Pose2ej.wasm" />    
+                                )
+                                (currentPose == 'Entrenamiento2' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose4ej/Build/Pose4ej.loader.js" dataUrl="/Pose4ej/Build/Pose4ej.data" frameworkUrl="/Pose4ej/Build/Pose4ej.framework.js" codeUrl="/Pose4ej/Build/Pose4ej.wasm" />    
+                                )
+                                (currentPose == 'Evaluación' &&
+                                    <UnityComponent setIsComponentUnloaded={setIsComponentUnloaded} loaderUrl="/Pose5ej/Build/Pose5ej.loader.js" dataUrl="/Pose5ej/Build/Pose5ej.data" frameworkUrl="/Pose5ej/Build/Pose5ej.framework.js" codeUrl="/Pose5ej/Build/Pose5ej.wasm" />    
+                                )                               
+                            
+                        :                            
+                            <p>no unloaded</p>
+                        }
+                    </div>
+
+                </div> < button onClick={stopPose} className="secondary-btn2" >        Siguiente </button>
                 <div className="social2" >
                     <img src={nueve} /> </div>
                 <div className="social" >
@@ -342,16 +356,55 @@ function Yoga() {
     }
 
     return (
+        
         <div className="yoga-container" >
+             <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse jsflx" id="navbarTogglerDemo01">
+          
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+            <Link to="/inicio">
+                <a class="nav-link">Inicio</a>
+            </Link>
+            </li>
+            <li class="nav-item">
+            <Link to="/home">
+            <a class="nav-link" >Registro</a>
+            </Link>
+              
+            </li>
+            <li class="nav-item">
+            <Link to="/resultados">
+                <a class="nav-link">Resultados</a>
+            </Link>  
+             
+            </li>
+            <li class="nav-item">
+            <Link to="/about">
+            <a class="nav-link" >Créditos</a>
+              </Link>           
+             
+            </li>
+            
+          </ul>
+     
+        </div>
+      </nav>            
             < DropDown poseList={poseList}
                 currentPose={currentPose}
                 setCurrentPose={setCurrentPose}
-            /> < Instructions currentPose={currentPose}
-            /> <  button onClick={startYoga}
+                onChange={handleSelectOnChange}
+            />
+            < Instructions currentPose={currentPose}/> 
+            <  button onClick={startYoga}
                 className="btny2 boton-abajo" >
-                ¡Listo! </button>
+                Iniciar </button>
         </div>
     )
 }
 
 export default Yoga
+

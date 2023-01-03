@@ -1,0 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&display=swap');
+.tuturialContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameText{
+    font-size: 60px;
+    font-family: 'Faster One', cursive;
+    color:mediumpurple;
+}

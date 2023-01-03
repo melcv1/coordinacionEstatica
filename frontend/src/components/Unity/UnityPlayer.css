@@ -1,0 +1,17 @@
+.UnityPlayer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.UnityPlayerControls{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.botones-unity{
+    background: none;
+    border: none;
+    font-size: 44px;
+    color: #1f355a;
+
+}
