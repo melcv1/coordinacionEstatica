@@ -75,7 +75,7 @@ export const ExcerciseStepper = ({ children, source }) => {
   return (
     <>
 
-      <Box sx={{ width: '100%' ,marginTop:'50px'}}>
+      <Box sx={{ width: '100%', marginTop: '50px' }}>
         <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
           {steps.map((label, index) => {
             const stepProps = {};
@@ -90,7 +90,7 @@ export const ExcerciseStepper = ({ children, source }) => {
             }
             return (
               <Step key={label} {...stepProps} >
-                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props,index)}>{(index % 2 !== 0) ? label : ''}</StepLabel>
+                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props, index)}>{(index % 2 !== 0) ? label : ''}</StepLabel>
               </Step>
             );
           })}
@@ -126,13 +126,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,#26416e 0%,#cfe7e7 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,#26416e 0%,#cfe7e7 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -148,30 +148,30 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState, isTraining }) =
   backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
   zIndex: 1,
   color: '#fff',
-  width: isTraining? 50 : 25,
-  height: isTraining? 50 : 25,
-  marginTop: isTraining? 0 : 10,
+  width: isTraining ? 50 : 25,
+  height: isTraining ? 50 : 25,
+  marginTop: isTraining ? 0 : 10,
   display: 'flex',
   borderRadius: '50%',
   justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, #26416e 50%, #cfe7e7 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 136deg, #26416e 50%, #cfe7e7 100%)',
   }),
 }));
 
-function ColorlibStepIcon(props,index) {
+function ColorlibStepIcon(props, index) {
   const { active, completed, className } = props;
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className} isTraining={index % 2 !== 0}>
-      <div>{index+1}</div>
+      <div>{index + 1}</div>
     </ColorlibStepIconRoot>
   );
 }
