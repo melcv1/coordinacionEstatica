@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-export const useFetchStudentsList = () => {
+export const useFetchStudentsList = (user) => {
 
     const [StudentList, setStudentList] = useState([]);
 
     const getStudentList = async () => {
-        await fetch("http://localhost:9000/api/prueba/busqueda")
+        await fetch(`http://localhost:9000/api/prueba/busqueda/${user}`)
             .then((response) => response.json())
             .then((response) => {
                 buildArrayForTable(response);
@@ -32,7 +32,7 @@ export const useFetchStudentsList = () => {
                 tFin: parseTiempos(student.PRUEBAS.split(','), student.TIEMPO_FIN.split(',')),
                 tEj: parseTiempos2(student.PRUEBAS.split(','), student.TIEMPO_EJ.split(',')),
                 observaciones: student.OBSERVACIONES,
-
+                evaluador: student.evaluador,
             };
             rows.push(row);
         })
