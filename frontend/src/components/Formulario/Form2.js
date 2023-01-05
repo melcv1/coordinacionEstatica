@@ -94,15 +94,6 @@ export default function Form2({ nino, setNino }) {
 
                     <button onClick={handleSubmit} className="btn btn-start-btn guardar">Guardar</button>
 
-                    {
-                    isSaved ?
-                        <Link to={"/home"}>
-                            <button className="btn btn-start-btn siguiente">Siguiente</button>
-                        </Link>
-                        :
-                        <div></div>
-                }
-
 
 
 

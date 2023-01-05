@@ -8,7 +8,7 @@ import {Training} from './pages/Training/Training'
 import About from './pages/About/About'
 import Resultados from './pages/Resultados/Resultados'
 import Tutorials from './pages/Tutorials/Tutorials'
-
+import Usuarios from './pages/Usuarios/Usuarios'
 import './App.css'
 import Exercises from './pages/Exercises/Exercises'
 import ExercisesTutorial from './pages/ExerciseTutorial/ExercisesTutorial'
@@ -18,6 +18,8 @@ import { Busqueda } from './pages/Busqueda/Busqueda'
 import { KidsInterface } from './pages/KidsInterface/KidsInterface'
 import { EvaluatorInterface } from './pages/EvaluatorInterface/EvaluatorInterface'
 
+import { Registrousuarios } from './pages/Registrousuarios/Registrousuarios'
+import { Busquedausuario } from './pages/Busqueda/Busquedausuario'
 export default function App() {
   return (
 
@@ -35,7 +37,12 @@ export default function App() {
         <Route path='/tratutorial' element={<TrainingTutorial />} />
         <Route path='/registro1' element={<Registro1 />} />
         <Route path='/busqueda' element={<Busqueda />} />
+        <Route path='/busquedausuario' element={<Busquedausuario />} />
         <Route path='/play' element={<KidsInterface />} />
+
+        <Route path='/usuarios' element={<Usuarios />}/>
+        <Route path='/registrousuarios' element={<Registrousuarios />}/>
+        
       
       </Routes>
     </Router>
