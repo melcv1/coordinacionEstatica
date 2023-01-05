@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router()
 var edad=0;
+const bcrypt = require("bcryptjs");
 routes.get('/edad', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -68,6 +69,31 @@ routes.get('/ninos', (req, res)=>{
         })
     })
 })
+routes.get('/auth/user', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+
+        conn.query('SELECT * FROM estudiante',  (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.json(rows)
+        })
+    })
+})
+
+
+routes.get('/usuario/users', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+
+        conn.query('SELECT * FROM usuario',  (err, rows)=>{
+            if(err) return res.send(err)
+
+            res.json(rows)
+        })
+    })
+})
+
 routes.post('/', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -79,6 +105,18 @@ routes.post('/', (req, res)=>{
         
     })
 })
+routes.post('/agregarusuario', (req, res)=>{
+    req.getConnection((err, conn)=>{
+        if(err) return res.send(err)
+        conn.query('INSERT INTO usuario set ?', [req.body], (err, results, rows)=>{
+            if(err) return res.send(err)
+            
+            res.json(results.insertId);
+        })
+        
+    })
+})
+
 
 
 

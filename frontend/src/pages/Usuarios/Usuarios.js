@@ -10,8 +10,6 @@ import { faPerson} from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import Header from '../../components/Header/Header';
 export default function Usuarios() {
-
-
   return (
     
     <div className="home-container">
@@ -30,7 +28,7 @@ export default function Usuarios() {
           </div>
 
           <div className="col-lg-12 fondo3">
-          <Link to="/busqueda">
+          <Link to="/busquedausuario">
           
                     <a className="texto-link">Buscar Usuario <span className="icono-der"><FontAwesomeIcon icon={faMagnifyingGlass} />  </span></a>
                 </Link>    

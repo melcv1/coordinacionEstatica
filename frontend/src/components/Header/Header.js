@@ -1,5 +1,9 @@
 import React from 'react'
+import Dropdown from 'react-bootstrap/Dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser} from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
+import "./Header.css"
 function Header(props) {
 
     return (
@@ -18,7 +22,13 @@ function Header(props) {
                     </li>
                     <li className="nav-item">
                         <Link to="/home">
-                            <a className="nav-link" >Registro</a>
+                            <a className="nav-link" >Participante</a>
+                        </Link>
+
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/usuarios">
+                            <a className="nav-link" >Usuario</a>
                         </Link>
 
                     </li>
@@ -38,6 +48,19 @@ function Header(props) {
 
                 </ul>
 
+                
+
+            </div>
+            <div>
+            <Dropdown  className="user-dos">
+      <Dropdown.Toggle id="dropdown-basic"  className="user-dos">
+      <FontAwesomeIcon icon={faUser} /> Usuario
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#">Cerrar Sesión</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
             </div>
         </nav>
 
