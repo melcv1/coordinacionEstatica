@@ -34,11 +34,11 @@ routes.get('/:id', (req, res) => {
     })
 })
 
-routes.get('/prueba/busqueda', (req, res) => {
+routes.get('/prueba/busqueda/:id', (req, res) => {
     req.getConnection((err, conn) => {
         if (err) return res.send(err)
 
-        conn.query('SELECT a.ID_ESTUDIANTE, a.NOMBRE, a.APELLIDO, a.FECHA_NACIMIENTO, a.EDAD_ACTUAL, GROUP_CONCAT(b.id_prueba) AS PRUEBAS, GROUP_CONCAT(b.validacion) AS VALIDACION,  GROUP_CONCAT(b.TIEMPO_INI) AS TIEMPO_INICIO, GROUP_CONCAT(b.TIEMPO_FIN) AS TIEMPO_FIN, group_concat(b.TIEMPO_EJ) AS TIEMPO_EJ, a.OBSERVACIONES FROM estudiante as a INNER JOIN estudiante_prueba as b ON a.ID_ESTUDIANTE = b.ID_ESTUDIANTE GROUP BY a.ID_ESTUDIANTE;', (err, rows) => {
+        conn.query('SELECT a.ID_ESTUDIANTE, a.NOMBRE, a.APELLIDO, a.FECHA_NACIMIENTO, a.EDAD_ACTUAL, GROUP_CONCAT(b.id_prueba) AS PRUEBAS, GROUP_CONCAT(b.validacion) AS VALIDACION,  GROUP_CONCAT(b.TIEMPO_INI) AS TIEMPO_INICIO, GROUP_CONCAT(b.TIEMPO_FIN) AS TIEMPO_FIN, group_concat(b.TIEMPO_EJ) AS TIEMPO_EJ, a.OBSERVACIONES, a.evaluador FROM estudiante as a INNER JOIN estudiante_prueba as b ON a.ID_ESTUDIANTE = b.ID_ESTUDIANTE WHERE a.evaluador = ? GROUP BY a.ID_ESTUDIANTE;',  [req.params.id], (err, rows) => {
             if (err) return res.send(err)
 
             res.json(rows)
