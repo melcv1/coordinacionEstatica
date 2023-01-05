@@ -72,15 +72,30 @@ routes.get('/pruebas/:id', (req, res) => {
 })
 
 
-routes.get('/ninos', (req, res) => {
+routes.get('/ninos/:id', (req, res) => {
     req.getConnection((err, conn) => {
         if (err) return res.send(err)
 
-        conn.query('SELECT * FROM estudiante', (err, rows) => {
-            if (err) return res.send(err)
+        if(req.params.id==="admin"){
 
-            res.json(rows)
-        })
+            conn.query('SELECT * FROM estudiante', (err, rows) => {
+                if (err) return res.send(err)
+    
+                res.json(rows)
+            })
+
+        }else{
+            conn.query('SELECT * FROM estudiante WHERE evaluador = ?',[req.params.id], (err, rows) => {
+                if (err) return res.send(err)
+    
+                res.json(rows)
+            })
+
+        }
+
+
+
+       
     })
 })
 
