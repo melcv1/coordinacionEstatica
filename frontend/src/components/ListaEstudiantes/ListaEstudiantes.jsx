@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Collapse, Box, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useFetchStudentsList } from '../../hooks/useFetchStudentsList';
@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../../context/AuthContext';
 
 const ListaEstudiantes = () => {
-
+    const { user } = useContext(AuthContext);  
     const navigate = useNavigate();
     const [estId, setEstId] = useLocalStorage("estId", "0");
 
-    const { StudentList } = useFetchStudentsList();
+    const { StudentList } = useFetchStudentsList(user);
     const [clickedIndex, setClickedIndex] = useState(-1);
 
     const columns = [
@@ -70,6 +71,7 @@ const ListaEstudiantes = () => {
             },
         },
         { field: 'observaciones', headerName: 'Observaciones', flex: 1 },
+        { field: 'evaluador', headerName: 'Evaluador', flex: 1 },
 
     ];
 
