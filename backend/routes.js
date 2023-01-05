@@ -140,25 +140,51 @@ routes.post('/', (req, res) => {
 routes.post('/agregarusuario', (req, res) => {
 
 
-    req.getConnection((err, conn) => {
+    req.getConnection(async (err, conn) => {
         if (err) return res.send(err)
 
         const rondasDeSal = 10;
         var contra = req.body.contrasena;
         var palabraSecretaEncriptada2;
-        bcrypt.hash(contra, rondasDeSal, (err, palabraSecretaEncriptada) => {
+        try{
+
+       
+      await  bcrypt.hash(contra, rondasDeSal, (err, palabraSecretaEncriptada) => {
             if (err) {
                 console.log("Error hasheando:", err);
             } else {
-                conn.query('INSERT INTO  usuario (usuario, contrasena, nombre, rol) VALUES (?, ?, ?, ?)', [req.body.usuario, palabraSecretaEncriptada, req.body.nombre, req.body.rol], (err, results, rows) => {
+
+                conn.query('SELECT usuario FROM usuario WHERE usuario = ?', [req.body.usuario], (err, results, rows) => {
                     if (err) return res.send(err)
 
-                    res.json(results.insertId);
+                  
+
+                    if(results.length > 0){
+                        res.json(0);
+
+                    }else{
+       
+                        conn.query('INSERT INTO  usuario (usuario, contrasena, nombre, rol) VALUES (?, ?, ?, ?)', [req.body.usuario, palabraSecretaEncriptada, req.body.nombre, req.body.rol], (err2, results2, rows2) => {
+                            if (err) return res.send(err2)
+
+                            res.json(results2.insertId);
+                        })
+
+                       // res.send("no hay usuario");
+
+                    }
+
+                   
                 })
+
 
             }
         });
+    }catch (error) {
+        res.send("Algo malo pasó");
+        console.log(error);
 
+    }
 
 
     })
@@ -200,6 +226,18 @@ routes.put('/actualizar/:id', (req, res) => {
         })
     })
 })
+
+routes.put('/actualizarprueba/:id', (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) return res.send(err)
+        conn.query('UPDATE estudiante_prueba set ? WHERE id_estudiante = ?', [req.body, req.params.id], (err, rows) => {
+            if (err) return res.send(err)
+
+            res.send('NINO  ACTUALIZADO!')
+        })
+    })
+})
+
 
 
 routes.put('/actualizardatos/:id/:prueba', (req, res) => {
