@@ -1,10 +1,10 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import Home from './pages/Home/Home'
 import Inicio from './pages/Inicio/Inicio'
 import Login from './pages/Login/Login'
-import {Training} from './pages/Training/Training'
+import { Training } from './pages/Training/Training'
 import About from './pages/About/About'
 import Resultados from './pages/Resultados/Resultados'
 import Tutorials from './pages/Tutorials/Tutorials'
@@ -20,33 +20,39 @@ import { EvaluatorInterface } from './pages/EvaluatorInterface/EvaluatorInterfac
 
 import { Registrousuarios } from './pages/Registrousuarios/Registrousuarios'
 import { Busquedausuario } from './pages/Busqueda/Busquedausuario'
+import { AuthProvider } from './context/AuthContext'
 export default function App() {
   return (
+    <AppState>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/inicio' element={<Inicio />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/start/:id' element={<EvaluatorInterface />} />
+          <Route path='/ej/:id' element={<Exercises />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/resultados' element={<Resultados />} />
+          <Route path='/tutorials' element={<Tutorials />} />
+          <Route path='/ejtuturial' element={<ExercisesTutorial />} />
+          <Route path='/tratutorial' element={<TrainingTutorial />} />
+          <Route path='/registro1' element={<Registro1 />} />
+          <Route path='/busqueda' element={<Busqueda />} />
+          <Route path='/busquedausuario' element={<Busquedausuario />} />
+          <Route path='/play' element={<KidsInterface />} />
 
-    <Router>
-      <Routes>       
-        <Route path='/' element={<Login />}/>
-        <Route path='/inicio' element={<Inicio />}/>
-        <Route path='/home' element={<Home />}/>
-        <Route path='/start/:id' element={<EvaluatorInterface />} />
-        <Route path='/ej/:id' element={<Exercises />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/resultados' element={<Resultados />} />
-        <Route path='/tutorials' element={<Tutorials />} />
-        <Route path='/ejtuturial' element={<ExercisesTutorial />} />
-        <Route path='/tratutorial' element={<TrainingTutorial />} />
-        <Route path='/registro1' element={<Registro1 />} />
-        <Route path='/busqueda' element={<Busqueda />} />
-        <Route path='/busquedausuario' element={<Busquedausuario />} />
-        <Route path='/play' element={<KidsInterface />} />
-
-        <Route path='/usuarios' element={<Usuarios />}/>
-        <Route path='/registrousuarios' element={<Registrousuarios />}/>
-        
-      
-      </Routes>
-    </Router>
+          <Route path='/usuarios' element={<Usuarios />} />
+          <Route path='/registrousuarios' element={<Registrousuarios />} />
+        </Routes>
+      </Router>
+    </AppState>
   )
 }
 
-
+const AppState = ({ children }) => {
+  return (
+    <AuthProvider>
+      {children}
+    </AuthProvider>
+  )
+}
