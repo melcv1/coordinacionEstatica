@@ -1,19 +1,20 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { count } from '../../utils/music';
 import './Resultados.css';
 import c from "../../utils/images/rojo.png";
 
 import veve2 from "../../utils/images/veve.png";
+import { AuthContext } from '../../context/AuthContext';
 
 
 const Estudiantes = ({ setListUpdated }) => {
-
+    const { user } = useContext(AuthContext);  
     const [estudiantes, setEstudiantes] = useState([])
 
 
 
     const getEstudiantes = () => {
-        fetch("http://localhost:9000/api/ninos")
+        fetch(`http://localhost:9000/api/ninos/${user}`)
             .then((response) => response.json())
             .then((response) => {
 
