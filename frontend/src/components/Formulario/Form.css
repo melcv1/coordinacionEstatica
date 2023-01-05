@@ -45,9 +45,9 @@
    
 }
 .siguiente{
-    background: #EB8198!important;
+    background:  #26406d!important;
     color: white!important;
-    border-color: #EB8198!important;
+    border-color: #26406d!important;
     padding-top:0!important;
     padding-bottom: 0!important;
    
@@ -85,4 +85,21 @@
 .nombre{
     width: 20rem;
     margin: 0 auto;
+}
+.form_lbl{
+    flex: 1;
+}
+
+.form_input{
+    flex: 2;
+}
+
+.form_container{
+    width: 80%;
+}
+
+.form_btn_row{
+    display: flex;
+    flex:1;
+    justify-content: center;
 }

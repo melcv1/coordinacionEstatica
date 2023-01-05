@@ -5,8 +5,14 @@
 }
 .performance-container{
     justify-content:space-between;
-    padding-right: 600px;
+    width: 100%;
     margin-bottom: 30px;
+}
+.sg{
+    background-color: #24a07f!important;
+}
+.cn{
+    background-color: #a70b2c!important;
 }
 .exercise-container{
     display: flex;
@@ -14,10 +20,13 @@
 }
 .webcam-container{
     position: relative;
+    margin-top:50px;
 }
 .record-container{
+    display:none;
     position: absolute;
-    background-color: #FDE5A4;
+    background-color: #c2d9d9;
+    color: rgba(0,0,0,.7)!important;
     border-radius: 50px;
     padding: 10px;
     top: 80px;
@@ -25,7 +34,8 @@
     width: 160px;
 }
 .record-container h4{
-    font-size: 16px;
+    font-size: 1rem;
+    color: rgba(0,0,0,.7)!important;
 }
 .timeButton{
     background-color: transparent;

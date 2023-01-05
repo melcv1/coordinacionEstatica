@@ -13,7 +13,7 @@ import seis from "../../utils/images/6.png";
 
 
 import { useNavigate } from "react-router-dom";
-import siete from "../../utils/images/7.png";
+import siete from "../../utils/images/aaa.jpg";
 import ocho from "../../utils/images/8.png";
 import nueve from "../../utils/images/a5.png";
 
@@ -75,16 +75,8 @@ export default function Login() {
       <div className="social3 ">
            <img src={uno} />
       </div>
-      <div className="social4 " >
-           <img src={dos} />
-      </div>
-      <div className="social5 ">
-           <img src={tres} />
-      </div>
-     
-      <div className="social7 ">
-           <img src={cinco} />
-      </div>
+      
+      
       <div className="social8 ">
            <img src={seis} />
       </div>

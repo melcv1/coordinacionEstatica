@@ -28,8 +28,14 @@
     margin-left:40%;
     font-size: 20px;
     font-weight: bold;
-    background-color: #EB8198;
-    color:white;
+    background-color: #cfe7e7;
+    color: rgba(0,0,0,.7)!important;
+    border:2px solid #26416e!important;
+}
+.margens:hover{
+    background-color: #cfe7e7;
+    border:2px solid #26416e!important;
+
 }
 .derecha2{
     position: relative;
@@ -103,7 +109,7 @@
 .social2 {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
 }
 
 .social3 {
@@ -173,11 +179,6 @@ input {
     color: white;
 }
 
-.fondo {
-    background-color: #FFE4E8;
-    border-radius: 15px;
-    box-shadow: 1em 1em 0.4em #EB8198;
-}
 
 body::-webkit-scrollbar {
     display: none;

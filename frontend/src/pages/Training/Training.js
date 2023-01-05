@@ -1,30 +1,32 @@
-import React, { useState, useEffect, usePrevious, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 //components
 import DropDown from '../../components/DropDown/DropDown';
-import UnityComponent from "../../components/Unity/UnityComponent";
 
 // constants
 import { UNITY_LOADERS, U_LOADERS_TRAINING } from '../../data/unityData';
 
 //hooks
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
-import { useUnityContext } from "react-unity-webgl";
 
 import './training.css';
 
-import nueve from "../../utils/images/9.png";
-import diez from "../../utils/images/10.png";
+import nueve from "../../utils/images/8.png";
+import diez from "../../utils/images/aaa.jpg";
 
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
-import video from '../../utils/images/Pose1.mp4';
-import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 import Timer from '../../components/Timer/Timer';
-
+import { useFetchPruebas } from '../../hooks/useFetchPruebas';
+import Header from '../../components/Header/Header';
 function Training() {
+
     const navigate = useNavigate();
+    const params = useParams();
+    const idEstudiante = params.id;
+    const { pruebas, isLoading } = useFetchPruebas(idEstudiante);
+    
     const newTab = useRef(null);
     const [currentPose, setCurrentPose] = useState(Object.keys(UNITY_LOADERS)[0])
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
@@ -51,27 +53,27 @@ function Training() {
             //xrCompatible: true,
         },
     });*/
-   
+
     function handleChange(pose) {
         setPose(pose);
         // await unityContext.unload();
         window.location.reload(false);
     }
 
-    function update(){
+    function update() {
         clearInterval(interval);
         var poseAct = 0;
         if (pose === "Entrenamiento1") {
-            poseAct = 3;       
+            poseAct = 3;
         } else if (pose === "Entrenamiento2") {
-             poseAct = 4;         
+            poseAct = 4;
         } else if (pose === "Evaluacion") {
-             poseAct = 5;    
+            poseAct = 5;
         }
-        else if(pose === "Habituacion"){
-             poseAct = 2;    
-        }else{
-             poseAct = 0;
+        else if (pose === "Habituacion") {
+            poseAct = 2;
+        } else {
+            poseAct = 0;
         }
 
         var resultado = ({
@@ -84,16 +86,15 @@ function Training() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultado)
         }
-        return fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
+        return fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + poseAct, requestInit)
             .then(res => res.text())
 
     }
 
-   async function goToExcercise() {
+    async function goToExcercise() {
         //  await unityContext.unload();
-    await update();
-
-        navigate('/ej')
+        await update();
+        navigate(`/ej/${idEstudiante}`)
     }
 
     function goTo(path) {
@@ -101,8 +102,8 @@ function Training() {
         navigate(path)
     }
 
-    
-    
+
+
     function startTestTimer() {
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
@@ -117,45 +118,21 @@ function Training() {
     return (
         <>
             <div className="yoga-container" >
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse jsflx" id="navbarTogglerDemo01">
-
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active btn-nav-item">
-                                <button onClick={() => goTo('/inicio')} class="nav-link">Inicio</button>
-
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/home')} class="nav-link">Registro</button>
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/resultados')} class="nav-link">Resultados</button>
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/about')} class="nav-link">Créditos</button>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </nav>
+                <Header></Header>
                 
                 < DropDown
                     poseList={Object.keys(UNITY_LOADERS)}
                     currentPose={pose}
                     setCurrentPose={handleChange}
+                    pruebas={pruebas}
+                    isLoading={isLoading}
                 >
                 </DropDown>
+
+
+                <Timer testTime={testTime}  startTestTimer={startTestTimer} />
+                { /*
                 
-                
-                <Timer testTime={testTime} startTestTimer={startTestTimer} />
-               { /*
-                <div className='poseTitle_container'>
-                    <div className='poseTitle' >{pose}</div>
-                </div>
                 */
                 }
                 {/*
@@ -165,18 +142,14 @@ function Training() {
                 />
                 */
                 }
-                <div className="social4 rotate" >
-                    <img src={doce} />
-                </div>
+                
                 <div className="social7 " >
                     <img src={trece} />
                 </div>
                 <div className="social3 " >
                     < img src={trece} />
                 </div>
-                <div className="social5 " >
-                    < img src={doce} />
-                </div>
+            
                 <div className="social2" >
                     <img src={nueve} />
                 </div>
@@ -184,15 +157,22 @@ function Training() {
                     <img src={diez} />
                 </div>
                 <div className="btn-centered">
+
+                < button onClick={() => navigate(`/busqueda`)} className="btny2 cancel" > Cancelar </button>
+
+              
                     < button onClick={goToExcercise}
                         className="btny2" >
-                        Iniciar
+                        Ingresar
                     </button>
+
+                    
+                    
                 </div>
 
-                <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
-                <span>start</span>
-            </Link>
+                <Link to="/tratutorial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>
+                    <span>start</span>
+                </Link>
             </div>
         </>
     )

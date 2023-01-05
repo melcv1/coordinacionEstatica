@@ -100,7 +100,7 @@
 .social2 {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
 }
 
 .social3 {
@@ -172,15 +172,15 @@ input {
 
 .fondo {
     margin-top:5%;
-    background-color: #FFE4E8;
+    background-color: #f0f5ff!important;
     border-radius: 15px;
-    box-shadow: 1em 1em 0.4em #EB8198;
+    box-shadow: 1em 1em 0.4em #26406d;
 }
 .fondo-reg {
     
-    background-color: #FFE4E8;
+    background-color: #f0f5ff;
     border-radius: 15px;
-    box-shadow: 1em 1em 0.4em #EB8198;
+    box-shadow: 1em 1em 0.4em #26406d;
 }
 .fondo3{
     margin-top:6%;

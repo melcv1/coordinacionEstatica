@@ -95,7 +95,7 @@ export const useDetector = (
     const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/model.json')
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/nuevo/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {
@@ -155,7 +155,7 @@ export const useDetector = (
                     if (data[0][classNo] > 0.97) {
                         if (!flag) {
 
-                            countAudio.play()
+                            
                             setStartingTime(new Date(Date()).getTime())
                             flag = true
                         }
@@ -164,7 +164,7 @@ export const useDetector = (
                     } else {
                         flag = false
                         skeletonColor = 'rgb(255,255,255)'
-                        countAudio.pause()
+                        
                         countAudio.currentTime = 0
                     }
                 })
@@ -181,7 +181,7 @@ export const useDetector = (
         runMovenet()
     }
 
-    async function stopPose(postResults) {
+    async function stopPose(postResults,id) {
 
         console.log("esta es la pose" + pose);
         let gotoPose= pose;
@@ -216,7 +216,7 @@ export const useDetector = (
         //await unload()
         
         await setPose(gotoPose);
-        navigate('/start')
+        navigate(`/start/${id}`);
     }
 
 

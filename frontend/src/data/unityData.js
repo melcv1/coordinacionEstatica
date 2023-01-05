@@ -74,3 +74,25 @@ export const U_LOADERS_EJ={
     Entrenamiento2:e3,
     Evaluacion:e4,
 }
+
+export const LOADERS ={
+    HabituacionT:t1,
+    HabituacionE:e1,
+    Entrenamiento1T:t2,
+    Entrenamiento1E:e2,
+    Entrenamiento2T:t3,
+    Entrenamiento2E:e3,
+    EvaluacionT:t4,
+    EvaluacionE:e4,
+}
+ export const STEPS = [
+    'HabituacionT',
+    'HabituacionE',
+    'Entrenamiento1T',
+    'Entrenamiento1E',
+    'Entrenamiento2T',
+    'Entrenamiento2E',
+    'EvaluacionT',
+    'EvaluacionE',
+];
+

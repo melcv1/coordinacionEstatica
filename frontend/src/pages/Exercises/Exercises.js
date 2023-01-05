@@ -9,23 +9,28 @@ import { useLocalStorage } from "../../localStorage/useLocalStorage";
 import { useUnityContext } from "react-unity-webgl";
 import UnityComponent from '../../components/Unity/UnityComponent';
 
-import nueve from "../../utils/images/9.png";
-import diez from "../../utils/images/10.png";
+import nueve from "../../utils/images/8.png";
+import diez from "../../utils/images/aaa.jpg";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { useFetchEdad } from '../../hooks/useFetchEdad';
 import { useFetchId } from '../../hooks/useFetchId';
 import { useDetector } from '../../hooks/useDetector';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Timer from '../../components/Timer/Timer';
 
 function Exercises() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const idEstudiante = params.id;
+
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
     const newTab = useRef(null);
     const { ninoEdad } = useFetchEdad();
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
+    const [play, setPlay] = useLocalStorage("play", "tHabituacion");
     const [testTime, setTestTime] = useState(0);
     const [estId, setEstId] = useLocalStorage("estId", "0");
     //const idnino = useFetchId();
@@ -53,6 +58,7 @@ function Exercises() {
     }
     let interval = null;
     function startTestTimer() {
+        setPlay(pose+'E');
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
         }, 10);
@@ -61,24 +67,26 @@ function Exercises() {
 
     function postResults(poseAct, paso) {
         clearInterval(interval);
+        console.log("TIEMPO_EJ" + bestPerform);
+        console.log("VALIDACION" + paso);
         var resultado = ({
             ID_PRUEBA: poseAct,
-            ID_ESTUDIANTE: estId,
+            ID_ESTUDIANTE: idEstudiante,
             TIEMPO_EJ: bestPerform,
             VALIDACION: paso,
             TIEMPO_FIN: testTime,
         })
-            const requestInit = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(resultado)
-            }
-             fetch('http://localhost:9000/api/actualizardatos/' + estId +"/"+poseAct, requestInit)
-                .then(res => res.text())
+        const requestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(resultado)
+        }
+        fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + poseAct, requestInit)
+            .then(res => res.text())
 
     }
     useEffect(() => {
-        newTab.current.click()
+        //newTab.current.click()
     }, []);
 
     return (
@@ -95,18 +103,21 @@ function Exercises() {
                                 Tiempo: {poseTime}
                             </h4>
                             <div className="record-container" >
-                                <h4> Tiempo Record: {bestPerform}
+                                <h4> Tiempo Ejercicio: {bestPerform}
                                 </h4>
                             </div>
                         </div>
                     </div>
-                    < button onClick={() => stopPose(postResults)} className="secondary-btn2" > Siguiente </button>
+                    <div className="d-flex">
+                        < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2 cn" > Cancelar </button>
+                        < button onClick={() => stopPose(postResults, idEstudiante)} className="secondary-btn2 sg" > Siguiente </button>
+                    </div>
                 </div>
 
                 <div className='exercise-container'>
                     <div className='webcam-container' >
-                        <  Webcam width='600px'
-                            height='400px'
+                        <  Webcam width='640px'
+                            height='480px'
                             id="webcam"
                             ref={webcamRef}
                             style={
@@ -119,8 +130,8 @@ function Exercises() {
                             }
                         /> <canvas ref={canvasRef}
                             id="my-canvas"
-                            width='600px'
-                            height='400px'
+                            width='640px'
+                            height='480px'
                             style={
                                 {
                                     position: 'absolute',
@@ -131,14 +142,11 @@ function Exercises() {
                         </canvas>
                     </div>
                 </div>
-                <div className="social4 " >
-                    <img src={doce} />
-                </div>
+
                 <div className="social7 " >
                     <img src={trece} /> </div>
                 <div className="social3 " >
-                    < img src={trece} /> </div> <div className="social5 " >
-                    < img src={doce} /> </div>
+                    < img src={trece} /> </div>
                 <div className="social2" >
                     <img src={nueve} />
                 </div>
@@ -147,7 +155,7 @@ function Exercises() {
                 </div>
 
             </div>
-            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
+            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>
                 <span>start</span>
             </Link>
 
