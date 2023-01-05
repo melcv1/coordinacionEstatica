@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import { authReducer, AuthState } from './authReducer';
 import { useLocalStorage } from '../localStorage/useLocalStorage';
+import { data } from '@tensorflow/tfjs';
 
 const authInicialState = {
-    status: 'checking',
+    status: 'notAuthenticated',
     token: null,
     user: null,
     errorMessage: '',
@@ -12,23 +13,24 @@ const authInicialState = {
 
 
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [session, setSession] = useLocalStorage("session", "session");
+    const [session, setSession] = useLocalStorage("session", JSON.stringify(authInicialState));
 
 
-    const [state, dispatch] = useReducer(authReducer, authInicialState);
+    const [state, dispatch] = useReducer(authReducer, JSON.parse(session));
 
     useEffect(() => {
-        checkToken();
+        //checkToken();
     }, [])
 
     const checkToken = async () => {
+        console.log(session);
         let sessionObj = JSON.parse(session);
         const token = sessionObj.status;
         // No token, no autenticado
-        if (!token) return dispatch({ type: 'notAuthenticated' });
+        if (token === 'notAuthenticated') return dispatch({ type: 'notAuthenticated' });
 
         // Hay token
         let resp = await fetch("http://localhost:9000/api/id")
@@ -51,14 +53,14 @@ export const AuthProvider = ({ children }) => {
         dispatch({
             type: 'signUp',
             payload: {
-                user: resp.data.usuario
+                user: resp.data.usuario,
+                rol: data.rol,
             }
         });
     }
 
 
-    const signIn = async ({ user, password }) => {
-
+    const signIn = async (user, password ) => {
         try {
 
             //const { data } = await cafeApi.post < LoginResponse > ('/auth/login', { correo, password });
@@ -68,30 +70,36 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify(
                     {
                         usuario: user,
-                        contrasena:password,
+                        contrasena: password,
                     }
                 )
             };
 
             let resp = await fetch("http://localhost:9000/api/login/users", requestInit)
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
-                return (response);
-            })
-            dispatch({
-                type: 'signUp',
-                payload: {
-                    user: data.usuario
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+                    return (response);
+                })
+            if(resp.status ==='authenticated'){
+                dispatch({
+                    type: 'signUp',
+                    payload: {
+                        user: resp.user,
+                        rol: resp.rol,
+                    }
+                });
+                //await AsyncStorage.setItem('token', data.token );
+                const sessionObj = {
+                    status: resp.status,
+                    user: resp.user,
                 }
-            });
+                await setSession(JSON.stringify(sessionObj));
 
-            //await AsyncStorage.setItem('token', data.token );
-            const sessionObj = {
-                status: resp.data.status,
-                user: resp.data.user,
+            }else{
+                alert('Datos Incorrectos')
             }
-            await setSession(JSON.stringify(sessionObj));
+
         } catch (error) {
             dispatch({
                 type: 'addError',
@@ -111,17 +119,17 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify(
                     {
                         usuario: nombre,
-                        contrasena:password,
+                        contrasena: password,
                     }
                 )
             };
 
             let resp = await fetch("http://localhost:9000/api/login/users", requestInit)
-            .then((response) => response.json())
-            .then((response) => {
-                console.log(response);
-                return (response);
-            })
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(response);
+                    return (response);
+                })
             dispatch({
                 type: 'signUp',
                 payload: {

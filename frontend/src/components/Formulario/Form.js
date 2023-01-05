@@ -1,11 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Form.css";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
 
 export default function Form({ nino, setNino }) {
-    const navigate = useNavigate();
+
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
 
     const [estId, setEstId] = useLocalStorage("estId", "0");
@@ -17,12 +16,9 @@ export default function Form({ nino, setNino }) {
     }
     const [isSaved, setisSaved] = useState(false);
 
-    let { nombre, apellido, edad_actual, fecha_nacimiento, observaciones } = nino
+    let { nombre, apellido, edad_actual, fecha_nacimiento, observaciones, evaluador } = nino
 
     const handleSubmit = async () => {
-        console.log("si vino a submit");
-        console.log(fecha_nacimiento);
-
         if (nombre === '' || apellido === '' || observaciones === '' || typeof fecha_nacimiento === 'undefined') {
             alert('Todos los campos son obligatorios')
             return
@@ -140,6 +136,12 @@ export default function Form({ nino, setNino }) {
     
         
     }
+
+    useEffect(() => {
+
+
+    }, [])
+    
 
 
     return (

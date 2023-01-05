@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import React, { Fragment, useState, useEffect, useContext } from 'react';
+import { Link, Navigate } from "react-router-dom";
 
 import "./Inicio.css";
 
@@ -8,13 +8,17 @@ import siete from "../../utils/images/aaa.jpg";
 import ocho from "../../utils/images/8.png";
 import nin1 from "../../utils/images/cambio.png";
 import Header from '../../components/Header/Header';
+import { AuthContext } from '../../context/AuthContext';
 export default function Home() {
 
-  const [nino, setNino] = useState({
-    nombre: '',
-    edad_actual: 0
-  })
+  const { status } = useContext(AuthContext);  
 
+  if (status === 'notAuthenticated') {
+    console.log(status);
+    return <Navigate to="/" />;
+  }else{
+    console.log(status);
+  }
 
   return (
 

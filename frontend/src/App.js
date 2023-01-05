@@ -20,10 +20,12 @@ import { EvaluatorInterface } from './pages/EvaluatorInterface/EvaluatorInterfac
 
 import { Registrousuarios } from './pages/Registrousuarios/Registrousuarios'
 import { Busquedausuario } from './pages/Busqueda/Busquedausuario'
-import { AuthProvider } from './context/AuthContext'
+import { AuthContext, AuthProvider } from './context/AuthContext'
 export default function App() {
+
   return (
     <AppState>
+
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />

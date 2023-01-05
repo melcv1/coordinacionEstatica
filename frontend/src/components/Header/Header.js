@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser} from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 import "./Header.css"
+import { AuthContext } from '../../context/AuthContext';
+
 function Header(props) {
+    const {
+        status,
+        rol,
+        user,
+        signUp,
+        signIn,
+        logOut,
+        removeError
+    } = useContext(AuthContext);
 
     return (
 
@@ -26,12 +37,16 @@ function Header(props) {
                         </Link>
 
                     </li>
-                    <li className="nav-item">
-                        <Link to="/usuarios">
-                            <a className="nav-link" >Usuario</a>
-                        </Link>
+                    {console.log(user)}
+                    {
+                        (rol === 'Admin') &&
+                        <li className="nav-item">
+                            <Link to="/usuarios">
+                                <a className="nav-link" >Usuario</a>
+                            </Link>
 
-                    </li>
+                        </li>
+                    }
                     <li className="nav-item">
                         <Link to="/resultados">
                             <a className="nav-link">Resultados</a>
@@ -48,19 +63,23 @@ function Header(props) {
 
                 </ul>
 
-                
+
 
             </div>
             <div>
-            <Dropdown  className="user-dos">
-      <Dropdown.Toggle id="dropdown-basic"  className="user-dos">
-      <FontAwesomeIcon icon={faUser} /> Usuario
-      </Dropdown.Toggle>
+                <Dropdown className="user-dos">
+                    <Dropdown.Toggle id="dropdown-basic" className="user-dos">
+                        <FontAwesomeIcon icon={faUser} /> {user}
+                    </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item href="#">Cerrar Sesión</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+                    <Dropdown.Menu>
+                        <Dropdown.Item>
+                            <Link to="/">
+                                <a className="nav-link" >Cerrar Sesión</a>
+                            </Link>
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
         </nav>
 

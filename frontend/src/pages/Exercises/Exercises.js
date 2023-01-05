@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import DropDown from '../../components/DropDown/DropDown';
 import { UNITY_LOADERS_EXERCISES, U_LOADERS_EJ } from '../../data/unityData';
 import Webcam from 'react-webcam';
@@ -16,11 +16,15 @@ import trece from "../../utils/images/13.png";
 import { useFetchEdad } from '../../hooks/useFetchEdad';
 import { useFetchId } from '../../hooks/useFetchId';
 import { useDetector } from '../../hooks/useDetector';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useNavigate, useParams } from "react-router-dom";
 import Timer from '../../components/Timer/Timer';
+import { AuthContext } from '../../context/AuthContext';
 
 function Exercises() {
+    const { status } = useContext(AuthContext);
+
+    
     const navigate = useNavigate();
     const params = useParams();
     const idEstudiante = params.id;
@@ -58,7 +62,7 @@ function Exercises() {
     }
     let interval = null;
     function startTestTimer() {
-        setPlay(pose+'E');
+        setPlay(pose + 'E');
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
         }, 10);
@@ -88,6 +92,12 @@ function Exercises() {
     useEffect(() => {
         //newTab.current.click()
     }, []);
+
+    if (status === 'notAuthenticated') {
+        return <Navigate to="/" />;
+    } else {
+        console.log(status);
+    }
 
     return (
         <>

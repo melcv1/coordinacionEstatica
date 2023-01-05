@@ -1,5 +1,5 @@
-import React, {Fragment, useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
+import React, { Fragment, useState, useEffect, useContext } from 'react';
+import { Link, Navigate } from "react-router-dom";
 
 import "./Login.css";
 import inicio from "../../utils/images/inicio.png";
@@ -18,70 +18,86 @@ import ocho from "../../utils/images/8.png";
 import nueve from "../../utils/images/a5.png";
 
 import Form from "../../components/Formulario/Form";
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Login() {
 
+  const {
+    status,
+    signUp,
+    signIn,
+    logOut,
+    removeError
+  } = useContext(AuthContext);
+
+
+
+
   const [nino2, setNino2] = useState([]);
   const navigate = useNavigate();
-  
-  let{usuario, contrasena} = nino2;
+
+  let { usuario, contrasena } = nino2;
 
   const handleChange = e => {
     setNino2({
-        ...nino2,
-        [e.target.name]: e.target.value
+      ...nino2,
+      [e.target.name]: e.target.value
     })
   }
 
-  const handleSubmit = () => {       
+  const handleSubmit = () => {
+    console.log(nino2);
+    signIn(usuario, contrasena)
+    //navigate("/inicio");
 
-        if(usuario =='admin' && contrasena=='admin'){
-          navigate("/inicio");
-        }
-        else{
-          alert("Ingrese datos correctos");
-        }
-}
+  }
+  
+  useEffect(() => {
+    logOut();
+  }, [])
+  
 
-
+  if (status === 'authenticated') {
+    return <Navigate to="/inicio" />;
+  }
+ 
 
   return (
-    
-    
+
+
     <div className="home-container">
       <div className="container-login">
         <div className="row login">
           <div className="col-lg-12 fondo">
-          <form onSubmit={handleSubmit}>
-            
+
             <h1 className="description">Iniciar Sesión</h1>
             <h2 className="description2">Usuario</h2>
             <input type="text" value={usuario} name="usuario" onChange={handleChange} className="form-control nombre"></input>
             <h2 className="description2">Contraseña</h2>
             <input type="password" value={contrasena} name="contrasena" onChange={handleChange} className="form-control nombre"></input>
-            <button type="submit" className="btn start-btn margens">Ingresar</button>
-          </form>
+            <button onClick={handleSubmit} className="btn start-btn margens">Ingresar</button>
+
           </div>
-         
-        </div>       
+
+        </div>
       </div>
       <div className="social ">
-           <img src={siete} />
+        <img src={siete} />
       </div>
 
       <div className="social2 ">
-           <img src={ocho} />
+        <img src={ocho} />
       </div>
       <div className="social3 ">
-           <img src={uno} />
-      </div>
-      
-      
-      <div className="social8 ">
-           <img src={seis} />
+        <img src={uno} />
       </div>
 
-     
+
+      <div className="social8 ">
+        <img src={seis} />
+      </div>
+
+
     </div>
   );
 }

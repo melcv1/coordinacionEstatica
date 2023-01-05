@@ -8,7 +8,8 @@ export const authReducer = ( state, action ) => {
                 ...state,
                 user: null,
                 status: 'not-authenticated',
-                errorMessage: action.payload
+                errorMessage: action.payload,
+                rol: null,
             }
     
         case 'removeError':
@@ -22,15 +23,17 @@ export const authReducer = ( state, action ) => {
                 ...state,
                 errorMessage: '',
                 status: 'authenticated',
-                user: action.payload.user
+                user: action.payload.user,
+                rol: action.payload.rol,
             }
 
         case 'logout':
         case 'notAuthenticated':
             return {
                 ...state,
-                status: 'not-authenticated',
-                user: null
+                status: 'notAuthenticated',
+                user: null,
+                rol: null,
             }
 
         default:
