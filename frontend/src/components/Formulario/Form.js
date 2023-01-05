@@ -143,36 +143,36 @@ export default function Form({ nino, setNino }) {
 
 
     return (
-        <div>
-            <div className="mb-3 algn-cnt">
+        <div className="d-flex justify-content-center">
+            <div className="mb-3 form_container">
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt">Nombres</h2>
-                    <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre">
+                    <h2 className="lbl-cnt form_lbl">Nombres</h2>
+                    <input type="text" value={nombre} name="nombre" onChange={handleChange} className="form-control nombre form_input">
 
                     </input>
                 </div>
 
 
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt">Apellidos</h2>
-                    <input type="text" value={apellido} name="apellido" onChange={handleChange} className="form-control nombre">
+                    <h2 className="lbl-cnt form_lbl">Apellidos</h2>
+                    <input type="text" value={apellido} name="apellido" onChange={handleChange} className="form-control nombre form_input">
 
                     </input>
                 </div>
 
 
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt">Fecha de Nacimiento</h2>
+                    <h2 className="lbl-cnt form_lbl">Fecha de Nacimiento</h2>
 
-                    <input type="date" value={fecha_nacimiento} name="fecha_nacimiento" onChange={handleChange} className="form-control nombre">
+                    <input type="date" value={fecha_nacimiento} name="fecha_nacimiento" onChange={handleChange} className="form-control nombre form_input">
 
                     </input>
 
                 </div>
 
                 <div className="d-flex align-items-center mt-4">
-                    <h2 className="lbl-cnt ob">Observaciones    </h2>
-                    <input type="text" value={observaciones} name="observaciones" onChange={handleChange} className="form-control nombre">
+                    <h2 className="lbl-cnt form_lbl">Observaciones    </h2>
+                    <input type="text" value={observaciones} name="observaciones" onChange={handleChange} className="form-control nombre form_input">
 
                     </input>
                 </div>
@@ -181,7 +181,7 @@ export default function Form({ nino, setNino }) {
 
 
 
-                <div className="form-sub">
+                <div className="form-sub form_btn_row">
 
                     <Link to="/home">
                         <button type="submit" className="btn start-btn cancelar">Cancelar</button>

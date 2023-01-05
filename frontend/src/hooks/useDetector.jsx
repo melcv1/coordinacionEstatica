@@ -95,7 +95,7 @@ export const useDetector = (
     const runMovenet = async () => {
         const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
         const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/model.json')
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/nuevo/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {

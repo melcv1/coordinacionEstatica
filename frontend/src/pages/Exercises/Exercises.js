@@ -30,6 +30,7 @@ function Exercises() {
     const newTab = useRef(null);
     const { ninoEdad } = useFetchEdad();
     const [pose, setPose] = useLocalStorage("pose", "Habituacion");
+    const [play, setPlay] = useLocalStorage("play", "tHabituacion");
     const [testTime, setTestTime] = useState(0);
     const [estId, setEstId] = useLocalStorage("estId", "0");
     //const idnino = useFetchId();
@@ -57,6 +58,7 @@ function Exercises() {
     }
     let interval = null;
     function startTestTimer() {
+        setPlay(pose+'E');
         interval = setInterval(() => {
             setTestTime((time) => time + 10);
         }, 10);
@@ -65,8 +67,8 @@ function Exercises() {
 
     function postResults(poseAct, paso) {
         clearInterval(interval);
-        console.log("TIEMPO_EJ"+bestPerform);
-        console.log("VALIDACION"+paso);
+        console.log("TIEMPO_EJ" + bestPerform);
+        console.log("VALIDACION" + paso);
         var resultado = ({
             ID_PRUEBA: poseAct,
             ID_ESTUDIANTE: idEstudiante,
@@ -74,13 +76,13 @@ function Exercises() {
             VALIDACION: paso,
             TIEMPO_FIN: testTime,
         })
-            const requestInit = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(resultado)
-            }
-             fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante +"/"+poseAct, requestInit)
-                .then(res => res.text())
+        const requestInit = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(resultado)
+        }
+        fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + poseAct, requestInit)
+            .then(res => res.text())
 
     }
     useEffect(() => {
@@ -106,14 +108,16 @@ function Exercises() {
                             </div>
                         </div>
                     </div>
-                    < button onClick={() => stopPose(postResults,idEstudiante)} className="secondary-btn2 sg" > Siguiente </button>
-                    < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2 cn" > Cancelar </button>
+                    <div className="d-flex">
+                        < button onClick={() => navigate(`/start/${idEstudiante}`)} className="secondary-btn2 cn" > Cancelar </button>
+                        < button onClick={() => stopPose(postResults, idEstudiante)} className="secondary-btn2 sg" > Siguiente </button>
+                    </div>
                 </div>
 
                 <div className='exercise-container'>
                     <div className='webcam-container' >
-                        <  Webcam width='600px'
-                            height='400px'
+                        <  Webcam width='640px'
+                            height='480px'
                             id="webcam"
                             ref={webcamRef}
                             style={
@@ -126,8 +130,8 @@ function Exercises() {
                             }
                         /> <canvas ref={canvasRef}
                             id="my-canvas"
-                            width='600px'
-                            height='400px'
+                            width='640px'
+                            height='480px'
                             style={
                                 {
                                     position: 'absolute',
@@ -138,11 +142,11 @@ function Exercises() {
                         </canvas>
                     </div>
                 </div>
-              
+
                 <div className="social7 " >
                     <img src={trece} /> </div>
                 <div className="social3 " >
-                    < img src={trece} /> </div> 
+                    < img src={trece} /> </div>
                 <div className="social2" >
                     <img src={nueve} />
                 </div>
@@ -151,7 +155,7 @@ function Exercises() {
                 </div>
 
             </div>
-            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{position:'absolute',visibility:'hidden'}}>
+            <Link to="/ejtuturial" target="_blank" rel="noopener noreferrer" ref={newTab} style={{ position: 'absolute', visibility: 'hidden' }}>
                 <span>start</span>
             </Link>
 

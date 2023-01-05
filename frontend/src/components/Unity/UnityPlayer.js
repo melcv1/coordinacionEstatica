@@ -48,7 +48,7 @@ export const UnityPlayer = ({ source, CallbackFn }) => {
         <div className="UnityPlayer">
             <iframe src={"https://olafwempe.com/mp3/silence/silence.mp3"} type={"audio/mp3"} allow={"autoplay"}  style={{display:'none'}}></iframe>
             <video
-                style={{ maxWidth: "100%", height: "70vh", margin: "0 auto", borderRadius: '50px' }}
+                style={{ maxWidth: "100%", height: "60vh", margin: "0 auto", borderRadius: '50px' }}
                 playsInline
                 alt="All the devices"
                 src={source}

@@ -19,7 +19,7 @@ import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import Timer from '../../components/Timer/Timer';
 import { useFetchPruebas } from '../../hooks/useFetchPruebas';
-
+import Header from '../../components/Header/Header';
 export const EvaluatorInterface = () =>{
 
     const navigate = useNavigate();
@@ -75,7 +75,7 @@ export const EvaluatorInterface = () =>{
 
     async function goToExcercise() {
         //  await unityContext.unload();
-        setPlay(pose+'E');
+        //setPlay(pose+'E');
         await update();
         
         navigate(`/ej/${idEstudiante}`)
@@ -100,31 +100,7 @@ export const EvaluatorInterface = () =>{
     return (
         <>
             <div className="yoga-container" >
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse jsflx" id="navbarTogglerDemo01">
-
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active btn-nav-item">
-                                <button onClick={() => goTo('/inicio')} class="nav-link">Inicio</button>
-
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/home')} class="nav-link">Registro</button>
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/resultados')} class="nav-link">Resultados</button>
-                            </li>
-                            <li class="nav-item btn-nav-item">
-                                <button onClick={() => goTo('/about')} class="nav-link">Créditos</button>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </nav>
+                <Header></Header>
                 
                 < DropDown
                     poseList={Object.keys(UNITY_LOADERS)}
@@ -138,9 +114,11 @@ export const EvaluatorInterface = () =>{
 
 
                 <Timer testTime={testTime}  startTestTimer={startTestTimer} />
-                <Link to="/play" target="_blank" rel="noopener noreferrer" ref={newTab} >
-                    <span>start</span>
-                </Link>
+                <div className="d-flex justify-content-center" style={{position: 'relative', top: '100px'}}>
+                    <Link to="/play" target="_blank" rel="noopener noreferrer" ref={newTab} >
+                        <span>Click aquí para abrir interfaz de jugador (solo si no esta abierto)</span>
+                    </Link>
+                </div>
                 { /*
                 
                 */
