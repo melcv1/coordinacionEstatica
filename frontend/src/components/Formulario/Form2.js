@@ -37,12 +37,18 @@ export default function Form2({ nino, setNino }) {
         }
         console.log("niño: " + nino);
         let r = "";
-        await fetch('http://localhost:9000/api/agregarusuario', requestInit)
-            .then(res => res.json())
-            .then(res => (r = String(res)))
-            .then(res => setisSaved(true))
-     
-        console.log(r);            
+        let response1= await fetch('http://localhost:9000/api/agregarusuario', requestInit)
+            
+            .then(res =>  res.json())
+            .then(res => String(res))
+
+            if(response1!=="0"){
+                navigate("/usuarios")
+            }else{
+                alert("Usuario ya registrado")
+            }
+            
+                
                 
     
         
