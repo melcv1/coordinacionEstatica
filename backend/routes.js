@@ -2,6 +2,7 @@ const express = require('express')
 const routes = express.Router()
 var edad=0;
 const bcrypt = require("bcryptjs");
+
 routes.get('/edad', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -69,17 +70,7 @@ routes.get('/ninos', (req, res)=>{
         })
     })
 })
-routes.get('/auth/user', (req, res)=>{
-    req.getConnection((err, conn)=>{
-        if(err) return res.send(err)
 
-        conn.query('SELECT * FROM estudiante',  (err, rows)=>{
-            if(err) return res.send(err)
-
-            res.json(rows)
-        })
-    })
-})
 
 
 routes.get('/usuario/users', (req, res)=>{
@@ -93,7 +84,32 @@ routes.get('/usuario/users', (req, res)=>{
         })
     })
 })
+ routes.post('/login/users',  (req, res)=>{
+    try {
 
+         req.getConnection( (err, conn)=>{
+            if(err) return res.send(err)
+    
+             conn.query('SELECT contrasena FROM usuario WHERE usuario= ?', [req.body.usuario], (err, rows)=>{
+                if(err) return res.send(err)
+    
+                const cmp =  bcrypt.compare(req.body.contrasena, rows.contrasena.toString());
+                if (cmp) {
+                  res.send("Auth Successful");
+                } else {
+                  res.send("Wrong username or password.");
+                }
+            })
+        })
+
+
+        
+      } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server error Occured");
+      }
+
+})
 routes.post('/', (req, res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
@@ -106,13 +122,28 @@ routes.post('/', (req, res)=>{
     })
 })
 routes.post('/agregarusuario', (req, res)=>{
+
+   
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
-        conn.query('INSERT INTO usuario set ?', [req.body], (err, results, rows)=>{
-            if(err) return res.send(err)
-            
-            res.json(results.insertId);
-        })
+
+        const rondasDeSal = 10;
+        var contra= req.body.contrasena;
+        var palabraSecretaEncriptada2;
+        bcrypt.hash(contra, rondasDeSal, (err, palabraSecretaEncriptada) => {
+            if (err) {
+                console.log("Error hasheando:", err);
+            } else {
+                conn.query('INSERT INTO  usuario (usuario, contrasena, nombre, rol) VALUES (?, ?, ?, ?)', [req.body.usuario, palabraSecretaEncriptada, req.body.nombre, req.body.rol], (err, results, rows)=>{
+                    if(err) return res.send(err)
+                    
+                    res.json(results.insertId);
+                })
+
+            }
+        });
+        
+       
         
     })
 })
