@@ -1,4 +1,3 @@
-import { Usuario } from '../interfaces/appInterfaces';
 
 
 export const authReducer = ( state, action ) => {

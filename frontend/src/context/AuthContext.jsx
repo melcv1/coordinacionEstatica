@@ -1,7 +1,4 @@
 import React, { createContext, useEffect, useReducer } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { Usuario, LoginResponse, LoginData, RegisterData } from '../interfaces/appInterfaces';
 import { authReducer, AuthState } from './authReducer';
 import { useLocalStorage } from '../localStorage/useLocalStorage';
 
@@ -9,7 +6,8 @@ const authInicialState = {
     status: 'checking',
     token: null,
     user: null,
-    errorMessage: ''
+    errorMessage: '',
+    rol: null,
 }
 
 
