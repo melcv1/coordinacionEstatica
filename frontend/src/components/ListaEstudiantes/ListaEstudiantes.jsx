@@ -59,7 +59,7 @@ const ListaEstudiantes = () => {
             },
         },
         {
-            field: 'tEj', headerName: 'T Ej', flex: 1, renderCell: (cellValues) => {
+            field: 'tEj', headerName: 'T Tarea', flex: 1, renderCell: (cellValues) => {
                 return (
                     <Box>
                         <div>{cellValues.value.pose2}</div>

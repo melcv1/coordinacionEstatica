@@ -17,7 +17,7 @@ import { Registro1 } from './pages/Registro1/Registro1'
 import { Busqueda } from './pages/Busqueda/Busqueda'
 import { KidsInterface } from './pages/KidsInterface/KidsInterface'
 import { EvaluatorInterface } from './pages/EvaluatorInterface/EvaluatorInterface'
-
+import Final from './pages/Final/Final'
 import { Registrousuarios } from './pages/Registrousuarios/Registrousuarios'
 import { Busquedausuario } from './pages/Busqueda/Busquedausuario'
 import { AuthContext, AuthProvider } from './context/AuthContext'
@@ -42,6 +42,7 @@ export default function App() {
           <Route path='/busqueda' element={<Busqueda />} />
           <Route path='/busquedausuario' element={<Busquedausuario />} />
           <Route path='/play' element={<KidsInterface />} />
+          <Route path='/final' element={<Final />} />
 
           <Route path='/usuarios' element={<Usuarios />} />
           <Route path='/registrousuarios' element={<Registrousuarios />} />

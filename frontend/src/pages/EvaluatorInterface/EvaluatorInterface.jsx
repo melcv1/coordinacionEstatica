@@ -126,7 +126,7 @@ export const EvaluatorInterface = () => {
                 <Timer testTime={testTime} startTestTimer={startTestTimer} />
                 <div className="d-flex justify-content-center" style={{ position: 'relative', top: '100px' }}>
                     <Link to="/play" target="_blank" rel="noopener noreferrer" ref={newTab} >
-                        <span>Click aquí para abrir interfaz de jugador (solo si no esta abierto)</span>
+                        <span style={{fontWeight: 'bold', textDecoration: 'underline'}}>Click aquí para abrir interfaz de jugador (solo si no esta abierto)</span>
                     </Link>
                 </div>
                 { /*

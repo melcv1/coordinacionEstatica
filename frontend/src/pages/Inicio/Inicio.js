@@ -30,11 +30,9 @@ export default function Home() {
 
             <div className="cnt-in">
               <h1 className="prim-cn">
-                Bienvenido a
+                Bienvenido a "ECEN"
               </h1>
-              <h2 className="prim-cn2">
-              "Static-Child"
-              </h2>
+             
 
               <img src={nin1} />
               <div>

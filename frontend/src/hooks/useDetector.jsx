@@ -216,7 +216,13 @@ export const useDetector = (
         //await unload()
         
         await setPose(gotoPose);
-        navigate(`/start/${id}`);
+
+        if(currentPose === "Evaluacion"){
+            navigate(`/final`);
+        }else{
+            navigate(`/start/${id}`);
+        }
+        
     }
 
 
