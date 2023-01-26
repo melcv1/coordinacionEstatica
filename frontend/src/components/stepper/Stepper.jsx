@@ -51,7 +51,7 @@ export const ExcerciseStepper = ({ children, Steps, activeStep }) => {
     });
   };
 
-  
+
 
 
 
@@ -73,7 +73,7 @@ export const ExcerciseStepper = ({ children, Steps, activeStep }) => {
             }
             return (
               <Step key={index} {...stepProps} >
-                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props, index)}>{(index % 2 !== 0) ? label.name : ''}</StepLabel>
+                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props, index)}>{label.name}</StepLabel>
               </Step>
             );
           })}
