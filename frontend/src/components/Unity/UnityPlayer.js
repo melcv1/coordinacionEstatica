@@ -4,14 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faPause } from '@fortawesome/free-solid-svg-icons';
 import { faRepeat } from '@fortawesome/free-solid-svg-icons';
+import { useOnChangeStorage } from '../../localStorage/useOnChangeStorage';
 
 
 export const UnityPlayer = ({ source, CallbackFn }) => {
     const [isPlaying, setIsPlaying] = useState(true)
     const videoEl = useRef(null);
     const playBtn = useRef(null);
+    const { storage } = useOnChangeStorage('isplaying',  JSON.stringify(false));
 
-
+    useEffect(() => {
+        togglePlay();
+    }, [storage])
+    
 
     const togglePlay = () => {
         console.log('togglePlay');
@@ -53,7 +58,7 @@ export const UnityPlayer = ({ source, CallbackFn }) => {
                 alt="All the devices"
                 src={source}
                 ref={videoEl}
-                // autoPlay
+                autoPlay
                 muted={false}
             /> 
             <div className="UnityPlayerControls">

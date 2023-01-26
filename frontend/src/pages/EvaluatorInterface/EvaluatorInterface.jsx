@@ -33,9 +33,11 @@ export const EvaluatorInterface = (stepInicial = 0) => {
     const { status } = useContext(AuthContext);
     const [currentStep, setCurrentStep] = useState(0)
     const [play, setPlay] = useLocalStorage("play", JSON.stringify(0));
+    const [isplaying, setIsplaying] = useLocalStorage("isplaying", JSON.stringify(false));
     const [timeElapsed, setTimeElapsed] = useState(0);
     const Estudiante = useFetchStudentById(idEstudiante);
     const [isPaused, setIsPaused] = useState(true);
+    const [started, setStarted] = useState(false);
 
     const trainingTime = useRef(0);
     const exerciseTime = useRef(0);
@@ -100,7 +102,11 @@ export const EvaluatorInterface = (stepInicial = 0) => {
     }
     const handleStart=()=>{
         startTestTimer();
-        
+        setIsplaying(JSON.stringify(true));
+        if(!started){
+            window.open('/play', '_blank');
+            setStarted(true);
+        }
     }
 
     function startTestTimer() {
@@ -116,6 +122,7 @@ export const EvaluatorInterface = (stepInicial = 0) => {
         clearInterval(intervalId.current);
         intervalId.current = 0;
         setIsPaused(true);
+        setIsplaying(JSON.stringify(false));
     }
 
     useEffect(() => {
@@ -123,7 +130,7 @@ export const EvaluatorInterface = (stepInicial = 0) => {
     }, [currentStep])
 
     useLayoutEffect(() => {
-        window.open('/play', '_blank');
+        //window.open('/play', '_blank');
     }, []);
 
 
