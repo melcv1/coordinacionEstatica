@@ -32,7 +32,7 @@ export const EvaluatorInterface = (stepInicial = 0) => {
     const idEstudiante = useParams().id;
     const { status } = useContext(AuthContext);
     const [currentStep, setCurrentStep] = useState(0)
-    const [play, setPlay] = useLocalStorage("play", '0');
+    const [play, setPlay] = useLocalStorage("play", JSON.stringify(0));
     const [timeElapsed, setTimeElapsed] = useState(0);
     const Estudiante = useFetchStudentById(idEstudiante);
     const [isPaused, setIsPaused] = useState(true);

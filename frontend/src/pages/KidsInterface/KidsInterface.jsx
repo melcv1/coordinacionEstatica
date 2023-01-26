@@ -20,8 +20,8 @@ import { TEST_STEPS } from '../../data/config';
 export const KidsInterface = ({ source }) => {
 
 
-    const { storage } = useOnChangeStorage('play', '0');
-    const { isPlaying } = useOnChangeStorage('isPlaying', 'false');
+    const { storage } = useOnChangeStorage('play',  JSON.stringify(0));
+    //const { isPlaying } = useOnChangeStorage('isPlaying', 'false');
     
     const [animation, setAnimation] = useState({
         name: 'zoomIn',
