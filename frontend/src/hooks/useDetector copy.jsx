@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as tf from '@tensorflow/tfjs';
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import { count } from '../utils/music';
 import { POINTS, keypointConnections } from '../utils/data';
-import { drawPoint, drawSegment } from '../utils/helper';
+import { drawPoint, drawSegment } from '../utils/helper'
+import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "../localStorage/useLocalStorage";
 import { TEST_STEPS } from '../data/config';
-
 let flag = false;
 let interval;
 let skeletonColor = 'rgb(255,255,255)';
@@ -21,41 +22,26 @@ export const useDetector = (
     webcamRef,
     canvasRef,
     currentStep,
+    run
 ) => {
     const currentPose = TEST_STEPS[currentStep].shortName;
+    const navigate = useNavigate();
+    const [pose, setPose] = useLocalStorage("pose", "Habituacion");
     const [poseTime, setPoseTime] = useState(0);
     const [bestPerform, setBestPerform] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [startingTime, setStartingTime] = useState(0);
-    const [isDetecting, setIsDetecting] = useState(false);
-    const [isLoadingEstimator, setIsLoadingEstimator] = useState(true);
-
-    const detectorConfigRef = useRef(null);
-    const detectorRef = useRef(null);
-    const poseClassifierRef = useRef(null);
-
-    const detectorConfig = detectorConfigRef.current;
-    const detector = detectorRef.current;
-    const poseClassifier = poseClassifierRef.current;
-
+    const [isStartPose, setIsStartPose] = useState(false)
 
     useEffect(() => {
-        loadModel();
-
-    }, [])
-
-
-    useEffect(() => {
-        if (CLASS_NO[currentPose] !== undefined) {
-            setCurrentTime(0);
-            setPoseTime(0);
-            setBestPerform(0);
-            startDetector();
-        } else {
-            stopDetector();
+        if(run){
+            setCurrentTime(0)
+            setPoseTime(0)
+            setBestPerform(0)
+            startYoga()
         }
-    }, [currentPose]);
-   
+    }, []);
+
 
     useEffect(() => {
         const timeDiff = (currentTime - startingTime) / 1000
@@ -66,12 +52,6 @@ export const useDetector = (
             setBestPerform(timeDiff)
         }
     }, [currentTime]);
-
-    const loadModel = async () => {
-        detectorConfigRef.current = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
-        detectorRef.current = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
-        poseClassifierRef.current = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/nuevo/model.json');
-    }
 
     function get_center_point(landmarks, left_bodypart, right_bodypart) {
         let left = tf.gather(landmarks, left_bodypart, 1)
@@ -117,6 +97,9 @@ export const useDetector = (
     }
 
     const runMovenet = async () => {
+        const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER };
+        const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
+        const poseClassifier = await tf.loadLayersModel('https://primicias.s3.amazonaws.com/comercial/Micrositios/nuevo/model.json')
         const countAudio = new Audio(count)
         countAudio.loop = true
         interval = setInterval(() => {
@@ -132,12 +115,10 @@ export const useDetector = (
             webcamRef.current !== null &&
             webcamRef.current.video.readyState === 4
         ) {
+            console.log('CANVAS');
             let notDetected = 0
             const video = webcamRef.current.video
-            const pose = await detector.estimatePoses(video);
-            if (isLoadingEstimator) {
-                setIsLoadingEstimator(false);
-            }
+            const pose = await detector.estimatePoses(video)
             const ctx = canvasRef.current.getContext('2d')
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
             try {
@@ -178,7 +159,7 @@ export const useDetector = (
                     if (data[0][classNo] > 0.97) {
                         if (!flag) {
 
-
+                            
                             setStartingTime(new Date(Date()).getTime())
                             flag = true
                         }
@@ -187,7 +168,7 @@ export const useDetector = (
                     } else {
                         flag = false
                         skeletonColor = 'rgb(255,255,255)'
-
+                        
                         countAudio.currentTime = 0
                     }
                 })
@@ -199,16 +180,53 @@ export const useDetector = (
         }
     }
 
-    function startDetector() {
-        setIsDetecting(true);
-        runMovenet();
+    function startYoga() {
+        setIsStartPose(true)
+        runMovenet()
     }
 
-    function stopDetector() {
+    async function stopPose(postResults,id) {
+
+        console.log("esta es la pose" + pose);
+        let gotoPose= pose;
+        var poseAct = 0;
+        if (currentPose === "Entrenamiento1") {
+            var poseAct = 3;
+            gotoPose = "Entrenamiento2";
+        } else if (currentPose === "Entrenamiento2") {
+            var poseAct = 4;
+            gotoPose = "Evaluacion";
+        } else if (currentPose === "Evaluacion") {
+            var poseAct = 5;
+            gotoPose = "Habituacion";
+        }
+        else if(currentPose === "Habituacion"){
+            var poseAct = 2;
+            gotoPose = "Entrenamiento1";
+        }else{
+            var poseAct = 0;
+        }
+        var paso = 0;
+
+        if (bestPerform >= 10) {
+            paso = 1;
+        }
+
+        postResults(poseAct, paso);
+
+
+        setIsStartPose(false);
         clearInterval(interval);
-        setIsDetecting(false);
-        const ctx = canvasRef.current.getContext('2d');
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        //await unload()
+        
+        await setPose(gotoPose);
+
+        if(currentPose === "Evaluacion"){
+            navigate(`/final`);
+        }else{
+            navigate(`/start/${id}`);
+        }
+        
     }
 
 
@@ -220,9 +238,8 @@ export const useDetector = (
         poseTime,
         bestPerform,
         currentTime,
-        isDetecting,
-        isLoadingEstimator,
-        startDetector,
-        stopDetector,
+        isStartPose,
+        startYoga,
+        stopPose,
     }
 }

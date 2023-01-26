@@ -152,7 +152,7 @@
 .btn-centered {
     display: flex;
     justify-content: center;
-    margin-top:20%;
+    margin-top:20px;
 }
 .btn-nav-item button {
     background:none !important;
@@ -181,4 +181,41 @@
     position: absolute;
     left: 5rem;
     top: 10rem;
+}
+
+.webcam-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex: 2;
+}
+.layout{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.layout-row-block  {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+.card-information{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 170px;
+    border: 2px solid #6D8EBB;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+.card-lbl{
+    color: #5b5b5b;
+    font-size: 20px;
+    font-weight: bold;
+}
+.card-value{
+    color: #5b5b5b;
+    font-size: 18px;
 }

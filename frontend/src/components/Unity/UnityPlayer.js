@@ -53,7 +53,7 @@ export const UnityPlayer = ({ source, CallbackFn }) => {
                 alt="All the devices"
                 src={source}
                 ref={videoEl}
-                autoPlay
+                // autoPlay
                 muted={false}
             /> 
             <div className="UnityPlayerControls">

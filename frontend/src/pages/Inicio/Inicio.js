@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Link, Navigate } from "react-router-dom";
 
 import "./Inicio.css";
-
+import "../../App.css";
 import uno from "../../utils/images/1.png";
 import siete from "../../utils/images/aaa.jpg";
 import ocho from "../../utils/images/8.png";
@@ -37,7 +37,7 @@ export default function Home() {
               <img src={nin1} />
               <div>
               <Link to="/home">
-              <button className="sig-inicio"> Siguiente</button>
+              <button className="btn_primary mb-4"> Siguiente</button>
 
                     </Link>
 

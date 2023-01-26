@@ -14,7 +14,6 @@ import diez from "../../utils/images/aaa.jpg";
 import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
 import { useFetchEdad } from '../../hooks/useFetchEdad';
-import { useFetchId } from '../../hooks/useFetchId';
 import { useDetector } from '../../hooks/useDetector';
 import { Link, Navigate } from 'react-router-dom';
 import { useNavigate, useParams } from "react-router-dom";

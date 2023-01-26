@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./Form.css";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
+import "../../App.css";
 
 export default function Form({ nino, setNino }) {
 
@@ -50,7 +51,6 @@ export default function Form({ nino, setNino }) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(nino)
         }
-        console.log("niño: " + nino);
         let r = "";
         await fetch('http://localhost:9000/api', requestInit)
             .then(res => res.json())
@@ -186,18 +186,18 @@ export default function Form({ nino, setNino }) {
                 <div className="form-sub form_btn_row">
 
                     <Link to="/home">
-                        <button type="submit" className="btn start-btn cancelar">Cancelar</button>
+                        <button type="submit" className="btn_cancel">Cancelar</button>
                     </Link>
 
-                    <button onClick={handleSubmit} className="btn btn-start-btn guardar">Guardar</button>
+                    
 
                     {
                     isSaved ?
                         <Link to={`/start/${estId}`}>
-                            <button className="btn btn-start-btn siguiente">Siguiente</button>
+                            <button className="btn_success">Siguiente</button>
                         </Link>
                         :
-                        <div></div>
+                        <button onClick={handleSubmit} className="btn_primary">Registrar</button>
                 }
 
 

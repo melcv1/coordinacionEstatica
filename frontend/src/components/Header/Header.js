@@ -33,26 +33,25 @@ function Header(props) {
                     </li>
                     <li className="nav-item">
                         <Link to="/home">
-                            <a className="nav-link" >Participante</a>
+                            <a className="nav-link" >Participantes</a>
                         </Link>
 
                     </li>
-                    {console.log(user)}
                     {
                         (rol === 'Admin') &&
                         <li className="nav-item">
                             <Link to="/usuarios">
-                                <a className="nav-link" >Usuario</a>
+                                <a className="nav-link" >Usuarios</a>
                             </Link>
 
                         </li>
                     }
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link to="/resultados">
                             <a className="nav-link">Resultados</a>
                         </Link>
 
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                         <Link to="/about">
                             <a className="nav-link" >Créditos</a>

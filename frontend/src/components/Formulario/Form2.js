@@ -3,6 +3,7 @@ import "./Form.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
+import "../../App.css";
 
 export default function Form2({ nino, setNino }) {
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ export default function Form2({ nino, setNino }) {
                 </div>
                 <div className="d-flex align-items-center mt-4">
                     <h2 className="lbl-cnt form_lbl">Contrasena</h2>
-                    <input type="text" value={contrasena} name="contrasena" onChange={handleChange} className="form-control nombre form_input">
+                    <input type="password" value={contrasena} name="contrasena" onChange={handleChange} className="form-control nombre form_input">
 
                     </input>
                 </div>
@@ -95,10 +96,10 @@ export default function Form2({ nino, setNino }) {
                 <div className="form-sub form_btn_row">
 
                     <Link to="/home">
-                        <button type="submit" className="btn start-btn cancelar">Cancelar</button>
+                        <button className="btn_cancel">Cancelar</button>
                     </Link>
 
-                    <button onClick={handleSubmit} className="btn btn-start-btn guardar">Guardar</button>
+                    <button onClick={handleSubmit} className="btn_primary">Registrar</button>
 
 
 

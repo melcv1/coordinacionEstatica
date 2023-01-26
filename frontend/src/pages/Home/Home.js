@@ -2,6 +2,7 @@ import React, {Fragment, useState, useEffect, useContext} from 'react';
 import { Link, Navigate } from "react-router-dom";
 
 import "./Home.css";
+import "../../App.css";
 import inicio from "../../utils/images/inicio.png";
 
 import uno from "../../utils/images/1.png";
@@ -35,7 +36,7 @@ export default function Home() {
           <div className="col-lg-12 fondo">
           <Link to="/registro1">
           
-                    <a className="texto-link">Agregar Nuevo Participante  <span className="icono-der"><FontAwesomeIcon icon={faPerson} />  </span></a>
+                    <a className="texto-link"><span className="icono-der"><FontAwesomeIcon icon={faPerson} />  </span>Agregar Nuevo Participante  </a>
                 </Link>    
                       
           </div>
@@ -43,7 +44,7 @@ export default function Home() {
           <div className="col-lg-12 fondo3">
           <Link to="/busqueda">
           
-                    <a className="texto-link">Buscar Participante  <span className="icono-der"><FontAwesomeIcon icon={faMagnifyingGlass} />  </span></a>
+                    <a className="texto-link"><span className="icono-der"><FontAwesomeIcon icon={faMagnifyingGlass} />  </span>Buscar Participante  </a>
                 </Link>    
                       
           </div>

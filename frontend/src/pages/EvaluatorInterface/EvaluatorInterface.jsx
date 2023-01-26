@@ -1,145 +1,195 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link, Navigate } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef, useContext, useLayoutEffect } from 'react';
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 //components
-import DropDown from '../../components/DropDown/DropDown';
-
-// constants
-import { UNITY_LOADERS, LOADERS } from '../../data/unityData';
+import { ExcerciseStepper } from '../../components/stepper/Stepper';
 
 //hooks
 import { useLocalStorage } from "../../localStorage/useLocalStorage";
 
-import './training.css';
+import './EvaluatorInterface.css';
 
 import nueve from "../../utils/images/8.png";
 import diez from "../../utils/images/aaa.jpg";
 
-import doce from "../../utils/images/12.png";
 import trece from "../../utils/images/13.png";
-import Timer from '../../components/Timer/Timer';
-import { useFetchPruebas } from '../../hooks/useFetchPruebas';
 import Header from '../../components/Header/Header';
 import { AuthContext } from '../../context/AuthContext';
-export const EvaluatorInterface = () => {
+import { TEST_STEPS } from '../../data/config';
+import Webcam from 'react-webcam';
+import { useFetchStudentById } from '../../hooks/useFetchStudentById';
+import "../../App.css";
+import { useDetector } from '../../hooks/useDetector';
+import CircularProgress from '@mui/material/CircularProgress';
 
-    const { status } = useContext(AuthContext);
+export const EvaluatorInterface = (stepInicial = 0) => {
 
-    
     const navigate = useNavigate();
-    const params = useParams();
-    const idEstudiante = params.id;
-    const { pruebas, isLoading } = useFetchPruebas(idEstudiante);
-    
-    const newTab = useRef(null);
-    
-    const [pose, setPose] = useLocalStorage("pose", "Habituacion");
-    
-    const [play, setPlay] = useLocalStorage("play", "tHabituacion");
-    
-    const [testTime, setTestTime] = useState(0);
-    let interval = null;
-    
+    const intervalId = useRef(0);
 
-    function handleChange(pose) {
-        setPose(pose);
-        // await unityContext.unload();
-        //window.location.reload(false);
+    const webcamRef = useRef(null);
+    const canvasRef = useRef(null);
+
+    const idEstudiante = useParams().id;
+    const { status } = useContext(AuthContext);
+    const [currentStep, setCurrentStep] = useState(0)
+    const [play, setPlay] = useLocalStorage("play", '0');
+    const [timeElapsed, setTimeElapsed] = useState(0);
+    const Estudiante = useFetchStudentById(idEstudiante);
+    const [isPaused, setIsPaused] = useState(true);
+
+    const trainingTime = useRef(0);
+    const exerciseTime = useRef(0);
+    const to = useRef(0);
+    const tf = useRef(0);
+    const taskTime = useRef(0);
+
+    const { poseTime, bestPerform, currentTime, isLoadingEstimator, startDetector, stopDetector } = useDetector(
+        webcamRef,
+        canvasRef,
+        currentStep,
+    );
+
+
+    const handleNext = () => {
+        tf.current = timeElapsed;
+        taskTime.current = tf.current - to.current;
+        console.log(taskTime.current);
+        if (TEST_STEPS[currentStep].type === 'training') {
+            trainingTime.current = taskTime.current;
+        }
+        if (TEST_STEPS[currentStep].type === 'exercise') {
+            exerciseTime.current = taskTime.current;
+        }
+        postResults(trainingTime.current, exerciseTime.current);
+        to.current = tf.current;
     }
 
-    function update() {
-        clearInterval(interval);
-        var poseAct = 0;
-        if (pose === "Entrenamiento1") {
-            poseAct = 3;
-        } else if (pose === "Entrenamiento2") {
-            poseAct = 4;
-        } else if (pose === "Evaluacion") {
-            poseAct = 5;
-        }
-        else if (pose === "Habituacion") {
-            poseAct = 2;
-        } else {
-            poseAct = 0;
-        }
 
+    async function postResults(exerciseTime, trainingTime) {
+        let idPrueba = TEST_STEPS[currentStep].idPrueba;
+        if (!idPrueba) {
+            setCurrentStep(currentStep + 1);
+            return
+        }
+        let paso = 0;
+        if (bestPerform >= 10) {
+            paso = 1;
+        }
         var resultado = ({
-            TIEMPO_INI: testTime,
-            ID_PRUEBA: poseAct
+            ID_PRUEBA: idPrueba,
+            ID_ESTUDIANTE: idEstudiante,
+            TIEMPO_EJ: bestPerform,
+            VALIDACION: paso,
+            TIEMPO_FIN: exerciseTime,
+            TIEMPO_INI: trainingTime,
         })
-
+        console.log("resultado" + JSON.stringify(resultado));
         const requestInit = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(resultado)
         }
-        return fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + poseAct, requestInit)
+        await fetch('http://localhost:9000/api/actualizardatos/' + idEstudiante + "/" + idPrueba, requestInit)
             .then(res => res.text())
 
+        if (currentStep < 7) {
+            setCurrentStep(currentStep + 1);
+        } else {
+            navigate(`/final`);
+        }
     }
-
-    async function goToExcercise() {
-        //  await unityContext.unload();
-        //setPlay(pose+'E');
-        await update();
-
-        navigate(`/ej/${idEstudiante}`)
+    const handleStart=()=>{
+        startTestTimer();
+        
     }
-
-    function goTo(path) {
-        // await unityContext.unload();
-        navigate(path)
-    }
-
-
 
     function startTestTimer() {
-        setPlay(pose + 'T');
-        interval = setInterval(() => {
-            setTestTime((time) => time + 10);
-        }, 10);
-
+        if (intervalId.current === 0) {
+            intervalId.current = setInterval(() => {
+                setTimeElapsed((time) => time + 10);
+            }, 10);
+            setIsPaused(false);
+        }
     }
+
+    function pauseTestTimer() {
+        clearInterval(intervalId.current);
+        intervalId.current = 0;
+        setIsPaused(true);
+    }
+
+    useEffect(() => {
+        setPlay(currentStep);
+    }, [currentStep])
+
+    useLayoutEffect(() => {
+        window.open('/play', '_blank');
+    }, []);
+
 
     if (status === 'notAuthenticated') {
         return <Navigate to="/" />;
-    } else {
-        console.log(status);
     }
-    
+
     return (
         <>
             <div className="yoga-container" >
-                <Header></Header>
+                <Header />
+                <ExcerciseStepper Steps={TEST_STEPS} activeStep={currentStep} />
+                <div className='layout pt-2'>
+                    <div className='layout-row-block'  >
+                        {
+                            Estudiante &&
+                            <div className='card-information'>
+                                <p className='card-lbl'>Participante: </p>
+                                <p className='card-value'>{Estudiante.NOMBRE} {Estudiante.APELLIDO}</p>
+                                <p className='card-lbl'>Edad: </p>
+                                <p className='card-value'>{Estudiante.EDAD_ACTUAL}</p>
+                            </div>
+                        }
+                    </div>
+                    <div className='flex-column'>
 
-                < DropDown
-                    poseList={Object.keys(UNITY_LOADERS)}
-                    currentPose={pose}
-                    setCurrentPose={handleChange}
-                    pruebas={pruebas}
-                    isLoading={isLoading}
-                >
-                </DropDown>
-
-
-
-                <Timer testTime={testTime} startTestTimer={startTestTimer} />
-                <div className="d-flex justify-content-center" style={{ position: 'relative', top: '100px' }}>
-                    <Link to="/play" target="_blank" rel="noopener noreferrer" ref={newTab} >
-                        <span style={{fontWeight: 'bold', textDecoration: 'underline'}}>Click aquí para abrir interfaz de jugador (solo si no esta abierto)</span>
-                    </Link>
+                        <div className='webcam-container' >
+                            <  Webcam
+                                className='loadable'
+                                width='640px'
+                                height='480px'
+                                id="webcam"
+                                ref={webcamRef}
+                            />
+                            {(isLoadingEstimator && currentStep > 2) && <div className='loading'><CircularProgress color="secondary" /><span style={{ marginLeft: 10 }}> Cargando ...</span> </div>}
+                            <canvas ref={canvasRef}
+                                id="my-canvas"
+                                width='640px'
+                                height='480px'
+                                style={
+                                    {
+                                        position: 'absolute',
+                                        left: 0,
+                                        zIndex: 1
+                                    }
+                                } >
+                            </canvas>
+                        </div>
+                    </div>
+                    <div className='layout-row-block'>
+                        <div className='card-information'>
+                            <p className='card-lbl'>Tiempo</p>
+                            <p className='card-value'>{Math.round(timeElapsed / 1000)} seg</p>
+                        </div>
+                    </div>
                 </div>
-                { /*
-                
-                */
-                }
-                {/*
-                    <UnityPlayer
-                    source={U_LOADERS_TRAINING[pose]}
-                    CallbackFn={startTestTimer}
-                />
-                */
-                }
+
+                <div className="btn-centered">
+                    <button className="btn_cancel" onClick={()=>navigate('/home')}> Cancelar</button>
+                    <button className="btn_success" onClick={handleStart} disabled={(!isPaused) ? true : false}> Iniciar</button>
+                    <button className="btn_primary" onClick={pauseTestTimer} disabled={(isPaused) ? true : false}> Pausar</button>
+                    {/* <button onClick={() => setCurrentStep(currentStep - 1)} className="btn_primary"> atras</button> */}
+                    <button onClick={handleNext} className="btn_primary"> {(currentStep == 7) ? 'Finalizar' : 'Siguiente'}</button>
+                </div>
+
+
 
                 <div className="social7 " >
                     <img src={trece} />
@@ -154,21 +204,6 @@ export const EvaluatorInterface = () => {
                 <div className="social" >
                     <img src={diez} />
                 </div>
-                <div className="btn-centered">
-
-                    < button onClick={() => navigate(`/busqueda`)} className="btny2 cancel" > Cancelar </button>
-
-
-                    < button onClick={goToExcercise}
-                        className="btny2" >
-                        Evaluar
-                    </button>
-
-
-
-                </div>
-
-
             </div>
         </>
     )

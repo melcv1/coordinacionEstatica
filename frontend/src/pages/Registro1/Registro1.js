@@ -6,6 +6,8 @@ import ocho from "../../utils/images/8.png";
 import Form from "../../components/Formulario/Form";
 import Header from '../../components/Header/Header';
 import { AuthContext } from '../../context/AuthContext';
+
+
 export const Registro1 = () => {
 
   const {

@@ -11,6 +11,7 @@ export const useOnChangeStorage = (storageItem, defaultValue) => {
             if (event.storageArea === localStorage) {
                 // Aquí puedes manejar el cambio en el almacenamiento local
                 const storedValue = localStorage.getItem(storageItem);
+                console.log(storedValue);
                 setStorage(storedValue.toString().replace(/['"]+/g, ''));
             }
         });

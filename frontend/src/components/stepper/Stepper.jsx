@@ -9,17 +9,12 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
-import { STEPS as steps } from '../../data/unityData';
+import { TEST_STEPS } from '../../data/config';
 import { styled } from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 
-export const ExcerciseStepper = ({ children, source }) => {
-  const { storage } = useOnChangeStorage('play', 'tHabituacion');
+export const ExcerciseStepper = ({ children, Steps, activeStep }) => {
 
-
-  const poseIndex = steps.indexOf(storage);
-  const [activeStep, setActiveStep] = useState(poseIndex);
   const [skipped, setSkipped] = useState(new Set());
 
 
@@ -38,13 +33,9 @@ export const ExcerciseStepper = ({ children, source }) => {
       newSkipped.delete(activeStep);
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
@@ -53,7 +44,6 @@ export const ExcerciseStepper = ({ children, source }) => {
       throw new Error("You can't skip a step that isn't optional.");
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
       newSkipped.add(activeStep);
@@ -61,14 +51,7 @@ export const ExcerciseStepper = ({ children, source }) => {
     });
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  useEffect(() => {
-    const stepIndex = steps.indexOf(storage);
-    setActiveStep(stepIndex);
-  }, [storage])
+  
 
 
 
@@ -77,7 +60,7 @@ export const ExcerciseStepper = ({ children, source }) => {
 
       <Box sx={{ width: '100%', marginTop: '50px' }}>
         <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
-          {steps.map((label, index) => {
+          {Steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
             if (isStepOptional(index)) {
@@ -89,20 +72,19 @@ export const ExcerciseStepper = ({ children, source }) => {
               stepProps.completed = false;
             }
             return (
-              <Step key={label} {...stepProps} >
-                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props, index)}>{(index % 2 !== 0) ? label : ''}</StepLabel>
+              <Step key={index} {...stepProps} >
+                <StepLabel {...labelProps} StepIconComponent={(props) => ColorlibStepIcon(props, index)}>{(index % 2 !== 0) ? label.name : ''}</StepLabel>
               </Step>
             );
           })}
         </Stepper>
-        {activeStep === steps.length ? (
+        {activeStep === Steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
               All steps completed - you&apos;re finished
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
             </Box>
           </React.Fragment>
         ) : (

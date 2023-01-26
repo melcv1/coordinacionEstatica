@@ -12,16 +12,17 @@ import trece from "../../utils/images/13.png";
 import { UnityPlayer } from '../../components/Unity/UnityPlayer';
 import { useOnChangeStorage } from '../../localStorage/useOnChangeStorage';
 
-import { ExcerciseStepper } from '../../components/stepper/Stepper';
-
 import MovingText from 'react-moving-text';
+import { TEST_STEPS } from '../../data/config';
 
 
 
 export const KidsInterface = ({ source }) => {
 
 
-    const { storage } = useOnChangeStorage('play', 'tHabituacion');
+    const { storage } = useOnChangeStorage('play', '0');
+    const { isPlaying } = useOnChangeStorage('isPlaying', 'false');
+    
     const [animation, setAnimation] = useState({
         name: 'zoomIn',
         iteration: '1',
@@ -62,9 +63,10 @@ export const KidsInterface = ({ source }) => {
 
     return (
         <>
-            <ExcerciseStepper>
-                {console.log('kidsInterface storage       ' + storage)}
+        {console.log(storage)}
                 <div style={{ display: 'flex', flex: 1, minHeight: '55vh', marginTop: '50px', justifyContent: 'center', alignItems: 'center' }}>
+                    
+                    
                     {
                         showText ?
                             <>
@@ -82,7 +84,7 @@ export const KidsInterface = ({ source }) => {
                             </>
                             :
                             <UnityPlayer
-                                source={LOADERS[storage]}
+                                source={TEST_STEPS[storage].media}
                                 CallbackFn={() => { }}
                             />
 
@@ -95,7 +97,6 @@ export const KidsInterface = ({ source }) => {
                 <div className="social" >
                     <img src={diez} />
                 </div>
-            </ExcerciseStepper>
         </>
     )
 
